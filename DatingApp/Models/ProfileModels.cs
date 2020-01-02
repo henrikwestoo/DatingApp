@@ -25,5 +25,6 @@ namespace DatingApp.Models
         Male,
         Female,
         Other
+            
     }
 }
