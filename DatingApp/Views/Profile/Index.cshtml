@@ -1,0 +1,24 @@
+﻿@model DatingApp.Models.ProfileViewModels.ProfileIndexViewModel
+
+
+<h2>This is your profile</h2>
+<br /><strong>Name</strong>
+<br />
+@Html.DisplayFor((m) => m.Name)
+<br />
+<br />
+<strong>Age</strong>
+<br />
+@Html.DisplayFor((m) => m.Age)
+<br />
+<strong>Gender</strong>
+<br />
+@Html.DisplayFor((m) => m._Gender)
+<br />
+<strong>Biography</strong>
+@Html.DisplayFor((m) => m.Biography)
+<br />
+<input type="button"
+       value="Edit"
+       class="btn btn-default" 
+       onclick="location.href='@Url.Action("Edit", "Profile" )'"/>

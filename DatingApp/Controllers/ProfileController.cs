@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using static DatingApp.Models.ProfileViewModels;
 
 namespace DatingApp.Controllers
 {
@@ -30,5 +31,30 @@ namespace DatingApp.Controllers
             return RedirectToAction("Index", "Home");
           
         }
+
+        public ActionResult Index()
+        {
+            string foreignKey = User.Identity.GetUserId();
+
+            var ctx = new AppDbContext();
+
+            int key = ctx.Profiles.Where((p) => p.UserId.Equals(foreignKey)).First().Id;
+
+            var model = ctx.Profiles.Find(key);
+            var viewModel = new ProfileIndexViewModel();
+
+            viewModel.Name = model.Name;
+            viewModel.Age = model.Age;
+            viewModel._Gender = model._Gender;
+            viewModel.Biography = model.Biography;
+
+            return View(viewModel);
+        }
+
+        public ActionResult Edit()
+        {
+            return View();
+        }
+
     }
 }
