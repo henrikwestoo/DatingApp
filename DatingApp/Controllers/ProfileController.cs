@@ -1,5 +1,6 @@
 ﻿using DatingApp.DbManager;
 using DatingApp.Models;
+using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,7 +21,8 @@ namespace DatingApp.Controllers
         public ActionResult Create(ProfileModels profileModel)
         {
             var profile = new ProfileModels { Name = profileModel.Name, Age = profileModel.Age,
-                                           _Gender = profileModel._Gender, Biography = profileModel.Biography};
+                                           _Gender = profileModel._Gender, Biography = profileModel.Biography,
+                                            UserId = User.Identity.GetUserId()};
 
             var ctx = new AppDbContext();
             ctx.Profiles.Add(profile);
