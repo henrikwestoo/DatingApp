@@ -18,6 +18,8 @@ namespace DatingApp.Models
         public Gender _Gender { get; set; }
 
         public string Biography { get; set; }
+
+        public virtual ApplicationUser User { get; set; }
     }
 
     public enum Gender
