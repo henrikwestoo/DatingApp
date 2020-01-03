@@ -28,6 +28,7 @@ namespace DatingApp.Controllers
             var ctx = new AppDbContext();
             ctx.Profiles.Add(profile);
             ctx.SaveChanges();
+            ctx.Dispose();
             return RedirectToAction("Index", "Home");
           
         }
@@ -38,22 +39,42 @@ namespace DatingApp.Controllers
 
             var ctx = new AppDbContext();
 
-            int key = ctx.Profiles.Where((p) => p.UserId.Equals(foreignKey)).First().Id;
-
-            var model = ctx.Profiles.Find(key);
-            var viewModel = new ProfileIndexViewModel();
-
-            viewModel.Name = model.Name;
-            viewModel.Age = model.Age;
-            viewModel._Gender = model._Gender;
-            viewModel.Biography = model.Biography;
+            var model = ctx.GetProfile(foreignKey);
+            var viewModel = new ProfileIndexViewModel(model);
+    
+            ctx.Dispose();
 
             return View(viewModel);
         }
 
         public ActionResult Edit()
         {
-            return View();
+            string foreignKey = User.Identity.GetUserId();
+
+            var ctx = new AppDbContext();
+
+            var model = ctx.GetProfile(foreignKey);
+            var viewModel = new ProfileIndexViewModel(model);
+
+            ctx.Dispose();
+
+            return View(viewModel);
+        }
+
+        [HttpPost]
+        public ActionResult Edit(ProfileIndexViewModel viewModel)
+        {
+
+            string foreignKey = User.Identity.GetUserId();
+
+            var ctx = new AppDbContext();
+
+            ctx.EditProfile(foreignKey, viewModel);
+
+            ctx.SaveChanges();
+            ctx.Dispose();
+            return RedirectToAction("Index", "Profile");
+
         }
 
     }

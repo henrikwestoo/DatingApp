@@ -1,1 +1,44 @@
-﻿<h2> Hej Edit !!!</h2>
+﻿@model DatingApp.Models.ProfileViewModels.ProfileIndexViewModel
+
+
+
+<h2>This is your profile</h2>
+
+@using (Html.BeginForm("Edit", "Profile", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    <br />
+    <strong>Name</strong>
+    <br />
+    <div class="col-md-10">
+        @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
+    </div>
+    <br />
+    <br />
+    <strong>Age</strong>
+    <br />
+    <div class="col-md-10">
+        @Html.TextBoxFor(m => m.Age, new { @class = "form-control" })
+    </div>
+    <br />
+    <br />
+    <strong>Gender</strong>
+    <br />
+
+    <div class="col-md-10">
+        @Html.TextBoxFor(m => m._Gender, new { @class = "form-control" })
+    </div>
+    <br />
+    <br />
+    <strong>Biography</strong>
+    <br />
+    <div class="col-md-10">
+        @Html.TextBoxFor(m => m.Biography, new { @class = "form-control" })
+    </div>
+    <br />
+    <br />
+    <div class="form-group">
+        <div class="col-md-offset-1 col-md-10">
+            <input type="submit" class="btn btn-default" value="Save changes" />
+        </div>
+    </div>
+}
