@@ -13,9 +13,9 @@ namespace DatingApp.DbManager
 {
     public class AppDbContext : IdentityDbContext<ApplicationUser>
     {
-        public DbSet<ProfileModels> Profiles { get; set; }
+        public DbSet<ProfileModel> Profiles { get; set; }
 
-        public ProfileModels GetProfile(string foreignkey)
+        public ProfileModel GetProfile(string foreignkey)
         { 
             int key = Profiles.Where((p) => p.UserId.Equals(foreignkey)).First().Id;
             var model = Profiles.Find(key);
@@ -31,7 +31,14 @@ namespace DatingApp.DbManager
             model._Gender = viewModel._Gender;
             model.Biography = viewModel.Biography;
 
-            Set<ProfileModels>().AddOrUpdate(model);
+            Set<ProfileModel>().AddOrUpdate(model);
+        }
+
+        public List<ProfileModel> FindProfiles(string search) 
+        {
+
+            return Profiles.Where((p) => p.Name.Equals(search)).ToList();
+        
         }
 
 
@@ -44,6 +51,8 @@ namespace DatingApp.DbManager
             modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>(); // Enable cascade delete when you remove something that requires it.
             base.OnModelCreating(modelBuilder);
         }
+
+
 
     }
 }

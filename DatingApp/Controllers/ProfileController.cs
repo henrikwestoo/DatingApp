@@ -19,9 +19,9 @@ namespace DatingApp.Controllers
         }
 
         [HttpPost]
-        public ActionResult Create(ProfileModels profileModel)
+        public ActionResult Create(ProfileModel profileModel)
         {
-            var profile = new ProfileModels { Name = profileModel.Name, Age = profileModel.Age,
+            var profile = new ProfileModel { Name = profileModel.Name, Age = profileModel.Age,
                                            _Gender = profileModel._Gender, Biography = profileModel.Biography,
                                             UserId = User.Identity.GetUserId()};
 
@@ -75,6 +75,18 @@ namespace DatingApp.Controllers
             ctx.Dispose();
             return RedirectToAction("Index", "Profile");
 
+        }
+
+        [HttpGet]
+        public ActionResult Search(string SearchBar)
+        {
+            var ctx = new AppDbContext();
+
+            var profiles = new ProfilesIndexViewModel();
+
+            profiles.Profiles = ctx.FindProfiles(SearchBar);
+
+            return View(profiles);
         }
 
     }

@@ -16,7 +16,7 @@ namespace DatingApp.Models
 
             }
 
-            public ProfileIndexViewModel(ProfileModels model)
+            public ProfileIndexViewModel(ProfileModel model)
             {
                 Name = model.Name;
                 Age = model.Age;
@@ -47,6 +47,16 @@ namespace DatingApp.Models
             [Required(ErrorMessage = "Field required")]
             [StringLength(150, ErrorMessage = "Character limit is 150")]
             public string Biography { get; set; }
+
+
+        }
+
+
+        public class ProfilesIndexViewModel
+
+        {
+
+            public List<ProfileModel> Profiles { get; set; }
 
 
         }
