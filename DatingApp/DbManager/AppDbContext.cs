@@ -15,10 +15,23 @@ namespace DatingApp.DbManager
     {
         public DbSet<ProfileModel> Profiles { get; set; }
 
-        public ProfileModel GetProfile(string foreignkey)
+        public ProfileModel GetProfile(string userId)
         { 
-            int key = Profiles.Where((p) => p.UserId.Equals(foreignkey)).First().Id;
+            int key = Profiles.Where((p) => p.UserId.Equals(userId)).First().Id;
             var model = Profiles.Find(key);
+            return model;
+        }
+
+        public int GetProfileId(string userId)
+        {
+
+            return Profiles.Where((p) => p.UserId.Equals(userId)).First().Id;
+
+        }
+
+        public ProfileModel GetProfile(int id)
+        {
+            var model = Profiles.Find(id);
             return model;
         }
 

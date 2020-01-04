@@ -1,18 +1,30 @@
-﻿@model DatingApp.Models.ProfileViewModels.ProfilesIndexViewModel
+﻿@using Microsoft.AspNet.Identity;
+@model DatingApp.Models.ProfileViewModels.ProfilesIndexViewModel
 
-<table>
-    
+<br />
+<br />
+<table class="table table-bordered">
+
+
     @foreach (var item in Model.Profiles)
     {
         <tr>
             <td>@item.Name </td>
-            
             <td>@item.Age</td>
-            
+            <td>@item._Gender</td>
+            <td>
+                @using (Html.BeginForm("Index", "Profile", FormMethod.Get))
+                {
+                    @Html.Hidden("userId", item.Id)
+                    <input type="submit"
+                           value="See profile"
+                           class="btn btn-primary"/>
+                        
+                }
+            </td>
         </tr>
     }
 
 
 </table>
 
- 

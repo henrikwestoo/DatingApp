@@ -18,6 +18,7 @@ namespace DatingApp.Models
 
             public ProfileIndexViewModel(ProfileModel model)
             {
+                Id = model.Id;
                 Name = model.Name;
                 Age = model.Age;
                 _Gender = model._Gender;
@@ -28,6 +29,8 @@ namespace DatingApp.Models
             //[DataType(DataType.Date)]
             //[Required(ErrorMessage = "You need to have a birthdate.")]
             //[StringLength(300, ErrorMessage = "Your biography may only be 300 characters long.")]
+
+            public int Id { get; set; }
 
             [Display(Name = "Name")]
             [Required(ErrorMessage = "Field required")]

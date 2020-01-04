@@ -13,6 +13,9 @@ namespace DatingApp.Controllers
     public class ProfileController : Controller
     {
         // GET: Profile
+
+
+        
         public ActionResult Create()
         {
             return View();
@@ -32,28 +35,42 @@ namespace DatingApp.Controllers
             return RedirectToAction("Index", "Home");
           
         }
-
+        
         public ActionResult Index()
         {
-            string foreignKey = User.Identity.GetUserId();
+            string userId = User.Identity.GetUserId();
 
             var ctx = new AppDbContext();
 
-            var model = ctx.GetProfile(foreignKey);
+            var model = ctx.GetProfile(userId);
             var viewModel = new ProfileIndexViewModel(model);
     
             ctx.Dispose();
 
             return View(viewModel);
         }
+        [HttpGet]
+        public ActionResult Index(int userId)
+        {
+          
+            var ctx = new AppDbContext();
+
+            var model = ctx.GetProfile(userId);
+            var viewModel = new ProfileIndexViewModel(model);
+
+            ctx.Dispose();
+
+            return View(viewModel);
+        }
+
 
         public ActionResult Edit()
         {
-            string foreignKey = User.Identity.GetUserId();
+            string userId = User.Identity.GetUserId();
 
             var ctx = new AppDbContext();
 
-            var model = ctx.GetProfile(foreignKey);
+            var model = ctx.GetProfile(userId);
             var viewModel = new ProfileIndexViewModel(model);
 
             ctx.Dispose();
