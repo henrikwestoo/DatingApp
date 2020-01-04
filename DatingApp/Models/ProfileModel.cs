@@ -20,6 +20,8 @@ namespace DatingApp.Models
 
         public string Biography { get; set; }
 
+        public byte[] Image { get; set; }
+
         //public virtual ApplicationUser User { get; set; }
 
         [ForeignKey("User")]

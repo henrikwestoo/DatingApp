@@ -36,7 +36,7 @@ namespace DatingApp.Controllers
           
         }
         
-        public ActionResult Index()
+        public ActionResult IndexMe()
         {
             string userId = User.Identity.GetUserId();
 
@@ -46,10 +46,10 @@ namespace DatingApp.Controllers
             var viewModel = new ProfileIndexViewModel(model);
     
             ctx.Dispose();
-
+  
             return View(viewModel);
         }
-        [HttpGet]
+       [HttpGet]
         public ActionResult Index(int userId)
         {
           
@@ -90,7 +90,7 @@ namespace DatingApp.Controllers
 
             ctx.SaveChanges();
             ctx.Dispose();
-            return RedirectToAction("Index", "Profile");
+            return RedirectToAction("IndexMe", "Profile");
 
         }
 

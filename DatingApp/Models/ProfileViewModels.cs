@@ -23,12 +23,9 @@ namespace DatingApp.Models
                 Age = model.Age;
                 _Gender = model._Gender;
                 Biography = model.Biography;
+                Image = model.Image;
             }
 
-            //[Display(Name = "Birthdate")]
-            //[DataType(DataType.Date)]
-            //[Required(ErrorMessage = "You need to have a birthdate.")]
-            //[StringLength(300, ErrorMessage = "Your biography may only be 300 characters long.")]
 
             public int Id { get; set; }
 
@@ -50,6 +47,8 @@ namespace DatingApp.Models
             [Required(ErrorMessage = "Field required")]
             [StringLength(150, ErrorMessage = "Character limit is 150")]
             public string Biography { get; set; }
+
+            public byte[] Image { get; set; }
 
 
         }
