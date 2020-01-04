@@ -48,9 +48,7 @@ namespace DatingApp.Models
             [StringLength(150, ErrorMessage = "Character limit is 150")]
             public string Biography { get; set; }
 
-            public byte[] Image { get; set; }
-
-
+            public string Image { get; set; }
         }
 
 

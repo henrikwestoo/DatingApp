@@ -204,6 +204,10 @@
     <Compile Include="Migrations\202001041237237_Added_ByteArray_For_Images.Designer.cs">
       <DependentUpon>202001041237237_Added_ByteArray_For_Images.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202001041453243_images.cs" />
+    <Compile Include="Migrations\202001041453243_images.Designer.cs">
+      <DependentUpon>202001041453243_images.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -278,6 +282,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Images\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -304,6 +309,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202001041237237_Added_ByteArray_For_Images.resx">
       <DependentUpon>202001041237237_Added_ByteArray_For_Images.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202001041453243_images.resx">
+      <DependentUpon>202001041453243_images.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
