@@ -103,6 +103,29 @@ namespace DatingApp.DbManager
                             .Select(x => x.ContactId).ToList();
         }
 
+        public void EditContact(int userProfileId, int contactId)
+        {
+            //fix
+            int key = Contacts.Where((c) => (c.ProfileId == userProfileId) && (c.ContactId == contactId)).First().Id;
+            var model = Contacts.Find(key);
+            model.ProfileId = userProfileId;
+            model.ContactId = contactId;
+            model.Accepted = true;
+
+            Set<ContactModel>().AddOrUpdate(model);
+
+        }
+
+        public void RemoveContact(int userProfileId, int contactId)
+        {
+
+            var contact = Contacts.Where((c) => (c.ProfileId == userProfileId) && (c.ContactId == contactId)).First();
+
+            Set<ContactModel>().Remove(contact);
+
+        }
+
+
         public AppDbContext() : base("DefaultConnection")
         {
 

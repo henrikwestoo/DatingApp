@@ -6,10 +6,32 @@
     @foreach (var item in Model.Pending.Profiles)
     {
     
-        <tr>
-            <td>@item.Name </td>
-            <td>@item.Age</td>
-            <td>@item._Gender</td>
-        </tr>
+    <tr>
+        <td>@item.Name </td>
+        <td>@item.Age</td>
+        <td>@item._Gender</td>
+        <td>
+            @using (Html.BeginForm("AcceptContact", "Contact", FormMethod.Post))
+            {
+                @Html.Hidden("contactUserId", item.Id)
+                <input type="submit"
+                       value="Accept request"
+                       class="btn btn-success" />
+
+            }
+        </td>
+        <td>
+            @using (Html.BeginForm("DeclineContact", "Contact", FormMethod.Post))
+            {
+                @Html.Hidden("contactUserId", item.Id)
+                <input type="submit"
+                       value="Decline request"
+                       class="btn btn-danger" />
+
+            }
+        </td>
+
+
+    </tr>
     }
 </table>

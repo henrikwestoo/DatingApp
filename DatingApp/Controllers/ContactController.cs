@@ -50,5 +50,39 @@ namespace DatingApp.Controllers
 
             return RedirectToAction("Search", "Profile");
         }
+
+        [HttpPost]
+
+        public ActionResult AcceptContact(int contactUserId) {
+
+            var ctx = new AppDbContext();
+            var currentProfileId = ctx.GetProfileId(User.Identity.GetUserId());
+
+            ctx.EditContact(currentProfileId, contactUserId);
+
+            ctx.SaveChanges();
+            ctx.Dispose();
+
+            return RedirectToAction("Index", "Contact");
+        
+        }
+
+        [HttpPost]
+
+        public ActionResult DeclineContact(int contactUserId)
+        {
+
+            var ctx = new AppDbContext();
+            var currentProfileId = ctx.GetProfileId(User.Identity.GetUserId());
+
+            ctx.RemoveContact(currentProfileId, contactUserId);
+
+            ctx.SaveChanges();
+            ctx.Dispose();
+
+            return RedirectToAction("Index", "Contact");
+
+        }
+
     }
 }
