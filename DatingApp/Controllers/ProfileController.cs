@@ -34,7 +34,7 @@ namespace DatingApp.Controllers
                 Age = profileModel.Age,
                 _Gender = profileModel._Gender,
                 Biography = profileModel.Biography,
-                Image = "Images/" + file.FileName,
+                Image = "~/Images/" + file.FileName,
                 UserId = User.Identity.GetUserId()
             };
 
@@ -89,19 +89,25 @@ namespace DatingApp.Controllers
         }
 
         [HttpPost]
-        public ActionResult Edit(ProfileIndexViewModel viewModel)
+        public ActionResult Edit(ProfileIndexViewModel viewModel, HttpPostedFileBase file)
         {
+            if (file != null)
+            {
+                string path = Path.Combine(Server.MapPath("~/Images"), Path.GetFileName(file.FileName));
+                file.SaveAs(path);
+            }
 
             string foreignKey = User.Identity.GetUserId();
 
             var ctx = new AppDbContext();
 
-            ctx.EditProfile(foreignKey, viewModel);
+            string fileName = "~/Images/" + file.FileName;
+
+            ctx.EditProfile(foreignKey, viewModel, fileName);
 
             ctx.SaveChanges();
             ctx.Dispose();
             return RedirectToAction("IndexMe", "Profile");
-
         }
 
         [HttpGet]
@@ -115,6 +121,5 @@ namespace DatingApp.Controllers
 
             return View(profiles);
         }
-
     }
 }

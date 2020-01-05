@@ -4,7 +4,13 @@
 }
 
 #searchButton {
+position: absolute;
+left: 120%;
+top: 17.5%;
 
-margin-left: 10%;
+}
 
+.profile-image {
+    max-width: 150px;
+    max-height: 150px;
 }

@@ -35,7 +35,7 @@ namespace DatingApp.DbManager
             return model;
         }
 
-        public void EditProfile(string foreignkey, ProfileIndexViewModel viewModel)
+        public void EditProfile(string foreignkey, ProfileIndexViewModel viewModel, string fileName)
         {
             int key = Profiles.Where((p) => p.UserId.Equals(foreignkey)).First().Id;
             var model = Profiles.Find(key);
@@ -43,6 +43,10 @@ namespace DatingApp.DbManager
             model.Age = viewModel.Age;
             model._Gender = viewModel._Gender;
             model.Biography = viewModel.Biography;
+            if (fileName != null)
+            {
+                model.Image = fileName;
+            }
 
             Set<ProfileModel>().AddOrUpdate(model);
         }
@@ -53,7 +57,6 @@ namespace DatingApp.DbManager
             return Profiles.Where((p) => p.Name.Equals(search)).ToList();
         
         }
-
 
         public AppDbContext() : base("DefaultConnection")
         {

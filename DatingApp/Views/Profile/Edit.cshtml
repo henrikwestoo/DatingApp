@@ -4,8 +4,16 @@
 
 <h2>This is your profile</h2>
 
-@using (Html.BeginForm("Edit", "Profile", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+@using (Html.BeginForm("Edit", "Profile", FormMethod.Post, new { @class = "form-horizontal", role = "form", enctype = "multipart/form-data" }))
 {
+    <img src="@Url.Content(Model.Image)" alt="Image" class="profile-image" />
+    <br />
+    <strong>Image</strong>
+    <br />
+    <div class="col-md-10">
+        <input type="file" name="file" />
+    </div>
+    <br />
     <br />
     <strong>Name</strong>
     <br />
@@ -23,7 +31,6 @@
     <br />
     <strong>Gender</strong>
     <br />
-
     <div class="col-md-10">
         @Html.TextBoxFor(m => m._Gender, new { @class = "form-control" })
     </div>
