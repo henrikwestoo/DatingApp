@@ -1,9 +1,12 @@
-﻿@model DatingApp.Models.ProfileViewModels.ProfilesIndexViewModel
+﻿@model DatingApp.Models.ContactsViewModel
+
+@Html.Partial("ContactRequestsPartial")
+
 
 <h2>These are your contacts</h2>
 
 <table class="table table-bordered">
-    @foreach (var item in Model.Profiles)
+    @foreach (var item in Model.Accepted.Profiles)
     {
         <tr>
             <td>@item.Name </td>

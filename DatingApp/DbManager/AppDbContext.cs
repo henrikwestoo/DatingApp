@@ -96,6 +96,13 @@ namespace DatingApp.DbManager
 
         }
 
+        public List<int> FindContacts(int profileId, bool accepted)
+        {
+
+            return Contacts.Where((p) => (p.ProfileId == profileId) && (p.Accepted == accepted))
+                            .Select(x => x.ContactId).ToList();
+        }
+
         public AppDbContext() : base("DefaultConnection")
         {
 

@@ -1,0 +1,15 @@
+﻿@model DatingApp.Models.ContactsViewModel
+
+<h2>These are your contact requests </h2>
+
+<table class="table table-bordered">
+    @foreach (var item in Model.Pending.Profiles)
+    {
+    
+        <tr>
+            <td>@item.Name </td>
+            <td>@item.Age</td>
+            <td>@item._Gender</td>
+        </tr>
+    }
+</table>

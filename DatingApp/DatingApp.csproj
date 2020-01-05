@@ -221,9 +221,14 @@
     <Compile Include="Migrations\202001051323539_PK_Contacts_Added.Designer.cs">
       <DependentUpon>202001051323539_PK_Contacts_Added.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202001051513210_Added_Accepted_Column_Contact.cs" />
+    <Compile Include="Migrations\202001051513210_Added_Accepted_Column_Contact.Designer.cs">
+      <DependentUpon>202001051513210_Added_Accepted_Column_Contact.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ContactModel.cs" />
+    <Compile Include="Models\ContactsViewModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\ProfileModel.cs" />
@@ -294,6 +299,7 @@
     <Content Include="Views\Profile\Search.cshtml" />
     <Content Include="Views\Profile\IndexMe.cshtml" />
     <Content Include="Views\Contact\Index.cshtml" />
+    <Content Include="Views\Contact\ContactRequestsPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -337,6 +343,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202001051323539_PK_Contacts_Added.resx">
       <DependentUpon>202001051323539_PK_Contacts_Added.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202001051513210_Added_Accepted_Column_Contact.resx">
+      <DependentUpon>202001051513210_Added_Accepted_Column_Contact.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

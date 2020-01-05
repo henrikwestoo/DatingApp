@@ -20,5 +20,7 @@ namespace DatingApp.Models
         public virtual int ContactId { get; set; }
         public virtual ProfileModel Contact { get; set; }
 
+        public bool Accepted { get; set; }
+
     }
 }

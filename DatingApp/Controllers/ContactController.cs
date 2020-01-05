@@ -18,13 +18,17 @@ namespace DatingApp.Controllers
             var ctx = new AppDbContext();
             var currentProfileId = ctx.GetProfileId(User.Identity.GetUserId());
 
-            var contactIds = ctx.FindContacts(currentProfileId);
-            
-            var profilesIndexViewModelContacts = ctx.FindProfiles(contactIds);
+            var acceptedContacts = ctx.FindContacts(currentProfileId, true);
+            var pendingContacts = ctx.FindContacts(currentProfileId, false);
+
+            var profilesIndexViewModelContactsAccepted = ctx.FindProfiles(acceptedContacts);
+            var profilesIndexViewModelContactsPending = ctx.FindProfiles(pendingContacts);
+
+            var allContacts = new ContactsViewModel(profilesIndexViewModelContactsAccepted, profilesIndexViewModelContactsPending);
 
             ctx.Dispose();
 
-            return View(profilesIndexViewModelContacts);
+            return View(allContacts);
 
         }
 
