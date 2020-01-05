@@ -88,7 +88,8 @@ namespace DatingApp.DbManager
 
             return viewModels;
         }
-
+        
+        // to-do: fix? remove?
         public List<int> FindContacts(int profileId)
         {
 
@@ -98,31 +99,43 @@ namespace DatingApp.DbManager
 
         public List<int> FindContacts(int profileId, bool accepted)
         {
-            //kanske ska vara profileId == profileID
-            return Contacts.Where((p) => (p.ContactId == profileId) && (p.Accepted == accepted))
-                            .Select(x => x.ContactId).ToList();
+            List<int> contacts = new List<int>();
+
+            if (accepted)
+            {
+                contacts.AddRange(Contacts.Where(p => (p.ContactId == profileId) && (p.Accepted == accepted)).Select((x) => x.ProfileId).ToList());
+
+                contacts.AddRange(Contacts.Where(p => (p.ProfileId == profileId) && (p.Accepted == accepted)).Select((x) => x.ContactId).ToList());
+            } else
+            {
+                contacts.AddRange(Contacts.Where((p) => (p.ContactId == profileId) && (p.Accepted == accepted)).Select((x) => x.ProfileId).ToList());
+            }
+
+            return contacts;
         }
 
         public void EditContact(int userProfileId, int contactId)
         {
-            //fix
-            int key = Contacts.Where((c) => (c.ProfileId == userProfileId) && (c.ContactId == contactId)).First().Id;
-            var model = Contacts.Find(key);
-            model.ProfileId = userProfileId;
-            model.ContactId = contactId;
-            model.Accepted = true;
+            var contact = Contacts.Where((c) => (c.ContactId == userProfileId) && (c.ProfileId == contactId)).First();
+            contact.Accepted = true;
 
-            Set<ContactModel>().AddOrUpdate(model);
+            Set<ContactModel>().AddOrUpdate(contact);
 
         }
 
         public void RemoveContact(int userProfileId, int contactId)
         {
 
-            var contact = Contacts.Where((c) => (c.ProfileId == userProfileId) && (c.ContactId == contactId)).First();
+            var contactTo = Contacts.Where((c) => (c.ContactId == userProfileId) && (c.ProfileId == contactId)).FirstOrDefault();
 
-            Set<ContactModel>().Remove(contact);
-
+            if (contactTo != null)
+            {
+                Set<ContactModel>().Remove(contactTo);
+            } else
+            {
+                var contactFrom = Contacts.Where((c) => (c.ContactId == contactId) && (c.ProfileId == userProfileId)).First();
+                Set<ContactModel>().Remove(contactFrom);
+            }
         }
 
 
