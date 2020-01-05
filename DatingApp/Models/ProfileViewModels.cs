@@ -56,8 +56,12 @@ namespace DatingApp.Models
 
         {
 
-            public List<ProfileModel> Profiles { get; set; }
+            public List<ProfileIndexViewModel> Profiles { get; set; }
 
+            public ProfilesIndexViewModel()
+            {
+                Profiles = new List<ProfileIndexViewModel>();
+            }
 
         }
 

@@ -15,6 +15,8 @@ namespace DatingApp.DbManager
     {
         public DbSet<ProfileModel> Profiles { get; set; }
 
+        public DbSet<ContactModel> Contacts { get; set; }
+
         public ProfileModel GetProfile(string userId)
         { 
             int key = Profiles.Where((p) => p.UserId.Equals(userId)).First().Id;
@@ -51,11 +53,47 @@ namespace DatingApp.DbManager
             Set<ProfileModel>().AddOrUpdate(model);
         }
 
-        public List<ProfileModel> FindProfiles(string search) 
+        public List<ProfileIndexViewModel> FindProfiles(string search) 
+        {
+            
+            List<ProfileModel>profiles = Profiles.Where((p) => p.Name.Equals(search)).ToList();
+            var viewModels = new List<ProfileIndexViewModel>();
+
+            foreach (var profile in profiles)
+            {
+                var viewModel = new ProfileIndexViewModel(profile);
+                viewModels.Add(viewModel);
+            }
+
+            return viewModels;
+        
+        }
+
+        public ProfilesIndexViewModel FindProfiles(List<int> contactIds)
+        {
+            var profiles = new List<ProfileModel>();
+
+            foreach (int contactId in contactIds) 
+            {
+                profiles.Add(Profiles.Where((p) => p.Id == contactId).First());
+            }
+
+            var viewModels = new ProfilesIndexViewModel();
+
+            foreach (var profile in profiles)
+            {
+                var viewModel = new ProfileIndexViewModel(profile);
+                viewModels.Profiles.Add(viewModel);
+            }
+
+            return viewModels;
+        }
+
+        public List<int> FindContacts(int profileId)
         {
 
-            return Profiles.Where((p) => p.Name.Equals(search)).ToList();
-        
+            return Contacts.Where((p) => p.ProfileId == profileId).Select(x => x.ContactId).ToList();
+
         }
 
         public AppDbContext() : base("DefaultConnection")

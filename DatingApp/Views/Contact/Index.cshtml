@@ -1,0 +1,14 @@
+﻿@model DatingApp.Models.ProfileViewModels.ProfilesIndexViewModel
+
+<h2>These are your contacts</h2>
+
+<table class="table table-bordered">
+    @foreach (var item in Model.Profiles)
+    {
+        <tr>
+            <td>@item.Name </td>
+            <td>@item.Age</td>
+            <td>@item._Gender</td>
+        </tr>
+    }
+</table>

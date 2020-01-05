@@ -181,6 +181,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\ContactController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ProfileController.cs" />
@@ -208,8 +209,21 @@
     <Compile Include="Migrations\202001041453243_images.Designer.cs">
       <DependentUpon>202001041453243_images.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202001051225137_Added_Contact_Relation_Table.cs" />
+    <Compile Include="Migrations\202001051225137_Added_Contact_Relation_Table.Designer.cs">
+      <DependentUpon>202001051225137_Added_Contact_Relation_Table.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202001051248413_Contacts_Edit.cs" />
+    <Compile Include="Migrations\202001051248413_Contacts_Edit.Designer.cs">
+      <DependentUpon>202001051248413_Contacts_Edit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202001051323539_PK_Contacts_Added.cs" />
+    <Compile Include="Migrations\202001051323539_PK_Contacts_Added.Designer.cs">
+      <DependentUpon>202001051323539_PK_Contacts_Added.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\ContactModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\ProfileModel.cs" />
@@ -279,6 +293,7 @@
     <Content Include="Views\Profile\Edit.cshtml" />
     <Content Include="Views\Profile\Search.cshtml" />
     <Content Include="Views\Profile\IndexMe.cshtml" />
+    <Content Include="Views\Contact\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -313,6 +328,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202001041453243_images.resx">
       <DependentUpon>202001041453243_images.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202001051225137_Added_Contact_Relation_Table.resx">
+      <DependentUpon>202001051225137_Added_Contact_Relation_Table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202001051248413_Contacts_Edit.resx">
+      <DependentUpon>202001051248413_Contacts_Edit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202001051323539_PK_Contacts_Added.resx">
+      <DependentUpon>202001051323539_PK_Contacts_Added.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

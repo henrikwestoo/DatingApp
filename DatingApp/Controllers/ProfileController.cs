@@ -115,11 +115,12 @@ namespace DatingApp.Controllers
         {
             var ctx = new AppDbContext();
 
-            var profiles = new ProfilesIndexViewModel();
 
-            profiles.Profiles = ctx.FindProfiles(SearchBar);
+            var profiles = ctx.FindProfiles(SearchBar);
+            var profilesViewModel = new ProfilesIndexViewModel();
+            profilesViewModel.Profiles = profiles;
 
-            return View(profiles);
+            return View(profilesViewModel);
         }
     }
 }
