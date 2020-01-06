@@ -17,6 +17,8 @@ namespace DatingApp.DbManager
 
         public DbSet<ContactModel> Contacts { get; set; }
 
+        public DbSet<PostModel> Posts { get; set; }
+
         public ProfileModel GetProfile(string userId)
         { 
             int key = Profiles.Where((p) => p.UserId.Equals(userId)).First().Id;
@@ -136,6 +138,14 @@ namespace DatingApp.DbManager
                 var contactFrom = Contacts.Where((c) => (c.ContactId == contactId) && (c.ProfileId == userProfileId)).First();
                 Set<ContactModel>().Remove(contactFrom);
             }
+        }
+
+        public List<PostModel> GetPosts(int userId) {
+
+            var posts = Posts.Where((u) => (u.RecieverId == userId)).ToList();
+
+            return posts;
+        
         }
 
 

@@ -1,5 +1,6 @@
 ﻿@model DatingApp.Models.ProfileViewModels.ProfileIndexViewModel
 
+<div id="profileInformationDiv">
 <img src="@Url.Content(Model.Image)" alt="Image" class="profile-image" />
 <br />
 @Html.LabelFor(m => m.Name, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -18,3 +19,8 @@
 <br />
 @Html.DisplayFor((m) => m.Biography)
 <br />
+</div>
+
+<div id="postsDiv">
+@Html.Partial("~/Views/Post/Index.cshtml")
+</div>

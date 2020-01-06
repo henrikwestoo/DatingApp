@@ -14,3 +14,28 @@ top: 17.5%;
     max-width: 150px;
     max-height: 150px;
 }
+
+#profileInformationDiv {
+    margin-top: 2.5%;
+    margin-left: 10%;
+    position: relative;
+    width: 50%;
+
+}
+
+#postsDiv {
+    position: absolute;
+    top: 15%;
+    left: 45%;
+    width: 45%;
+    background-color: gray;
+}
+
+.postDiv {
+
+background-color: red;
+box-shadow: 25px;
+box-shadow: blue;
+
+
+}

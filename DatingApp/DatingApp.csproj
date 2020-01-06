@@ -184,6 +184,7 @@
     <Compile Include="Controllers\ContactController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\PostController.cs" />
     <Compile Include="Controllers\ProfileController.cs" />
     <Compile Include="DbManager\AppDbContext.cs" />
     <Compile Include="Global.asax.cs">
@@ -225,12 +226,22 @@
     <Compile Include="Migrations\202001051513210_Added_Accepted_Column_Contact.Designer.cs">
       <DependentUpon>202001051513210_Added_Accepted_Column_Contact.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202001061344471_Added_Post_Model.cs" />
+    <Compile Include="Migrations\202001061344471_Added_Post_Model.Designer.cs">
+      <DependentUpon>202001061344471_Added_Post_Model.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202001061449545_Added_Posts_DbSet.cs" />
+    <Compile Include="Migrations\202001061449545_Added_Posts_DbSet.Designer.cs">
+      <DependentUpon>202001061449545_Added_Posts_DbSet.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ContactModel.cs" />
     <Compile Include="Models\ContactsViewModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\PostModel.cs" />
+    <Compile Include="Models\PostViewModels.cs" />
     <Compile Include="Models\ProfileModel.cs" />
     <Compile Include="Models\ProfileViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -301,6 +312,7 @@
     <Content Include="Views\Profile\IndexMe.cshtml" />
     <Content Include="Views\Contact\Index.cshtml" />
     <Content Include="Views\Contact\ContactRequestsPartial.cshtml" />
+    <Content Include="Views\Post\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -347,6 +359,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202001051513210_Added_Accepted_Column_Contact.resx">
       <DependentUpon>202001051513210_Added_Accepted_Column_Contact.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202001061344471_Added_Post_Model.resx">
+      <DependentUpon>202001061344471_Added_Post_Model.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202001061449545_Added_Posts_DbSet.resx">
+      <DependentUpon>202001061449545_Added_Posts_DbSet.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

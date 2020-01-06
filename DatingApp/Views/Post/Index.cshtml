@@ -1,0 +1,8 @@
+﻿@model DatingApp.Models.ProfileViewModels.ProfileIndexViewModel
+
+@foreach (var post in Model.Posts)
+{
+    <div class="postDiv">
+    <p>@post.Content</p>
+     </div>
+}

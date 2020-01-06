@@ -7,6 +7,7 @@ using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using static DatingApp.Models.PostViewModels;
 using static DatingApp.Models.ProfileViewModels;
 
 namespace DatingApp.Controllers
@@ -67,6 +68,16 @@ namespace DatingApp.Controllers
 
             var model = ctx.GetProfile(userId);
             var viewModel = new ProfileIndexViewModel(model);
+
+            var listOfPosts = new List<PostIndexViewModel>();
+
+            foreach (var post in ctx.GetPosts(userId))
+            {
+                var postViewModel = new PostIndexViewModel(post);
+                listOfPosts.Add(postViewModel);
+            }
+
+            viewModel.Posts = listOfPosts;
 
             ctx.Dispose();
 

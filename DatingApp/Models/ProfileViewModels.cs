@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
+using static DatingApp.Models.PostViewModels;
 
 namespace DatingApp.Models
 {
@@ -24,6 +25,7 @@ namespace DatingApp.Models
                 _Gender = model._Gender;
                 Biography = model.Biography;
                 Image = model.Image;
+                Posts = new List<PostIndexViewModel>();
             }
 
 
@@ -49,6 +51,8 @@ namespace DatingApp.Models
             public string Biography { get; set; }
 
             public string Image { get; set; }
+
+            public List<PostIndexViewModel> Posts { get; set; }
         }
 
 
