@@ -131,6 +131,8 @@ namespace DatingApp.Controllers
             var profilesViewModel = new ProfilesIndexViewModel();
             profilesViewModel.Profiles = profiles;
 
+            ctx.Dispose();
+
             return View(profilesViewModel);
         }
     }

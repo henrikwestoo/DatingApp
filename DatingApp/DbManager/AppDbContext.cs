@@ -17,6 +17,11 @@ namespace DatingApp.DbManager
 
         public DbSet<ContactModel> Contacts { get; set; }
 
+        internal void GetProfileId(object p)
+        {
+            throw new NotImplementedException();
+        }
+
         public DbSet<PostModel> Posts { get; set; }
 
         public ProfileModel GetProfile(string userId)
