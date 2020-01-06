@@ -68,7 +68,6 @@ namespace DatingApp.Controllers
         }
 
         [HttpPost]
-
         public ActionResult DeclineContact(int contactUserId)
         {
 
@@ -82,6 +81,19 @@ namespace DatingApp.Controllers
 
             return RedirectToAction("Index", "Contact");
 
+        }
+
+        public ActionResult GetPendingRequests()
+        {
+
+            var ctx = new AppDbContext();
+            var currentProfileId = ctx.GetProfileId(User.Identity.GetUserId());
+
+            var pendingContacts = ctx.FindContacts(currentProfileId, false).Count;
+
+            ctx.Dispose();
+
+            return Json(new { number = pendingContacts }, JsonRequestBehavior.AllowGet);
         }
 
     }

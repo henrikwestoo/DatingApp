@@ -26,6 +26,8 @@ namespace DatingApp
                       "~/Content/bootstrap.css",
                       "~/Content/Custom.css",
                       "~/Content/site.css"));
+            bundles.Add(new StyleBundle("~/bundles/custom").Include(
+                       "~/Scripts/custom.js"));
         }
     }
 }

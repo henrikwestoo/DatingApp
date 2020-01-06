@@ -21,7 +21,7 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("View Contacts", "Index", "Contact")</li>
+                    <li><a id="contactsText" href="/Contact/Index">View contacts (37)</a></li>
                     <li>
                         @using (Html.BeginForm("Search", "Profile", FormMethod.Get))
                         {
@@ -43,6 +43,7 @@
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/custom")
     @RenderSection("scripts", required: false)
 </body>
 </html>
