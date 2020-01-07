@@ -42,11 +42,13 @@ namespace DatingApp.Controllers
         }
 
 
-        [HttpGet]
-        public List<PostIndexViewModel> Display() {
+        [Route("api/postapi/display")]
+        [HttpPost]
+        public List<PostIndexViewModel> Display([FromBody] string receiverId) {
 
-            int recieverId = 10;
-            var postModels =  UnitOfWork.PostRepository.GetPosts(recieverId);
+            int id = Int32.Parse(receiverId);
+
+            var postModels =  UnitOfWork.PostRepository.GetPosts(id);
             var postViewModels = new List<PostIndexViewModel>();
             foreach (var postModel in postModels)
             {
