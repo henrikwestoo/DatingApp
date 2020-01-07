@@ -9,25 +9,9 @@ namespace DatingApp.Repositories
     {
         protected AppDbContext Ctx;
 
-        public BaseRepository()
+        public BaseRepository(AppDbContext ctx)
         {
-            Ctx = new AppDbContext();
-        }
-
-        public void SaveAndDispose()
-        {
-            Ctx.SaveChanges();
-            Ctx.Dispose();
-        }
-
-        public void Save()
-        {
-            Ctx.SaveChanges();
-        }
-
-        public void Dispose()
-        {
-            Ctx.Dispose();
+            Ctx = ctx;
         }
     }
 }

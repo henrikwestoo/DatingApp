@@ -12,19 +12,18 @@ namespace DatingApp.Controllers
 {
     public class ContactController : Controller
     {
+        private UnitOfWork UnitOfWork = new UnitOfWork();
         // GET: Contact
         [Authorize]
         public ActionResult Index()
         {
-            var profileRepo = new ProfileRepository();
-            var contactRepo = new ContactRepository();
-            var currentProfileId = profileRepo.GetProfileId(User.Identity.GetUserId());
+            var currentProfileId = UnitOfWork.ProfileRepository.GetProfileId(User.Identity.GetUserId());
 
-            var acceptedContacts = contactRepo.FindContacts(currentProfileId, true);
-            var pendingContacts = contactRepo.FindContacts(currentProfileId, false);
+            var acceptedContacts = UnitOfWork.ContactRepository.FindContacts(currentProfileId, true);
+            var pendingContacts = UnitOfWork.ContactRepository.FindContacts(currentProfileId, false);
 
-            var profilesContactsAccepted = profileRepo.FindProfiles(acceptedContacts);
-            var profilesContactsPending = profileRepo.FindProfiles(pendingContacts);
+            var profilesContactsAccepted = UnitOfWork.ProfileRepository.FindProfiles(acceptedContacts);
+            var profilesContactsPending = UnitOfWork.ProfileRepository.FindProfiles(pendingContacts);
 
             var profilesIndexViewModelContactsAccepted = new ProfilesIndexViewModel();
             var profilesIndexViewModelContactsPending = new ProfilesIndexViewModel();
@@ -43,8 +42,6 @@ namespace DatingApp.Controllers
 
             var allContacts = new ContactsViewModel(profilesIndexViewModelContactsAccepted, profilesIndexViewModelContactsPending);
 
-            profileRepo.Dispose();
-            contactRepo.Dispose();
 
             return View(allContacts);
 
@@ -53,8 +50,7 @@ namespace DatingApp.Controllers
         [HttpPost]
         public ActionResult AddContact(int contactProfileId)
         {
-            var profileRepo = new ProfileRepository();
-            var currentProfileId = profileRepo.GetProfileId(User.Identity.GetUserId());
+            var currentProfileId = UnitOfWork.ProfileRepository.GetProfileId(User.Identity.GetUserId());
 
             var contactModel = new ContactModel
             {
@@ -62,11 +58,8 @@ namespace DatingApp.Controllers
                 ContactId = contactProfileId
             };
 
-            var contactRepo = new ContactRepository();
-
-            contactRepo.AddContact(contactModel);
-            contactRepo.SaveAndDispose();
-            profileRepo.Dispose();
+            UnitOfWork.ContactRepository.AddContact(contactModel);
+            UnitOfWork.Save();
 
             return RedirectToAction("Search", "Profile");
         }
@@ -75,15 +68,11 @@ namespace DatingApp.Controllers
 
         public ActionResult AcceptContact(int contactUserId) {
 
-            var profileRepo = new ProfileRepository();
-            var contactRepo = new ContactRepository();
+            var currentProfileId = UnitOfWork.ProfileRepository.GetProfileId(User.Identity.GetUserId());
 
-            var currentProfileId = profileRepo.GetProfileId(User.Identity.GetUserId());
+            UnitOfWork.ContactRepository.EditContact(currentProfileId, contactUserId);
 
-            contactRepo.EditContact(currentProfileId, contactUserId);
-
-            contactRepo.SaveAndDispose();
-            profileRepo.Dispose();
+            UnitOfWork.Save();
 
             return RedirectToAction("Index", "Contact");
         
@@ -92,15 +81,11 @@ namespace DatingApp.Controllers
         [HttpPost]
         public ActionResult DeclineContact(int contactUserId)
         {
-            var profileRepo = new ProfileRepository();
-            var contactRepo = new ContactRepository();
+            var currentProfileId = UnitOfWork.ProfileRepository.GetProfileId(User.Identity.GetUserId());
 
-            var currentProfileId = profileRepo.GetProfileId(User.Identity.GetUserId());
+            UnitOfWork.ContactRepository.RemoveContact(currentProfileId, contactUserId);
 
-            contactRepo.RemoveContact(currentProfileId, contactUserId);
-
-            contactRepo.SaveAndDispose();
-            profileRepo.Dispose();
+            UnitOfWork.Save();
 
             return RedirectToAction("Index", "Contact");
 
@@ -108,17 +93,17 @@ namespace DatingApp.Controllers
 
         public ActionResult GetPendingRequests()
         {
-            var profileRepo = new ProfileRepository();
-            var contactRepo = new ContactRepository();
+            var currentProfileId = UnitOfWork.ProfileRepository.GetProfileId(User.Identity.GetUserId());
 
-            var currentProfileId = profileRepo.GetProfileId(User.Identity.GetUserId());
-
-            var pendingContacts = contactRepo.FindContacts(currentProfileId, false).Count;
-
-            contactRepo.Dispose();
-            profileRepo.Dispose();
+            var pendingContacts = UnitOfWork.ContactRepository.FindContacts(currentProfileId, false).Count;
 
             return Json(new { number = pendingContacts }, JsonRequestBehavior.AllowGet);
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            UnitOfWork.Dispose();
+            base.Dispose(disposing);
         }
 
     }

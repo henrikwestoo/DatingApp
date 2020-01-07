@@ -9,6 +9,11 @@ namespace DatingApp.Repositories
 {
     public class ProfileRepository : BaseRepository
     {
+        public ProfileRepository(AppDbContext ctx) : base(ctx)
+        {
+
+        }
+
         public void AddProfile(ProfileModel profile)
         {
             Ctx.Profiles.Add(profile);

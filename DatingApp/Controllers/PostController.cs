@@ -11,10 +11,6 @@ namespace DatingApp.Controllers
         // GET: Post
         public ActionResult Index()
         {
-
-
-
-
             return View();
         }
     }

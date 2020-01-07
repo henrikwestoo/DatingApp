@@ -9,6 +9,11 @@ namespace DatingApp.Repositories
 {
     public class ContactRepository : BaseRepository
     {
+        public ContactRepository(AppDbContext ctx) : base(ctx)
+        {
+
+        }
+
         public void AddContact(ContactModel model)
         {
             Ctx.Contacts.Add(model);
