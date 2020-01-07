@@ -13,7 +13,7 @@ namespace DatingApp.Controllers
 {
     public class PostApiController : ApiController
     {
-        private UnitOfWork UnitOfWork = new UnitOfWork();
+        private readonly UnitOfWork UnitOfWork = new UnitOfWork();
 
         [HttpPost]
         public string Send([FromBody] PostIndexViewModel viewModel)
@@ -40,5 +40,23 @@ namespace DatingApp.Controllers
                 return "Inte ok";
             }
         }
+
+
+        [HttpGet]
+        public List<PostIndexViewModel> Display() {
+
+            int recieverId = 10;
+            var postModels =  UnitOfWork.PostRepository.GetPosts(recieverId);
+            var postViewModels = new List<PostIndexViewModel>();
+            foreach (var postModel in postModels)
+            {
+                var postViewModel = new PostIndexViewModel(postModel);
+                postViewModels.Add(postViewModel);
+            }
+
+            return postViewModels;
+        
+        }
+
     }
 }
