@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <title>@ViewBag.Title - CODR</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 
@@ -21,11 +21,11 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li><a id="contactsText" href="/Contact/Index">View contacts (37)</a></li>
+                    <li><a id="contactsText" href="/Contact/Index">View contacts (0)</a></li>
                     <li>
                         @using (Html.BeginForm("Search", "Profile", FormMethod.Get))
                         {
-                            @Html.TextBox("SearchBar")<input type="submit" , id="searchButton" class="btn btn-primary" value="Find people" />
+                            @Html.TextBox("search")<input type="submit" , id="search-button" class="btn btn-primary" value="Find people" />
                         }
                     </li>
                 </ul>
@@ -37,7 +37,7 @@
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+            <p>&copy; @DateTime.Now.Year - CODR</p>
         </footer>
     </div>
 

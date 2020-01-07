@@ -5,7 +5,7 @@ namespace DatingApp.Migrations
     using System.Data.Entity.Migrations;
     using System.Linq;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<DatingApp.DbManager.AppDbContext>
+    internal sealed class Configuration : DbMigrationsConfiguration<DatingApp.Repositories.AppDbContext>
     {
         public Configuration()
         {
@@ -13,7 +13,7 @@ namespace DatingApp.Migrations
             ContextKey = "DatingApp.DbManager.AppDbContext";
         }
 
-        protected override void Seed(DatingApp.DbManager.AppDbContext context)
+        protected override void Seed(DatingApp.Repositories.AppDbContext context)
         {
             //  This method will be called after migrating to the latest version.
 

@@ -1,8 +1,10 @@
 ﻿@model DatingApp.Models.ProfileViewModels.ProfileIndexViewModel
 
+@{
+    ViewBag.Title = "Edit";
+}
 
-
-<h2>This is your profile</h2>
+<h2>Edit profile</h2>
 
 @using (Html.BeginForm("Edit", "Profile", FormMethod.Post, new { @class = "form-horizontal", role = "form", enctype = "multipart/form-data" }))
 {
@@ -32,7 +34,7 @@
     <strong>Gender</strong>
     <br />
     <div class="col-md-10">
-        @Html.TextBoxFor(m => m._Gender, new { @class = "form-control" })
+        @Html.TextBoxFor(m => m.Gender, new { @class = "form-control" })
     </div>
     <br />
     <br />

@@ -338,3 +338,24 @@ ASALocalRun/
 
 # BeatPulse healthcheck temp database
 healthchecksdb
+/DatingApp/Scripts/esm
+/DatingApp/Scripts/umd
+/DatingApp/Scripts/src
+/DatingApp/Scripts/bootstrap.bundle.js
+/DatingApp/Scripts/bootstrap.bundle.js.map
+/DatingApp/Scripts/bootstrap.bundle.min.js
+/DatingApp/Scripts/bootstrap.bundle.min.js.map
+/DatingApp/Scripts/bootstrap.js.map
+/DatingApp/Scripts/bootstrap.min.js.map
+/DatingApp/Scripts/index.js.flow
+/DatingApp/Scripts/index.d.ts
+/DatingApp/Scripts/popper-utils.js
+/DatingApp/Scripts/popper-utils.js.map
+/DatingApp/Scripts/popper-utils.min.js.map
+/DatingApp/Scripts/popper-utils.min.js
+/DatingApp/Scripts/popper.js
+/DatingApp/Scripts/popper.js.map
+/DatingApp/Scripts/popper.min.js
+/DatingApp/Scripts/popper.min.js.map
+/DatingApp/Scripts/README.md
+/DatingApp/Infrastructure

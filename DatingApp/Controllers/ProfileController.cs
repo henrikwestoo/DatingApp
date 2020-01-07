@@ -1,5 +1,5 @@
-﻿using DatingApp.DbManager;
-using DatingApp.Models;
+﻿using DatingApp.Models;
+using DatingApp.Repositories;
 using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
@@ -15,9 +15,6 @@ namespace DatingApp.Controllers
     public class ProfileController : Controller
     {
         // GET: Profile
-
-
-
         public ActionResult Create()
         {
             return View();
@@ -33,45 +30,34 @@ namespace DatingApp.Controllers
             {
                 Name = profileModel.Name,
                 Age = profileModel.Age,
-                _Gender = profileModel._Gender,
+                Gender = profileModel.Gender,
                 Biography = profileModel.Biography,
                 Image = "~/Images/" + file.FileName,
                 UserId = User.Identity.GetUserId()
             };
 
-            var ctx = new AppDbContext();
-            ctx.Profiles.Add(profile);
-            ctx.SaveChanges();
-            ctx.Dispose();
+            var profileRepo = new ProfileRepository();
+            profileRepo.AddProfile(profile);
+            profileRepo.SaveAndDispose();
+
             return RedirectToAction("Index", "Home");
 
         }
 
         public ActionResult IndexMe()
         {
+            var postRepo = new PostRepository();
+            var profileRepo = new ProfileRepository();            
+            
             string userId = User.Identity.GetUserId();
+            int profileId = profileRepo.GetProfileId(userId);
 
-            var ctx = new AppDbContext();
+            var model = profileRepo.GetProfile(userId);
 
-            var model = ctx.GetProfile(userId);
             var viewModel = new ProfileIndexViewModel(model);
-
-            ctx.Dispose();
-
-            return View(viewModel);
-        }
-        [HttpGet]
-        public ActionResult Index(int userId)
-        {
-
-            var ctx = new AppDbContext();
-
-            var model = ctx.GetProfile(userId);
-            var viewModel = new ProfileIndexViewModel(model);
-
             var listOfPosts = new List<PostIndexViewModel>();
 
-            foreach (var post in ctx.GetPosts(userId))
+            foreach (var post in postRepo.GetPosts(profileId))
             {
                 var postViewModel = new PostIndexViewModel(post);
                 listOfPosts.Add(postViewModel);
@@ -79,7 +65,33 @@ namespace DatingApp.Controllers
 
             viewModel.Posts = listOfPosts;
 
-            ctx.Dispose();
+            postRepo.Dispose();
+            profileRepo.Dispose();
+
+            return View(viewModel);
+        }
+
+        [HttpGet]
+        public ActionResult Index(int userId)
+        {
+            var profileRepo = new ProfileRepository();
+            var postRepo = new PostRepository();
+
+            var model = profileRepo.GetProfile(userId);
+
+            var viewModel = new ProfileIndexViewModel(model);
+            var listOfPosts = new List<PostIndexViewModel>();
+
+            foreach (var post in postRepo.GetPosts(userId))
+            {
+                var postViewModel = new PostIndexViewModel(post);
+                listOfPosts.Add(postViewModel);
+            }
+
+            viewModel.Posts = listOfPosts;
+
+            postRepo.Dispose();
+            profileRepo.Dispose();
 
             return View(viewModel);
         }
@@ -89,12 +101,12 @@ namespace DatingApp.Controllers
         {
             string userId = User.Identity.GetUserId();
 
-            var ctx = new AppDbContext();
+            var profileRepo = new ProfileRepository();
 
-            var model = ctx.GetProfile(userId);
+            var model = profileRepo.GetProfile(userId);
             var viewModel = new ProfileIndexViewModel(model);
 
-            ctx.Dispose();
+            profileRepo.Dispose();
 
             return View(viewModel);
         }
@@ -108,30 +120,41 @@ namespace DatingApp.Controllers
                 file.SaveAs(path);
             }
 
+            var profileRepo = new ProfileRepository();
             string foreignKey = User.Identity.GetUserId();
-
-            var ctx = new AppDbContext();
-
             string fileName = "~/Images/" + file.FileName;
 
-            ctx.EditProfile(foreignKey, viewModel, fileName);
+            var model = profileRepo.GetProfile(profileRepo.GetProfileId(foreignKey));
+            model.Name = viewModel.Name;
+            model.Age = viewModel.Age;
+            model.Gender = viewModel.Gender;
+            model.Biography = viewModel.Biography;
+            if (fileName != null)
+            {
+                model.Image = fileName;
+            }
 
-            ctx.SaveChanges();
-            ctx.Dispose();
+            profileRepo.EditProfile(model);
+
+            profileRepo.SaveAndDispose();
             return RedirectToAction("IndexMe", "Profile");
         }
 
         [HttpGet]
-        public ActionResult Search(string SearchBar)
+        public ActionResult Search(string search)
         {
-            var ctx = new AppDbContext();
+            var profileRepo = new ProfileRepository();
 
-
-            var profiles = ctx.FindProfiles(SearchBar);
+            var profiles = profileRepo.SearchProfiles(search);
             var profilesViewModel = new ProfilesIndexViewModel();
-            profilesViewModel.Profiles = profiles;
 
-            ctx.Dispose();
+            foreach (var profile in profiles)
+            {
+                var profileViewModel = new ProfileIndexViewModel(profile);
+                profilesViewModel.Profiles.Add(profileViewModel);
+            }
+
+            profileRepo.Dispose();
 
             return View(profilesViewModel);
         }

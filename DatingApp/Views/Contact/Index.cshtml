@@ -2,36 +2,47 @@
 
 @Html.Partial("ContactRequestsPartial")
 
+@{
+    ViewBag.Title = "Contacts";
+}
 
-<h2>These are your contacts</h2>
+<h2>Contacts</h2>
 
 <table class="table table-bordered">
+    <tr>
+        <th>Name</th>
+        <th>Age</th>
+        <th>Gender</th>
+        <th>View</th>
+        <th>Manage</th>
+    </tr>
+
     @foreach (var item in Model.Accepted.Profiles)
     {
-    <tr>
-        <td>@item.Name </td>
-        <td>@item.Age</td>
-        <td>@item._Gender</td>
-        <td>
-            @using (Html.BeginForm("Index", "Profile", FormMethod.Get))
-            {
-                @Html.Hidden("userId", item.Id)
-                <input type="submit"
-                       value="See profile"
-                       class="btn btn-primary" />
+        <tr>
+            <td>@item.Name </td>
+            <td>@item.Age</td>
+            <td>@item.Gender</td>
+            <td>
+                @using (Html.BeginForm("Index", "Profile", FormMethod.Get))
+                {
+                    @Html.Hidden("userId", item.Id)
+                    <input type="submit"
+                           value="See profile"
+                           class="btn btn-primary" />
 
-            }
-        </td>
-        <td>
-            @using (Html.BeginForm("DeclineContact", "Contact", FormMethod.Post))
-            {
-                @Html.Hidden("contactUserId", item.Id)
-                <input type="submit"
-                       value="Remove contact"
-                       class="btn btn-danger" />
+                }
+            </td>
+            <td>
+                @using (Html.BeginForm("DeclineContact", "Contact", FormMethod.Post))
+                {
+                    @Html.Hidden("contactUserId", item.Id)
+                    <input type="submit"
+                           value="Remove contact"
+                           class="btn btn-danger" />
 
-            }
-        </td>
-    </tr>
+                }
+            </td>
+        </tr>
     }
 </table>

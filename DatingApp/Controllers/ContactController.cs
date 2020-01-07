@@ -1,5 +1,5 @@
-﻿using DatingApp.DbManager;
-using DatingApp.Models;
+﻿using DatingApp.Models;
+using DatingApp.Repositories;
 using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
@@ -13,20 +13,38 @@ namespace DatingApp.Controllers
     public class ContactController : Controller
     {
         // GET: Contact
+        [Authorize]
         public ActionResult Index()
         {
-            var ctx = new AppDbContext();
-            var currentProfileId = ctx.GetProfileId(User.Identity.GetUserId());
+            var profileRepo = new ProfileRepository();
+            var contactRepo = new ContactRepository();
+            var currentProfileId = profileRepo.GetProfileId(User.Identity.GetUserId());
 
-            var acceptedContacts = ctx.FindContacts(currentProfileId, true);
-            var pendingContacts = ctx.FindContacts(currentProfileId, false);
+            var acceptedContacts = contactRepo.FindContacts(currentProfileId, true);
+            var pendingContacts = contactRepo.FindContacts(currentProfileId, false);
 
-            var profilesIndexViewModelContactsAccepted = ctx.FindProfiles(acceptedContacts);
-            var profilesIndexViewModelContactsPending = ctx.FindProfiles(pendingContacts);
+            var profilesContactsAccepted = profileRepo.FindProfiles(acceptedContacts);
+            var profilesContactsPending = profileRepo.FindProfiles(pendingContacts);
+
+            var profilesIndexViewModelContactsAccepted = new ProfilesIndexViewModel();
+            var profilesIndexViewModelContactsPending = new ProfilesIndexViewModel();
+
+            foreach (var model in profilesContactsAccepted)
+            {
+                var profileIndexViewModelAccepted = new ProfileIndexViewModel(model);
+                profilesIndexViewModelContactsAccepted.Profiles.Add(profileIndexViewModelAccepted);
+            }
+
+            foreach (var model in profilesContactsPending)
+            {
+                var profileIndexViewModelPending = new ProfileIndexViewModel(model);
+                profilesIndexViewModelContactsPending.Profiles.Add(profileIndexViewModelPending);
+            }
 
             var allContacts = new ContactsViewModel(profilesIndexViewModelContactsAccepted, profilesIndexViewModelContactsPending);
 
-            ctx.Dispose();
+            profileRepo.Dispose();
+            contactRepo.Dispose();
 
             return View(allContacts);
 
@@ -35,8 +53,8 @@ namespace DatingApp.Controllers
         [HttpPost]
         public ActionResult AddContact(int contactProfileId)
         {
-            var ctx = new AppDbContext();
-            var currentProfileId = ctx.GetProfileId(User.Identity.GetUserId());
+            var profileRepo = new ProfileRepository();
+            var currentProfileId = profileRepo.GetProfileId(User.Identity.GetUserId());
 
             var contactModel = new ContactModel
             {
@@ -44,9 +62,11 @@ namespace DatingApp.Controllers
                 ContactId = contactProfileId
             };
 
-            ctx.Contacts.Add(contactModel);
-            ctx.SaveChanges();
-            ctx.Dispose();
+            var contactRepo = new ContactRepository();
+
+            contactRepo.AddContact(contactModel);
+            contactRepo.SaveAndDispose();
+            profileRepo.Dispose();
 
             return RedirectToAction("Search", "Profile");
         }
@@ -55,13 +75,15 @@ namespace DatingApp.Controllers
 
         public ActionResult AcceptContact(int contactUserId) {
 
-            var ctx = new AppDbContext();
-            var currentProfileId = ctx.GetProfileId(User.Identity.GetUserId());
+            var profileRepo = new ProfileRepository();
+            var contactRepo = new ContactRepository();
 
-            ctx.EditContact(currentProfileId, contactUserId);
+            var currentProfileId = profileRepo.GetProfileId(User.Identity.GetUserId());
 
-            ctx.SaveChanges();
-            ctx.Dispose();
+            contactRepo.EditContact(currentProfileId, contactUserId);
+
+            contactRepo.SaveAndDispose();
+            profileRepo.Dispose();
 
             return RedirectToAction("Index", "Contact");
         
@@ -70,14 +92,15 @@ namespace DatingApp.Controllers
         [HttpPost]
         public ActionResult DeclineContact(int contactUserId)
         {
+            var profileRepo = new ProfileRepository();
+            var contactRepo = new ContactRepository();
 
-            var ctx = new AppDbContext();
-            var currentProfileId = ctx.GetProfileId(User.Identity.GetUserId());
+            var currentProfileId = profileRepo.GetProfileId(User.Identity.GetUserId());
 
-            ctx.RemoveContact(currentProfileId, contactUserId);
+            contactRepo.RemoveContact(currentProfileId, contactUserId);
 
-            ctx.SaveChanges();
-            ctx.Dispose();
+            contactRepo.SaveAndDispose();
+            profileRepo.Dispose();
 
             return RedirectToAction("Index", "Contact");
 
@@ -85,13 +108,15 @@ namespace DatingApp.Controllers
 
         public ActionResult GetPendingRequests()
         {
+            var profileRepo = new ProfileRepository();
+            var contactRepo = new ContactRepository();
 
-            var ctx = new AppDbContext();
-            var currentProfileId = ctx.GetProfileId(User.Identity.GetUserId());
+            var currentProfileId = profileRepo.GetProfileId(User.Identity.GetUserId());
 
-            var pendingContacts = ctx.FindContacts(currentProfileId, false).Count;
+            var pendingContacts = contactRepo.FindContacts(currentProfileId, false).Count;
 
-            ctx.Dispose();
+            contactRepo.Dispose();
+            profileRepo.Dispose();
 
             return Json(new { number = pendingContacts }, JsonRequestBehavior.AllowGet);
         }

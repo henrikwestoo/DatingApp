@@ -16,7 +16,7 @@ namespace DatingApp.Models
 
         public int Age { get; set; }
 
-        public Gender _Gender { get; set; }
+        public Gender Gender { get; set; }
 
         public string Biography { get; set; }
 

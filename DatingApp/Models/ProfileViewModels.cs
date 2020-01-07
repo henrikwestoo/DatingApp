@@ -22,7 +22,7 @@ namespace DatingApp.Models
                 Id = model.Id;
                 Name = model.Name;
                 Age = model.Age;
-                _Gender = model._Gender;
+                Gender = model.Gender;
                 Biography = model.Biography;
                 Image = model.Image;
                 Posts = new List<PostIndexViewModel>();
@@ -43,7 +43,7 @@ namespace DatingApp.Models
 
             [Display(Name = "Gender")]
             [Required(ErrorMessage = "Field required")]
-            public Gender _Gender { get; set; }
+            public Gender Gender { get; set; }
 
             [Display(Name = "Biography")]
             [Required(ErrorMessage = "Field required")]

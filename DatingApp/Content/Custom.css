@@ -1,13 +1,12 @@
-﻿#SearchBar {
+﻿#search {
     margin-top: 7%;
     margin-left: 10%
 }
 
-#searchButton {
-position: absolute;
-left: 120%;
-top: 17.5%;
-
+#search-button {
+    position: absolute;
+    left: 120%;
+    top: 17.5%;
 }
 
 .profile-image {
@@ -15,27 +14,28 @@ top: 17.5%;
     max-height: 150px;
 }
 
-#profileInformationDiv {
-    margin-top: 2.5%;
-    margin-left: 10%;
-    position: relative;
-    width: 50%;
-
+.m-top {
+    margin-top: 5em !important;
 }
 
-#postsDiv {
-    position: absolute;
-    top: 15%;
-    left: 45%;
-    width: 45%;
-    background-color: gray;
+.button-col {
+    padding-top: 2em !important;
 }
 
-.postDiv {
+.panel-header-wide {
+    padding-bottom: 2em;
+}
 
-background-color: red;
-box-shadow: 25px;
-box-shadow: blue;
+#form-submit-button {
+    margin-top: 1em;
+    margin-bottom: 1em;
+}
 
+#profile-name-space {
+    margin-top: 1em;
+    margin-bottom: 0.5em;
+}
 
+textarea {
+    max-width: 100% !important;
 }

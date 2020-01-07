@@ -1,8 +1,19 @@
 ﻿@model DatingApp.Models.ProfileViewModels.ProfileIndexViewModel
 
-@foreach (var post in Model.Posts)
-{
-    <div class="postDiv">
-    <p>@post.Content</p>
-     </div>
-}
+<form class="form-horizontal">
+    <input type="hidden" id="user-id" value="@Model.Id" />
+    <textarea class="form-control">Write something...</textarea>
+    <button type="button" class="btn btn-primary" id="form-submit-button">Post</button>
+</form>
+
+<div class="panel-group">
+    @foreach (var post in Model.Posts)
+    {
+        <div class="panel panel-default">
+            <div class="panel-heading panel-header-wide">
+                <div class="col-md-8">Placeholder name</div><div class="col-md-4">@post.DateTime</div>
+            </div>
+            <div class="panel-body text-left">@post.Content</div>
+        </div>
+    }
+</div>

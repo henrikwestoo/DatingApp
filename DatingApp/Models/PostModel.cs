@@ -16,9 +16,9 @@ namespace DatingApp.Models
         public virtual int CreatorId { get; set; }
         public virtual ProfileModel Creator { get; set; }
 
-        [ForeignKey("Reciever")]
-        public virtual int RecieverId { get; set; }
-        public virtual ProfileModel Reciever { get; set; }
+        [ForeignKey("Receiver")]
+        public virtual int ReceiverId { get; set; }
+        public virtual ProfileModel Receiver { get; set; }
 
         public string Content { get; set; }
 

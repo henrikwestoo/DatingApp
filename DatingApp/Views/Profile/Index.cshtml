@@ -1,26 +1,39 @@
 ﻿@model DatingApp.Models.ProfileViewModels.ProfileIndexViewModel
 
-<div id="profileInformationDiv">
-<img src="@Url.Content(Model.Image)" alt="Image" class="profile-image" />
-<br />
-@Html.LabelFor(m => m.Name, htmlAttributes: new { @class = "control-label col-md-2" })
-<br />
-@Html.DisplayFor((m) => m.Name)
-<br />
-@Html.LabelFor(m => m.Age, htmlAttributes: new { @class = "control-label col-md-2" })
-<br />
-@Html.DisplayFor((m) => m.Age)
-<br />
-@Html.LabelFor(m => m._Gender, htmlAttributes: new { @class = "control-label col-md-2" })
-<br />
-@Html.DisplayFor((m) => m._Gender)
-<br />
-@Html.LabelFor(m => m.Biography, htmlAttributes: new { @class = "control-label col-md-2" })
-<br />
-@Html.DisplayFor((m) => m.Biography)
-<br />
+@{
+    ViewBag.Title = Model.Name + "'s profile";
+}
+
+
+<div class="m-top">
+    <div class="col-sm-4">
+        <div class="panel panel-default">
+            <div class="panel-heading text-center">
+                <img src="@Url.Content(Model.Image)" alt="Image" class="img-thumbnail profile-image" />
+                <h1 class="panel-title" id="profile-name-space">@Html.DisplayFor((m) => m.Name)</h1>
+            </div>
+            <div class="panel-body text-center">
+                <table class="table table-responsive">
+                    <tr>
+                        <td>@Html.LabelFor(m => m.Age, htmlAttributes: new { @class = "control-label col-md-2" })</td>
+                        <td><p>@Html.DisplayFor((m) => m.Age, new { @class = "control-label col-md-8" })</p></td>
+                    </tr>
+                    <tr>
+                        <td>@Html.LabelFor(m => m.Gender, htmlAttributes: new { @class = "control-label col-md-2" })</td>
+                        <td><p>@Html.DisplayFor((m) => m.Gender, new { @class = "control-label col-md-8" })</p></td>
+                    </tr>
+                    <tr>
+                        <td>@Html.LabelFor(m => m.Biography, htmlAttributes: new { @class = "control-label col-md-2" })</td>
+                        <td><em>@Html.DisplayFor((m) => m.Biography, new { @class = "control-label col-md-8" })</em></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
 </div>
 
-<div id="postsDiv">
-@Html.Partial("~/Views/Post/Index.cshtml")
+<div class="m-top">
+    <div class="col-sm-8">
+        @Html.Partial("~/Views/Post/Index.cshtml")
+    </div>
 </div>

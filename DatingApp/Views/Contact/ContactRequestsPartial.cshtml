@@ -1,15 +1,18 @@
 ﻿@model DatingApp.Models.ContactsViewModel
 
-<h2>These are your contact requests </h2>
+@if(Model.Pending.Profiles.Count > 0)
+{
+    <h2>New contact requests</h2>
+}
 
-<table class="table table-bordered">
+<table class="table table-hover">
     @foreach (var item in Model.Pending.Profiles)
     {
     
-    <tr>
+    <tr class="info">
         <td>@item.Name </td>
         <td>@item.Age</td>
-        <td>@item._Gender</td>
+        <td>@item.Gender</td>
         <td>
             @using (Html.BeginForm("AcceptContact", "Contact", FormMethod.Post))
             {

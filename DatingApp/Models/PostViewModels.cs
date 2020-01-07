@@ -13,7 +13,7 @@ namespace DatingApp.Models
            
             public virtual int CreatorId { get; set; }
 
-            public virtual int RecieverId { get; set; }
+            public virtual int ReceiverId { get; set; }
  
             public string Content { get; set; }
 
@@ -22,7 +22,7 @@ namespace DatingApp.Models
             public PostIndexViewModel(PostModel postModel)
             {
                 CreatorId = postModel.CreatorId;
-                RecieverId = postModel.RecieverId;
+                ReceiverId = postModel.ReceiverId;
                 Content = postModel.Content;
                 DateTime = postModel.DateTime;
             }
