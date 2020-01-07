@@ -13,6 +13,11 @@ namespace DatingApp.Repositories
 
         }
 
+        public void AddPost(PostModel model)
+        {
+            Ctx.Posts.Add(model);
+        }
+
         public List<PostModel> GetPosts(int userId)
         {
             return Ctx.Posts.Where((u) => (u.ReceiverId == userId)).ToList();
