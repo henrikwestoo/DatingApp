@@ -3,6 +3,7 @@ using DatingApp.Repositories;
 using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -66,7 +67,8 @@ namespace DatingApp.Controllers
 
         [HttpPost]
 
-        public ActionResult AcceptContact(int contactUserId) {
+        public ActionResult AcceptContact(int contactUserId)
+        {
 
             var currentProfileId = UnitOfWork.ProfileRepository.GetProfileId(User.Identity.GetUserId());
 
@@ -75,7 +77,7 @@ namespace DatingApp.Controllers
             UnitOfWork.Save();
 
             return RedirectToAction("Index", "Contact");
-        
+
         }
 
         [HttpPost]
@@ -93,9 +95,19 @@ namespace DatingApp.Controllers
 
         public ActionResult GetPendingRequests()
         {
-            var currentProfileId = UnitOfWork.ProfileRepository.GetProfileId(User.Identity.GetUserId());
+            int pendingContacts = 0;
 
-            var pendingContacts = UnitOfWork.ContactRepository.FindContacts(currentProfileId, false).Count;
+            try
+            {
+                var currentProfileId = UnitOfWork.ProfileRepository.GetProfileId(User.Identity.GetUserId());
+                pendingContacts = UnitOfWork.ContactRepository.FindContacts(currentProfileId, false).Count;
+            }
+
+            // fixa? sker exception varje gång en ny user skapas och man omredigeras till create profile
+            catch (InvalidOperationException e)
+            {
+                Debug.Write("No profile found");
+            }
 
             return Json(new { number = pendingContacts }, JsonRequestBehavior.AllowGet);
         }
