@@ -1,5 +1,6 @@
 ﻿using DatingApp.Models;
 using DatingApp.Repositories;
+using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,9 +20,13 @@ namespace DatingApp.Controllers
         {
             try
             {
+
+                string userId = User.Identity.GetUserId();
+                int profileId = UnitOfWork.ProfileRepository.GetProfileId(userId);
+
                 var post = new PostModel
                 {
-                    CreatorId = viewModel.CreatorId,
+                    CreatorId = profileId,
                     ReceiverId = viewModel.ReceiverId,
                     Content = viewModel.Content,
                     DateTime = viewModel.DateTime

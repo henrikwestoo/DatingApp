@@ -17,8 +17,8 @@
         const userId = $('#user-id').val();
 
         const post = {
-            CreatorId: userId,
-            ReceiverId: 10,
+            
+            ReceiverId: userId,
             DateTime: timestamp,
             Content: newPost
         };
