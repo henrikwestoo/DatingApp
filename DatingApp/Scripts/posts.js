@@ -3,7 +3,11 @@
     window.addEventListener('load', () => {
         //updateWall();
 
-        $('#post-wall-button').click(alert('Test'));
+        //$('#post-wall-button').click(alert('Test'));
+
+        $("#post-wall-button").click(function () {
+            postToWall()
+        });
     });
 
     function postToWall() {
@@ -22,7 +26,7 @@
         $.post('/api/postapi/send', post)
             .then((answer) => {
                 if (answer === "Ok") {
-                    $('new-post').val('');
+                    $('#new-post').val('');
                     //updateWall();
                 } else {
                     alert("Something went wrong!");
