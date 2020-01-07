@@ -10,7 +10,7 @@ namespace DatingApp.Migrations
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
-            ContextKey = "DatingApp.DbManager.AppDbContext";
+            ContextKey = "DatingApp.Repositories.AppDbContext";
         }
 
         protected override void Seed(DatingApp.Repositories.AppDbContext context)
