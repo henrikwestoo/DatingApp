@@ -66,7 +66,48 @@ namespace DatingApp.Models
 
         }
 
+        public class ProfileSearchViewModel
+        {
+            public ProfileSearchViewModel(ProfileModel model, bool isContact)
+            {
+                Id = model.Id;
+                Name = model.Name;
+                Age = model.Age;
+                Gender = model.Gender;
+                Biography = model.Biography;
+                Image = model.Image;
+                IsContact = isContact;
+            }
 
+
+            public int Id { get; set; }
+
+            [Display(Name = "Name")]
+            public string Name { get; set; }
+
+            [Display(Name = "Age")]
+            public int Age { get; set; }
+
+            [Display(Name = "Gender")]
+            public Gender Gender { get; set; }
+
+            [Display(Name = "Biography")]
+            public string Biography { get; set; }
+
+            public string Image { get; set; }
+
+            public bool IsContact { get; set; }
+        }
+
+        public class ProfilesSearchViewModel
+        {
+            public List<ProfileSearchViewModel> Profiles { get; set; }
+
+            public ProfilesSearchViewModel()
+            {
+                Profiles = new List<ProfileSearchViewModel>();
+            }
+        }
 
     }
 }

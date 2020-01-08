@@ -112,11 +112,25 @@ namespace DatingApp.Controllers
         public ActionResult Search(string search)
         {
             var profiles = UnitOfWork.ProfileRepository.SearchProfiles(search);
-            var profilesViewModel = new ProfilesIndexViewModel();
+
+
+            var currentId = User.Identity.GetUserId();
+            int profileId = UnitOfWork.ProfileRepository.GetProfileId(currentId);
+
+            var profilesViewModel = new ProfilesSearchViewModel();
+
+            var contacts = UnitOfWork.ContactRepository.FindAllContacts(profileId);
 
             foreach (var profile in profiles)
             {
-                var profileViewModel = new ProfileIndexViewModel(profile);
+                bool isContact = false;
+
+                if(contacts.Contains(profile.Id))
+                {
+                    isContact = true;
+                }
+
+                var profileViewModel = new ProfileSearchViewModel(profile, isContact);
                 profilesViewModel.Profiles.Add(profileViewModel);
             }
 

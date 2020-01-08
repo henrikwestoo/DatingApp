@@ -1,5 +1,5 @@
 ﻿@using Microsoft.AspNet.Identity;
-@model DatingApp.Models.ProfileViewModels.ProfilesIndexViewModel
+@model DatingApp.Models.ProfileViewModels.ProfilesSearchViewModel
 
 @{
     ViewBag.Title = "Search";
@@ -37,10 +37,13 @@
             <td>
                 @using (Html.BeginForm("AddContact", "Contact", FormMethod.Post))
                 {
-                    @Html.Hidden("contactProfileId", item.Id)
-                    <input type="submit"
-                           value="Add contact"
-                           class="btn btn-success" />
+                    if (!item.IsContact)
+                    {
+                        @Html.Hidden("contactProfileId", item.Id)
+                        <input type="submit"
+                               value="Add contact"
+                               class="btn btn-success" />
+                    }
                 }
             </td>
         </tr>

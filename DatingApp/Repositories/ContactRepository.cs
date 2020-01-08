@@ -66,5 +66,19 @@ namespace DatingApp.Repositories
                 Ctx.Set<ContactModel>().Remove(contactFrom);
             }
         }
+
+        public List<int> FindAllContacts(int id)
+        {
+            List<int> ids = new List<int>();
+
+            ids.AddRange(Ctx.Contacts.Where((c) => (c.ProfileId == id)).
+                    Select((x) => x.ContactId).
+                    ToList());
+            ids.AddRange(Ctx.Contacts.Where((c) => (c.ContactId == id)).
+                    Select((x) => x.ProfileId).
+                    ToList());
+
+            return ids;
+        }
     }
 }
