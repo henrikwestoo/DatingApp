@@ -1,7 +1,5 @@
 ﻿window.addEventListener('load', () => {
-    //updateWall();
-
-    //$('#post-wall-button').click(alert('Test'));
+    updateWall();
 
     $("#post-wall-button").click(function () {
         postToWall()
@@ -11,13 +9,13 @@
 function postToWall() {
 
     const newPost = $('#new-post').val();
-    const timestamp = new Date().toISOString();
+    const dateTime = new Date().toISOString();
     const recieverId = $('#user-id').val();
 
     const post = {
 
         ReceiverId: recieverId,
-        DateTime: timestamp,
+        DateTime: dateTime,
         Content: newPost
     };
 
@@ -45,8 +43,11 @@ function updateWall() {
         success: function (result) {
             $('#posts-div').html('');
             result.forEach((post) => {
+                var dateArray = post.DateTime.split("T");
+                var clock = dateArray[1].substring(0, 8);
+                var formattedDate = dateArray[0] + " " + clock;
                $('#posts-div').append(
-                 '<div class="panel panel-default"><div class="panel-heading panel-header-wide"><div class="col-md-8">Placeholder name</div><div class="col-md-4">' + post.DateTime + '</div></div><div class="panel-body text-left">' + post.Content + '</div></div>'
+                   '<div class="panel panel-default"><div class="panel-heading panel-header-wide"><div class="col-md-8">' + post.CreatorName + '</div><div class="col-md-4">' + formattedDate + '</div></div><div class="panel-body text-left">' + post.Content + '</div></div>'
                 );
             });
         }

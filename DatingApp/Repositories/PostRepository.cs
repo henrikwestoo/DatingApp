@@ -20,7 +20,7 @@ namespace DatingApp.Repositories
 
         public List<PostModel> GetPosts(int userId)
         {
-            return Ctx.Posts.Where((u) => (u.ReceiverId == userId)).ToList();
+            return Ctx.Posts.Where((u) => (u.ReceiverId == userId)).OrderByDescending(u => u.DateTime).ToList();
         }
     }
 }

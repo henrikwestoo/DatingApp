@@ -19,12 +19,23 @@ namespace DatingApp.Models
 
             public DateTime DateTime { get; set; }
 
+            public string CreatorName { get; set; }
+
             public PostIndexViewModel(PostModel postModel)
             {
                 CreatorId = postModel.CreatorId;
                 ReceiverId = postModel.ReceiverId;
                 Content = postModel.Content;
                 DateTime = postModel.DateTime;
+            }
+
+            public PostIndexViewModel(PostModel postModel, string creatorName)
+            {
+                CreatorId = postModel.CreatorId;
+                ReceiverId = postModel.ReceiverId;
+                Content = postModel.Content;
+                DateTime = postModel.DateTime;
+                CreatorName = creatorName;
             }
 
 

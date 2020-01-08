@@ -53,15 +53,6 @@ namespace DatingApp.Controllers
             var model = UnitOfWork.ProfileRepository.GetProfile(userId);
 
             var viewModel = new ProfileIndexViewModel(model);
-            var listOfPosts = new List<PostIndexViewModel>();
-
-            foreach (var post in UnitOfWork.PostRepository.GetPosts(profileId))
-            {
-                var postViewModel = new PostIndexViewModel(post);
-                listOfPosts.Add(postViewModel);
-            }
-
-            viewModel.Posts = listOfPosts;
 
             return View(viewModel);
         }
@@ -72,15 +63,6 @@ namespace DatingApp.Controllers
             var model = UnitOfWork.ProfileRepository.GetProfile(userId);
 
             var viewModel = new ProfileIndexViewModel(model);
-            var listOfPosts = new List<PostIndexViewModel>();
-
-            foreach (var post in UnitOfWork.PostRepository.GetPosts(userId))
-            {
-                var postViewModel = new PostIndexViewModel(post);
-                listOfPosts.Add(postViewModel);
-            }
-
-            viewModel.Posts = listOfPosts;
 
             return View(viewModel);
         }

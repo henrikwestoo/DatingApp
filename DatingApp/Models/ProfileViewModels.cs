@@ -25,7 +25,6 @@ namespace DatingApp.Models
                 Gender = model.Gender;
                 Biography = model.Biography;
                 Image = model.Image;
-                Posts = new List<PostIndexViewModel>();
             }
 
 
@@ -51,8 +50,6 @@ namespace DatingApp.Models
             public string Biography { get; set; }
 
             public string Image { get; set; }
-
-            public List<PostIndexViewModel> Posts { get; set; }
         }
 
 

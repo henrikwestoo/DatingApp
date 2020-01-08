@@ -49,10 +49,14 @@ namespace DatingApp.Controllers
             int id = Int32.Parse(receiverId);
 
             var postModels =  UnitOfWork.PostRepository.GetPosts(id);
+            
             var postViewModels = new List<PostIndexViewModel>();
+
             foreach (var postModel in postModels)
             {
-                var postViewModel = new PostIndexViewModel(postModel);
+                string name = UnitOfWork.ProfileRepository.GetProfile(postModel.CreatorId).Name;
+
+                var postViewModel = new PostIndexViewModel(postModel, name);
                 postViewModels.Add(postViewModel);
             }
 

@@ -6,18 +6,8 @@
     <button type="button" class="btn btn-primary" id="post-wall-button">Post</button>
 </form>
 
+<!-- Posts below -->
 <div id="posts-div" class="panel-group">
-    @foreach (var post in Model.Posts)
-    {
-        <div class="panel panel-default">
-            <div class="panel-heading panel-header-wide">
-                <div class="col-md-8">Placeholder name</div><div class="col-md-4">@post.DateTime</div>
-            </div>
-            <div class="panel-body text-left">@post.Content</div>
-        </div>
-    }
-
-
 </div>
 
 @Scripts.Render("~/bundles/posts")
