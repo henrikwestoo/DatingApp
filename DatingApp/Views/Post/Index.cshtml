@@ -1,9 +1,11 @@
 ﻿@model DatingApp.Models.ProfileViewModels.ProfileIndexViewModel
 
+@Scripts.Render("~/bundles/custom")
+
 <form class="form-horizontal">
     <input type="hidden" id="user-id" value="@Model.Id" />
     <textarea class="form-control" id="new-post"></textarea>
-    <button type="button" class="btn btn-primary" id="post-wall-button">Post</button>
+    <button type="button" class="btn btn-primary wall-button" id="post-wall-button">Post</button>
 </form>
 
 <!-- Posts below -->

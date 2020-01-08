@@ -105,6 +105,7 @@ namespace DatingApp.Controllers
             return RedirectToAction("IndexMe", "Profile");
         }
 
+        [Authorize]
         [HttpGet]
         public ActionResult Search(string search)
         {
@@ -120,15 +121,18 @@ namespace DatingApp.Controllers
 
             foreach (var profile in profiles)
             {
-                bool isContact = false;
-
-                if(contacts.Contains(profile.Id))
+                if (profile.Id != profileId)
                 {
-                    isContact = true;
-                }
+                    bool isContact = false;
 
-                var profileViewModel = new ProfileSearchViewModel(profile, isContact);
-                profilesViewModel.Profiles.Add(profileViewModel);
+                    if (contacts.Contains(profile.Id))
+                    {
+                        isContact = true;
+                    }
+
+                    var profileViewModel = new ProfileSearchViewModel(profile, isContact);
+                    profilesViewModel.Profiles.Add(profileViewModel);
+                }
             }
 
             return View(profilesViewModel);
