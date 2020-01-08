@@ -6,48 +6,55 @@
 }
 
 
-<h2>Search results</h2>
+@if (Model.Profiles.Count > 0)
+{
+    <h2>Search results</h2>
 
-<table class="table table-bordered">
+    <table class="table table-bordered">
 
-    <tr>
-        <th>Name</th>
-        <th>Age</th>
-        <th>Gender</th>
-        <th>View</th>
-        <th>Add</th>
-    </tr>
-
-    @foreach (var item in Model.Profiles)
-    {
         <tr>
-            <td>@item.Name </td>
-            <td>@item.Age</td>
-            <td>@item.Gender</td>
-            <td>
-                @using (Html.BeginForm("Index", "Profile", FormMethod.Get))
-                {
-                    @Html.Hidden("userId", item.Id)
-                    <input type="submit"
-                           value="See profile"
-                           class="btn btn-primary" />
-
-                }
-            </td>
-            <td>
-                @using (Html.BeginForm("AddContact", "Contact", FormMethod.Post))
-                {
-                    if (!item.IsContact)
-                    {
-                        @Html.Hidden("contactProfileId", item.Id)
-                        <input type="submit"
-                               value="Add contact"
-                               class="btn btn-success" />
-                    }
-                }
-            </td>
+            <th>Name</th>
+            <th>Age</th>
+            <th>Gender</th>
+            <th>View</th>
+            <th>Add</th>
         </tr>
-    }
+
+        @foreach (var item in Model.Profiles)
+        {
+            <tr>
+                <td>@item.Name </td>
+                <td>@item.Age</td>
+                <td>@item.Gender</td>
+                <td>
+                    @using (Html.BeginForm("Index", "Profile", FormMethod.Get))
+                    {
+                        @Html.Hidden("userId", item.Id)
+                        <input type="submit"
+                               value="See profile"
+                               class="btn btn-primary" />
+
+                    }
+                </td>
+                <td>
+                    @using (Html.BeginForm("AddContact", "Contact", FormMethod.Post))
+                    {
+                        if (!item.IsContact)
+                        {
+                            @Html.Hidden("contactProfileId", item.Id)
+                            <input type="submit"
+                                   value="Add contact"
+                                   class="btn btn-success" />
+                        }
+                    }
+                </td>
+            </tr>
+        }
 
 
-</table>
+    </table>
+}
+else
+{
+    <h2>No results found!</h2>
+}

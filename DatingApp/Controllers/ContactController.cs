@@ -103,8 +103,7 @@ namespace DatingApp.Controllers
                 pendingContacts = UnitOfWork.ContactRepository.FindContacts(currentProfileId, false).Count;
             }
 
-            // fixa? sker exception varje gång en ny user skapas och man omredigeras till create profile
-            catch (InvalidOperationException e)
+            catch (InvalidOperationException)
             {
                 Debug.Write("No profile found");
             }

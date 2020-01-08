@@ -44,7 +44,7 @@ namespace DatingApp.Models
             [Required(ErrorMessage = "Field required")]
             public Gender Gender { get; set; }
 
-            [Display(Name = "Biography")]
+            [Display(Name = "Bio")]
             [Required(ErrorMessage = "Field required")]
             [StringLength(150, MinimumLength = 1, ErrorMessage = "Character limit is 150")]
             public string Biography { get; set; }

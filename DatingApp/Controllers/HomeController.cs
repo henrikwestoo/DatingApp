@@ -19,26 +19,26 @@ namespace DatingApp.Controllers
 
             try
             {
+                // Kontrollerar om användare är inloggad
+                // Om sant, hämtas användarens profil-ID
                 int profileId = 0;
-
                 if (User.Identity.GetUserId() != null)
                 {
                     profileId = UnitOfWork.ProfileRepository.GetProfileId(User.Identity.GetUserId());
                 }
 
                 var lowestProfileId = UnitOfWork.ProfileRepository.GetLowestProfileId();
-                var countProfiles = UnitOfWork.ProfileRepository.CountProfiles();
-                var highestProfileId = countProfiles + lowestProfileId;
+                var profilesCount = UnitOfWork.ProfileRepository.CountProfiles();
+                var highestProfileId = profilesCount + lowestProfileId;
 
-
-
-                if (countProfiles > 3)
+                // Kontrollerar om det finns tillräckligt med profiler för att göra profilkorten på startsidan
+                if (profilesCount > 3)
                 {
                     Random rnd = new Random();
 
                     int a, b, c;
                     
-                    //Genererar distinkta siffror, som inte är lika med id:t på den som är inloggad
+                    //Genererar tre unika siffror, som inte är lika med id:t på den som är inloggad
                     do
                     {
                         a = rnd.Next(lowestProfileId, highestProfileId);
@@ -70,8 +70,8 @@ namespace DatingApp.Controllers
                 }
             }
 
-            // Inga profiler fanns i databasen
-            catch (InvalidOperationException e)
+            // Inga profiler kunde hämtas från databasen
+            catch (InvalidOperationException)
             {
                 return View(viewModels);
             }

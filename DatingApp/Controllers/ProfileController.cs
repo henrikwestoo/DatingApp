@@ -7,7 +7,6 @@ using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using static DatingApp.Models.PostViewModels;
 using static DatingApp.Models.ProfileViewModels;
 
 namespace DatingApp.Controllers
@@ -42,11 +41,10 @@ namespace DatingApp.Controllers
 
         }
 
+        [Authorize]
         public ActionResult IndexMe()
         {           
             string userId = User.Identity.GetUserId();
-            int profileId = UnitOfWork.ProfileRepository.GetProfileId(userId);
-
             var model = UnitOfWork.ProfileRepository.GetProfile(userId);
 
             var viewModel = new ProfileIndexViewModel(model);
@@ -54,6 +52,7 @@ namespace DatingApp.Controllers
             return View(viewModel);
         }
 
+        [Authorize]
         [HttpGet]
         public ActionResult Index(int userId)
         {
@@ -64,7 +63,7 @@ namespace DatingApp.Controllers
             return View(viewModel);
         }
 
-
+        [Authorize]
         public ActionResult Edit()
         {
             string userId = User.Identity.GetUserId();
@@ -85,8 +84,7 @@ namespace DatingApp.Controllers
                 file.SaveAs(path);
                 fileName = "~/Images/" + file.FileName;
             }
-            string foreignKey = User.Identity.GetUserId();
-           
+            string foreignKey = User.Identity.GetUserId();           
 
             var model = UnitOfWork.ProfileRepository.GetProfile(UnitOfWork.ProfileRepository.GetProfileId(foreignKey));
             model.Name = viewModel.Name;

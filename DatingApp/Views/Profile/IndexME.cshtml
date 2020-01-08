@@ -6,41 +6,35 @@
 
 
 <div class="m-top">
-    <div class="col-xs-4">
+    <div class="col-sm-4">
         <div class="panel panel-default">
             <div class="panel-heading text-center">
                 <img src="@Url.Content(Model.Image)" alt="Image" class="img-thumbnail profile-image" />
                 <h1 class="panel-title" id="profile-name-space">@Html.DisplayFor((m) => m.Name)</h1>
             </div>
             <div class="panel-body text-center">
-                <table class="table-responsive">
+                <table class="table table-responsive">
                     <tr>
                         <td>@Html.LabelFor(m => m.Age, htmlAttributes: new { @class = "control-label col-md-2" })</td>
-                        <td>@Html.DisplayFor((m) => m.Age)</td>
+                        <td><p>@Html.DisplayFor((m) => m.Age, new { @class = "control-label col-md-6" })</p></td>
                     </tr>
                     <tr>
                         <td>@Html.LabelFor(m => m.Gender, htmlAttributes: new { @class = "control-label col-md-2" })</td>
-                        <td>@Html.DisplayFor((m) => m.Gender)</td>
+                        <td><p>@Html.DisplayFor((m) => m.Gender, new { @class = "control-label col-md-6" })</p></td>
                     </tr>
                     <tr>
                         <td>@Html.LabelFor(m => m.Biography, htmlAttributes: new { @class = "control-label col-md-2" })</td>
-                        <td><em>@Html.DisplayFor((m) => m.Biography)</em></td>
-                    </tr>
-                    <tr>
-                        <td class="button-col">
-                            <input type="button"
-                                   value="Edit"
-                                   class="btn btn-default"
-                                   onclick="location.href='@Url.Action("Edit", "Profile" )'" />
-                        </td>
-                        <td class="button-col">
-                            <input type="button"
-                                   value="Manage login"
-                                   class="btn btn-default"
-                                   onclick="location.href='@Url.Action("Index", "Manage" )'" />
-                        </td>
+                        <td><em>@Html.DisplayFor((m) => m.Biography, new { @class = "control-label col-md-6" })</em></td>
                     </tr>
                 </table>
+                <input type="button"
+                       value="Edit"
+                       class="btn btn-default"
+                       onclick="location.href='@Url.Action("Edit", "Profile" )'" />
+                <input type="button"
+                       value="Manage login"
+                       class="btn btn-default"
+                       onclick="location.href='@Url.Action("Index", "Manage" )'" />
             </div>
         </div>
     </div>

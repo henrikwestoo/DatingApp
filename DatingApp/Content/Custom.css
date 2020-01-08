@@ -43,3 +43,11 @@ textarea {
 .col-md-8 {
     word-wrap: break-word !important;
 }
+
+.m-top > .panel {
+    overflow: auto;
+}
+
+#post-label {
+    font-weight: normal !important;
+}
