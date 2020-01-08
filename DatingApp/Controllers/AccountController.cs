@@ -165,9 +165,15 @@ namespace DatingApp.Controllers
                     // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                     // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
 
-                    string path = Path.Combine(Server.MapPath("~/Images"), Path.GetFileName(file.FileName));
-                    file.SaveAs(path);
-                    pModel.Image = "~/Images/" + file.FileName;
+                    if (file != null)
+                    {
+                        string path = Path.Combine(Server.MapPath("~/Images"), Path.GetFileName(file.FileName));
+                        file.SaveAs(path);
+                        pModel.Image = "~/Images/" + file.FileName;
+                    } else
+                    {
+                        pModel.Image = "~/Images/default-profile-picture.jpg";
+                    }
 
                     return RedirectToAction("Create", "Profile", pModel);
                 }
