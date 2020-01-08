@@ -9,6 +9,8 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using DatingApp.Models;
+using static DatingApp.Models.ProfileViewModels;
+using System.IO;
 
 namespace DatingApp.Controllers
 {
@@ -147,7 +149,7 @@ namespace DatingApp.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Register(RegisterViewModel model)
+        public async Task<ActionResult> Register(RegisterViewModel model, ProfileIndexViewModel pModel, HttpPostedFileBase file)
         {
             if (ModelState.IsValid)
             {
@@ -156,14 +158,18 @@ namespace DatingApp.Controllers
                 if (result.Succeeded)
                 {
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
-                    
+
                     // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
                     // Send an email with this link
                     // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
                     // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                     // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
 
-                    return RedirectToAction("Create", "Profile");
+                    string path = Path.Combine(Server.MapPath("~/Images"), Path.GetFileName(file.FileName));
+                    file.SaveAs(path);
+                    pModel.Image = "~/Images/" + file.FileName;
+
+                    return RedirectToAction("Create", "Profile", pModel);
                 }
                 AddErrors(result);
             }

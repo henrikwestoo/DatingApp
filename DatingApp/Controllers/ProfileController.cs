@@ -22,19 +22,16 @@ namespace DatingApp.Controllers
             return View();
         }
 
-        [HttpPost]
-        public ActionResult Create(ProfileModel profileModel, HttpPostedFileBase file)
+        [HttpGet]
+        public ActionResult Create(ProfileIndexViewModel profileModel)
         {
-            string path = Path.Combine(Server.MapPath("~/Images"), Path.GetFileName(file.FileName));
-            file.SaveAs(path);
-
             var profile = new ProfileModel
             {
                 Name = profileModel.Name,
                 Age = profileModel.Age,
                 Gender = profileModel.Gender,
                 Biography = profileModel.Biography,
-                Image = "~/Images/" + file.FileName,
+                Image = profileModel.Image,
                 UserId = User.Identity.GetUserId()
             };
 
