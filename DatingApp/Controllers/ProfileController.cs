@@ -17,7 +17,7 @@ namespace DatingApp.Controllers
         private UnitOfWork UnitOfWork = new UnitOfWork();
 
         // GET: Profile
-        public ActionResult Create()
+        public ActionResult Create()    
         {
             return View();
         }
@@ -80,20 +80,24 @@ namespace DatingApp.Controllers
         [HttpPost]
         public ActionResult Edit(ProfileIndexViewModel viewModel, HttpPostedFileBase file)
         {
+            string fileName = "";
+
             if (file != null)
             {
                 string path = Path.Combine(Server.MapPath("~/Images"), Path.GetFileName(file.FileName));
                 file.SaveAs(path);
+                fileName = "~/Images/" + file.FileName;
             }
             string foreignKey = User.Identity.GetUserId();
-            string fileName = "~/Images/" + file.FileName;
+           
 
             var model = UnitOfWork.ProfileRepository.GetProfile(UnitOfWork.ProfileRepository.GetProfileId(foreignKey));
             model.Name = viewModel.Name;
             model.Age = viewModel.Age;
             model.Gender = viewModel.Gender;
             model.Biography = viewModel.Biography;
-            if (fileName != null)
+
+            if (!String.IsNullOrEmpty(fileName))
             {
                 model.Image = fileName;
             }

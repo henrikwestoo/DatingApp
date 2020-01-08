@@ -12,22 +12,31 @@ function postToWall() {
     const dateTime = new Date().toISOString();
     const recieverId = $('#user-id').val();
 
-    const post = {
+    if (newPost !== '') {
 
-        ReceiverId: recieverId,
-        DateTime: dateTime,
-        Content: newPost
-    };
+        const post = {
 
-    $.post('/api/postapi/send', post)
-        .then((answer) => {
-            if (answer === "Ok") {
-                $('#new-post').val('');
-                updateWall();
-            } else {
-                alert("Something went wrong!");
-            }
-        });
+            ReceiverId: recieverId,
+            DateTime: dateTime,
+            Content: newPost
+        };
+
+        $.post('/api/postapi/send', post)
+            .then((answer) => {
+                if (answer === "Ok") {
+                    $('#new-post').val('');
+                    updateWall();
+                } else {
+                    alert("Something went wrong!");
+                }
+            });
+    }
+
+    else {
+
+        alert("Your post is empty");
+
+    }
 }
 
 function updateWall() {
@@ -47,7 +56,7 @@ function updateWall() {
                 var clock = dateArray[1].substring(0, 8);
                 var formattedDate = dateArray[0] + " " + clock;
                $('#posts-div').append(
-                   '<div class="panel panel-default"><div class="panel-heading panel-header-wide"><div class="col-md-8">' + post.CreatorName + '</div><div class="col-md-4">' + formattedDate + '</div></div><div class="panel-body text-left">' + post.Content + '</div></div>'
+                   '<div class="panel panel-default"><div class="panel-heading panel-header-wide"><div class="col-md-8">' + post.CreatorName + '</div><div class="col-md-4">' + formattedDate + '</div></div><div class="panel-body text-left" style="word-wrap: break-word !important;">' + post.Content + '</div></div>'
                 );
             });
         },

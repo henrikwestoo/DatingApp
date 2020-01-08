@@ -39,3 +39,7 @@
 textarea {
     max-width: 100% !important;
 }
+
+.col-md-8 {
+    word-wrap: break-word !important;
+}
