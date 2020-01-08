@@ -15,29 +15,66 @@ namespace DatingApp.Controllers
 
         public ActionResult Index()
         {
-            var profileId = UnitOfWork.ProfileRepository.GetProfileId(User.Identity.GetUserId());
-
-            var numbers = Enumerable.Range(1, UnitOfWork.ProfileRepository.CountProfiles()).OrderBy(n => n * n * (new Random()).Next());
-            var distinctNumbers = numbers.Distinct().Take(3);
-
-            while (distinctNumbers.Contains(profileId))
-            {
-                numbers = Enumerable.Range(1, UnitOfWork.ProfileRepository.CountProfiles()).OrderBy(n => n * n * (new Random()).Next());
-                distinctNumbers = numbers.Distinct().Take(3);
-            }
-
             var viewModels = new ProfilesIndexViewModel();
 
-            foreach (int item in distinctNumbers)
+            try
             {
-                var model = UnitOfWork.ProfileRepository.GetProfile(item);
-                var viewModel = new ProfileIndexViewModel(model);
-                viewModels.Profiles.Add(viewModel);
+                int profileId = 0;
+
+                if (User.Identity.GetUserId() != null)
+                {
+                    profileId = UnitOfWork.ProfileRepository.GetProfileId(User.Identity.GetUserId());
+                }
+
+                var lowestProfileId = UnitOfWork.ProfileRepository.GetLowestProfileId();
+                var countProfiles = UnitOfWork.ProfileRepository.CountProfiles();
+                var highestProfileId = countProfiles + lowestProfileId;
+
+
+
+                if (countProfiles > 3)
+                {
+                    Random rnd = new Random();
+
+                    int a, b, c;
+                    
+                    //Genererar distinkta siffror, som inte är lika med id:t på den som är inloggad
+                    do
+                    {
+                        a = rnd.Next(lowestProfileId, highestProfileId);
+                        b = rnd.Next(lowestProfileId, highestProfileId);
+                        c = rnd.Next(lowestProfileId, highestProfileId);
+                    } while ((a == b) || (b == c) || (a == c) || (a == profileId) ||(b == profileId) || (c == profileId));
+
+                    List<int> randomNumbers = new List<int>()
+                    {
+                        a,
+                        b,
+                        c
+                    };
+
+                    foreach (int item in randomNumbers)
+                    {
+                        var model = UnitOfWork.ProfileRepository.GetProfile(item);
+                        var viewModel = new ProfileIndexViewModel(model);
+                        viewModels.Profiles.Add(viewModel);
+                    }
+
+                    UnitOfWork.Dispose();
+
+                    return View(viewModels);
+                }
+                else
+                {
+                    return View(viewModels);
+                }
             }
 
-            UnitOfWork.Dispose();
-
-            return View(viewModels);
+            // Inga profiler fanns i databasen
+            catch (InvalidOperationException e)
+            {
+                return View(viewModels);
+            }
         }
     }
 }

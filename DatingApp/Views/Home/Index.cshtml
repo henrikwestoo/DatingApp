@@ -4,32 +4,36 @@
     ViewBag.Title = "Home";
 }
 
-    <div class="jumbotron">
-        <h1>Welcome to CODR</h1>
-        <h3>The greatest dating app for programmers!</h3>
-    </div>
+<div class="jumbotron">
+    <h1>Welcome to CODR</h1>
+    <h3>The greatest dating app for programmers!</h3>
+</div>
 
 <div class="row">
-    @foreach (var item in Model.Profiles)
+    @if (Model.Profiles.Count != 0)
     {
-    <div class="col-sm-4">
-        <div class="panel panel-default">
-            <div class="panel-heading text-center">@item.Name</div>
-            <div class="panel-body text-center">
-                <p>@item.Age, @item.Gender</p>
-                <em>@item.Biography</em>
-                <br />
-                <br />
-                @using (Html.BeginForm("Index", "Profile", FormMethod.Get))
-                {
-                    @Html.Hidden("userId", item.Id)
-                    <input type="submit"
-                           value="View profile"
-                           class="btn btn-success" />
-                }
+        foreach (var item in Model.Profiles)
+        {
+            <div class="col-sm-4">
+                <div class="panel panel-default">
+                    <div class="panel-heading text-center">@item.Name</div>
+                    <div class="panel-body text-center">
+                        <img src="@Url.Content(item.Image)" alt="Image" class="img-thumbnail profile-image" />
+                        <p>@item.Age, @item.Gender</p>
+                        <em>@item.Biography</em>
+                        <br />
+                        <br />
+                        @using (Html.BeginForm("Index", "Profile", FormMethod.Get))
+                        {
+                            @Html.Hidden("userId", item.Id)
+                            <input type="submit"
+                                   value="View profile"
+                                   class="btn btn-success" />
+                        }
+                    </div>
+                </div>
             </div>
-        </div>
-    </div>
+        }
     }
 </div>
 

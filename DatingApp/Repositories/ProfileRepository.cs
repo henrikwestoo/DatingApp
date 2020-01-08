@@ -61,5 +61,10 @@ namespace DatingApp.Repositories
         {
             return Ctx.Profiles.Count();
         }
+
+        public int GetLowestProfileId()
+        {
+            return Ctx.Profiles.Select((x) => x.Id).Min();
+        }
     }
 }
