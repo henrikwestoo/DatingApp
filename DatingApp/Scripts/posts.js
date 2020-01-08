@@ -50,6 +50,9 @@ function updateWall() {
                    '<div class="panel panel-default"><div class="panel-heading panel-header-wide"><div class="col-md-8">' + post.CreatorName + '</div><div class="col-md-4">' + formattedDate + '</div></div><div class="panel-body text-left">' + post.Content + '</div></div>'
                 );
             });
+        },
+        error: function () {
+            alert("Failed to display posts");
         }
     });
 }

@@ -21,7 +21,10 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
+                    @if(Request.IsAuthenticated)
+                    {
                     <li><a id="contactsText" href="/Contact/Index">View contacts (0)</a></li>
+                    }
                     <li>
                         @using (Html.BeginForm("Search", "Profile", FormMethod.Get))
                         {
