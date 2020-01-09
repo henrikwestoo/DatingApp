@@ -39,7 +39,7 @@
                 <input type="button"
                        value="Download as XML"
                        class="btn btn-default"
-                       onclick="location.href='@Url.Action("Download", "Profile" )'" />
+                       onclick="location.href='@Url.Action("Download", "Profile" )',alert('File placed in folder named ExportUserData')" />
                 <hr />
 
                 @if (Model.Active == true)
