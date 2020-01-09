@@ -1,0 +1,13 @@
+﻿<h2>Your account is not active</h2>
+
+<h3>Would you like to reactive it?</h3>
+
+@using (Html.BeginForm("EnableAccount", "Profile", FormMethod.Post))
+{
+    <input type="hidden"
+           name="foreignKey"
+           value="@ViewBag.Identity"/>
+    <input type="submit"
+           value="Reactivate account"
+           class="btn btn-primary" />
+}

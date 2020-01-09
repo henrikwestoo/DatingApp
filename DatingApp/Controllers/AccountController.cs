@@ -11,6 +11,8 @@ using Microsoft.Owin.Security;
 using DatingApp.Models;
 using static DatingApp.Models.ProfileViewModels;
 using System.IO;
+using DatingApp.Repositories;
+using System.Security.Principal;
 
 namespace DatingApp.Controllers
 {
@@ -59,6 +61,7 @@ namespace DatingApp.Controllers
         [AllowAnonymous]
         public ActionResult Login(string returnUrl)
         {
+            ViewBag.Reactivated = TempData["Reactivated"];
             ViewBag.ReturnUrl = returnUrl;
             return View();
         }
@@ -78,10 +81,11 @@ namespace DatingApp.Controllers
             // This doesn't count login failures towards account lockout
             // To enable password failures to trigger account lockout, change to shouldLockout: true
             var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
+
             switch (result)
             {
                 case SignInStatus.Success:
-                    return RedirectToLocal(returnUrl);
+                    return RedirectToAction("ActivationCheck");
                 case SignInStatus.LockedOut:
                     return View("Lockout");
                 case SignInStatus.RequiresVerification:
@@ -90,6 +94,24 @@ namespace DatingApp.Controllers
                 default:
                     ModelState.AddModelError("", "Invalid login attempt.");
                     return View(model);
+            }
+        }
+
+        public ActionResult ActivationCheck()
+        {
+            var unitOfWork = new UnitOfWork();
+
+            if(!unitOfWork.ProfileRepository.GetProfile(User.Identity.GetUserId()).Active)
+            {
+                ViewBag.Identity = User.Identity.GetUserId();
+
+                AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
+                HttpContext.User = new GenericPrincipal(new GenericIdentity(string.Empty), null);
+
+                return View();
+            } else
+            {
+                return RedirectToAction("Index", "Home");
             }
         }
 

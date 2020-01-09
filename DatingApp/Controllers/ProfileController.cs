@@ -106,7 +106,7 @@ namespace DatingApp.Controllers
         }
 
         
-        public ActionResult AlterActiveStatus() {
+        public ActionResult DisableAccount() {
 
             string foreignKey = User.Identity.GetUserId();
 
@@ -116,10 +116,26 @@ namespace DatingApp.Controllers
             UnitOfWork.ProfileRepository.EditProfile(model);
             UnitOfWork.Save();
 
-            return RedirectToAction("IndexMe", "Profile");
+            HttpContext.GetOwinContext().Authentication.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
+            TempData["Deactivated"] = true;
+
+            return RedirectToAction("Index", "Home");
 
         }
 
+        [HttpPost]
+        public ActionResult EnableAccount(string foreignKey)
+        {
+            var model = UnitOfWork.ProfileRepository.GetProfile(UnitOfWork.ProfileRepository.GetProfileId(foreignKey));
+            model.Active = !model.Active;
+
+            UnitOfWork.ProfileRepository.EditProfile(model);
+            UnitOfWork.Save();
+
+            TempData["Reactivated"] = true;
+
+            return RedirectToAction("Login", "Account");
+        }
 
         [Authorize]
         [HttpGet]

@@ -4,10 +4,19 @@
     ViewBag.Title = "Home";
 }
 
+@if (ViewBag.Deactivated == true)
+{
+    <div class="alert alert-info">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        Your account has been de-activated. If you wish to re-activate it, please log in again.
+    </div>
+}
+
 <div class="jumbotron">
     <h1>Welcome to CODR</h1>
     <h3>The greatest dating app for programmers!</h3>
 </div>
+
 
 <div class="row">
     @if (Model.Profiles.Count != 0)
@@ -36,4 +45,5 @@
         }
     }
 </div>
+
 

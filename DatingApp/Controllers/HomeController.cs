@@ -16,6 +16,7 @@ namespace DatingApp.Controllers
         public ActionResult Index()
         {
             var viewModels = new ProfilesIndexViewModel();
+            ViewBag.Deactivated = TempData["Deactivated"];
 
             try
             {

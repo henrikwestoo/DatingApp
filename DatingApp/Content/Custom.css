@@ -11,7 +11,7 @@
 
 .profile-image {
     max-width: 150px;
-    max-height: 150px;
+    height: 150px;
 }
 
 .m-top {
@@ -50,4 +50,12 @@ textarea {
 
 #post-label {
     font-weight: normal !important;
+}
+
+@media (min-width: 99px) {
+    .equal {
+        display: -ms-flexbox;
+        display: -webkit-flex;
+        display: flex;
+    }
 }
