@@ -11,6 +11,7 @@
             <div class="panel-heading text-center">
                 <img src="@Url.Content(Model.Image)" alt="Image" class="img-thumbnail profile-image" />
                 <h1 class="panel-title" id="profile-name-space">@Html.DisplayFor((m) => m.Name)</h1>
+                @if (!Model.Active) {<h6>(Deactivated)</h6> }
             </div>
             <div class="panel-body text-center">
                 <table class="table table-responsive">
@@ -39,15 +40,22 @@
                        value="Download as XML"
                        class="btn btn-default"
                        onclick="location.href='@Url.Action("Download", "Profile" )'" />
+
+                @if (Model.Active == true)
+                {
+
                 <input type="button"
                        value="Disable my account"
                        class="btn btn-danger"
-                       onclick="location.href='@Url.Action("Disable", "Profile" )'" />
-
+                       onclick="location.href='@Url.Action("AlterActiveStatus", "Profile")'" />
+                }
+                else
+                {
                 <input type="button"
                        value="Re-activate my account"
                        class="btn btn-success"
-                       onclick="location.href='@Url.Action("Enable", "Profile" )'" />
+                       onclick="location.href='@Url.Action("AlterActiveStatus", "Profile")'" />
+                }
             </div>
         </div>
     </div>

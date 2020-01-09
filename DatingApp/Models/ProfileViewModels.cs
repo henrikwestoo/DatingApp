@@ -25,6 +25,7 @@ namespace DatingApp.Models
                 Gender = model.Gender;
                 Biography = model.Biography;
                 Image = model.Image;
+                Active = model.Active;
             }
 
 
@@ -48,6 +49,8 @@ namespace DatingApp.Models
             [Required(ErrorMessage = "Field required")]
             [StringLength(150, MinimumLength = 1, ErrorMessage = "Character limit is 150")]
             public string Biography { get; set; }
+
+            public bool Active { get; set; }
 
             public string Image { get; set; }
         }

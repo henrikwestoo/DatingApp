@@ -106,34 +106,20 @@ namespace DatingApp.Controllers
         }
 
         
-        public ActionResult Disable() {
+        public ActionResult AlterActiveStatus() {
 
             string foreignKey = User.Identity.GetUserId();
 
             var model = UnitOfWork.ProfileRepository.GetProfile(UnitOfWork.ProfileRepository.GetProfileId(foreignKey));
-            model.Active = false;
+            model.Active = !model.Active;
 
             UnitOfWork.ProfileRepository.EditProfile(model);
             UnitOfWork.Save();
 
-            return RedirectToAction("Index", "Manage");
+            return RedirectToAction("IndexMe", "Profile");
 
         }
 
-        public ActionResult Enable()
-        {
-
-            string foreignKey = User.Identity.GetUserId();
-
-            var model = UnitOfWork.ProfileRepository.GetProfile(UnitOfWork.ProfileRepository.GetProfileId(foreignKey));
-            model.Active = true;
-
-            UnitOfWork.ProfileRepository.EditProfile(model);
-            UnitOfWork.Save();
-
-            return RedirectToAction("Index", "Manage");
-
-        }
 
         [Authorize]
         [HttpGet]
