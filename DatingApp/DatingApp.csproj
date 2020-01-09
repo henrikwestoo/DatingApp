@@ -196,6 +196,10 @@
     <Compile Include="Migrations\202001062040454_Fixed-typos.Designer.cs">
       <DependentUpon>202001062040454_Fixed-typos.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202001091011018_profile_active.cs" />
+    <Compile Include="Migrations\202001091011018_profile_active.Designer.cs">
+      <DependentUpon>202001091011018_profile_active.cs</DependentUpon>
+    </Compile>
     <Compile Include="Repositories\AppDbContext.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -385,6 +389,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202001062040454_Fixed-typos.resx">
       <DependentUpon>202001062040454_Fixed-typos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202001091011018_profile_active.resx">
+      <DependentUpon>202001091011018_profile_active.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
