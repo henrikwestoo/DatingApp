@@ -10,7 +10,8 @@ namespace DatingApp.Models
     public class ProfileViewModels
     {
 
-        public class ProfileIndexViewModel {
+        public class ProfileIndexViewModel
+        {
 
             public ProfileIndexViewModel()
             {
@@ -108,6 +109,32 @@ namespace DatingApp.Models
                 Profiles = new List<ProfileSearchViewModel>();
             }
         }
+
+        public class ProfileDownloadViewModel
+        {
+            public ProfileDownloadViewModel(ProfileModel model)
+            {
+                Name = model.Name;
+                Age = model.Age;
+                Gender = model.Gender;
+                Biography = model.Biography;
+            }
+
+            public ProfileDownloadViewModel()
+            {
+
+            }
+
+            public string Name { get; set; }
+
+            public int Age { get; set; }
+
+            public Gender Gender { get; set; }
+
+            public string Biography { get; set; }
+        }
+
+
 
     }
 }

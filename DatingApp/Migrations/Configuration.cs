@@ -9,7 +9,7 @@ namespace DatingApp.Migrations
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = false;
+            AutomaticMigrationsEnabled = true;
             ContextKey = "DatingApp.Repositories.AppDbContext";
         }
 

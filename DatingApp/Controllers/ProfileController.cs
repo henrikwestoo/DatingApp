@@ -1,5 +1,6 @@
 ﻿using DatingApp.Models;
 using DatingApp.Repositories;
+using DatingApp.Services;
 using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
@@ -134,6 +135,19 @@ namespace DatingApp.Controllers
             }
 
             return View(profilesViewModel);
+        }
+
+        public ActionResult Download()
+        {
+            var profile = UnitOfWork.ProfileRepository.GetProfile(User.Identity.GetUserId());
+
+            string path = Server.MapPath("~/ExportedUserData/" + profile.Id + ".xml");
+
+            var downloadViewModel = new ProfileDownloadViewModel(profile);
+
+            XMLSerializer.Serialize<ProfileDownloadViewModel>(downloadViewModel, path);
+
+            return RedirectToAction("IndexMe");
         }
 
         protected override void Dispose(bool disposing)

@@ -188,61 +188,9 @@
     <Compile Include="Controllers\PostController.cs" />
     <Compile Include="Controllers\ProfileController.cs" />
     <Compile Include="GlobalSuppressions.cs" />
-    <Compile Include="Migrations\202001062022484_Added_Repositories.cs" />
-    <Compile Include="Migrations\202001062022484_Added_Repositories.Designer.cs">
-      <DependentUpon>202001062022484_Added_Repositories.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202001062040454_Fixed-typos.cs" />
-    <Compile Include="Migrations\202001062040454_Fixed-typos.Designer.cs">
-      <DependentUpon>202001062040454_Fixed-typos.cs</DependentUpon>
-    </Compile>
     <Compile Include="Repositories\AppDbContext.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202001021824476_InitialCreate.cs" />
-    <Compile Include="Migrations\202001021824476_InitialCreate.Designer.cs">
-      <DependentUpon>202001021824476_InitialCreate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202001031033201_ProfileModels_FK.cs" />
-    <Compile Include="Migrations\202001031033201_ProfileModels_FK.Designer.cs">
-      <DependentUpon>202001031033201_ProfileModels_FK.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202001031113453_Profile_FK_Update.cs" />
-    <Compile Include="Migrations\202001031113453_Profile_FK_Update.Designer.cs">
-      <DependentUpon>202001031113453_Profile_FK_Update.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202001041237237_Added_ByteArray_For_Images.cs" />
-    <Compile Include="Migrations\202001041237237_Added_ByteArray_For_Images.Designer.cs">
-      <DependentUpon>202001041237237_Added_ByteArray_For_Images.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202001041453243_images.cs" />
-    <Compile Include="Migrations\202001041453243_images.Designer.cs">
-      <DependentUpon>202001041453243_images.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202001051225137_Added_Contact_Relation_Table.cs" />
-    <Compile Include="Migrations\202001051225137_Added_Contact_Relation_Table.Designer.cs">
-      <DependentUpon>202001051225137_Added_Contact_Relation_Table.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202001051248413_Contacts_Edit.cs" />
-    <Compile Include="Migrations\202001051248413_Contacts_Edit.Designer.cs">
-      <DependentUpon>202001051248413_Contacts_Edit.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202001051323539_PK_Contacts_Added.cs" />
-    <Compile Include="Migrations\202001051323539_PK_Contacts_Added.Designer.cs">
-      <DependentUpon>202001051323539_PK_Contacts_Added.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202001051513210_Added_Accepted_Column_Contact.cs" />
-    <Compile Include="Migrations\202001051513210_Added_Accepted_Column_Contact.Designer.cs">
-      <DependentUpon>202001051513210_Added_Accepted_Column_Contact.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202001061344471_Added_Post_Model.cs" />
-    <Compile Include="Migrations\202001061344471_Added_Post_Model.Designer.cs">
-      <DependentUpon>202001061344471_Added_Post_Model.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202001061449545_Added_Posts_DbSet.cs" />
-    <Compile Include="Migrations\202001061449545_Added_Posts_DbSet.Designer.cs">
-      <DependentUpon>202001061449545_Added_Posts_DbSet.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -260,6 +208,7 @@
     <Compile Include="Repositories\PostRepository.cs" />
     <Compile Include="Repositories\ProfileRepository.cs" />
     <Compile Include="Repositories\UnitOfWork.cs" />
+    <Compile Include="Services\XMLSerializer.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -345,47 +294,6 @@
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-3.3.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.3.1.min.map" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\202001021824476_InitialCreate.resx">
-      <DependentUpon>202001021824476_InitialCreate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202001031033201_ProfileModels_FK.resx">
-      <DependentUpon>202001031033201_ProfileModels_FK.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202001031113453_Profile_FK_Update.resx">
-      <DependentUpon>202001031113453_Profile_FK_Update.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202001041237237_Added_ByteArray_For_Images.resx">
-      <DependentUpon>202001041237237_Added_ByteArray_For_Images.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202001041453243_images.resx">
-      <DependentUpon>202001041453243_images.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202001051225137_Added_Contact_Relation_Table.resx">
-      <DependentUpon>202001051225137_Added_Contact_Relation_Table.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202001051248413_Contacts_Edit.resx">
-      <DependentUpon>202001051248413_Contacts_Edit.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202001051323539_PK_Contacts_Added.resx">
-      <DependentUpon>202001051323539_PK_Contacts_Added.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202001051513210_Added_Accepted_Column_Contact.resx">
-      <DependentUpon>202001051513210_Added_Accepted_Column_Contact.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202001061344471_Added_Post_Model.resx">
-      <DependentUpon>202001061344471_Added_Post_Model.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202001061449545_Added_Posts_DbSet.resx">
-      <DependentUpon>202001061449545_Added_Posts_DbSet.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202001062022484_Added_Repositories.resx">
-      <DependentUpon>202001062022484_Added_Repositories.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202001062040454_Fixed-typos.resx">
-      <DependentUpon>202001062040454_Fixed-typos.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
