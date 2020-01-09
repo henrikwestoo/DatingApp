@@ -22,6 +22,8 @@ namespace DatingApp.Models
 
         public string Image { get; set; }
 
+        public bool Active { get; set; }
+
         //public virtual ApplicationUser User { get; set; }
 
         [ForeignKey("User")]
