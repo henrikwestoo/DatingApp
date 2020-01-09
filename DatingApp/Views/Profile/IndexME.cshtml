@@ -35,6 +35,19 @@
                        value="Manage login"
                        class="btn btn-default"
                        onclick="location.href='@Url.Action("Index", "Manage" )'" />
+                <input type="button"
+                       value="Download as XML"
+                       class="btn btn-default"
+                       onclick="location.href='@Url.Action("Download", "Profile" )'" />
+                <input type="button"
+                       value="Disable my account"
+                       class="btn btn-danger"
+                       onclick="location.href='@Url.Action("Disable", "Profile" )'" />
+
+                <input type="button"
+                       value="Re-activate my account"
+                       class="btn btn-success"
+                       onclick="location.href='@Url.Action("Enable", "Profile" )'" />
             </div>
         </div>
     </div>

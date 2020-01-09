@@ -1,5 +1,6 @@
 ﻿using DatingApp.Models;
 using DatingApp.Repositories;
+using DatingApp.Services;
 using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
@@ -31,7 +32,8 @@ namespace DatingApp.Controllers
                 Gender = profileModel.Gender,
                 Biography = profileModel.Biography,
                 Image = profileModel.Image,
-                UserId = User.Identity.GetUserId()
+                UserId = User.Identity.GetUserId(),
+                Active = true
             };
 
             UnitOfWork.ProfileRepository.AddProfile(profile);
@@ -103,6 +105,36 @@ namespace DatingApp.Controllers
             return RedirectToAction("IndexMe", "Profile");
         }
 
+        
+        public ActionResult Disable() {
+
+            string foreignKey = User.Identity.GetUserId();
+
+            var model = UnitOfWork.ProfileRepository.GetProfile(UnitOfWork.ProfileRepository.GetProfileId(foreignKey));
+            model.Active = false;
+
+            UnitOfWork.ProfileRepository.EditProfile(model);
+            UnitOfWork.Save();
+
+            return RedirectToAction("Index", "Manage");
+
+        }
+
+        public ActionResult Enable()
+        {
+
+            string foreignKey = User.Identity.GetUserId();
+
+            var model = UnitOfWork.ProfileRepository.GetProfile(UnitOfWork.ProfileRepository.GetProfileId(foreignKey));
+            model.Active = true;
+
+            UnitOfWork.ProfileRepository.EditProfile(model);
+            UnitOfWork.Save();
+
+            return RedirectToAction("Index", "Manage");
+
+        }
+
         [Authorize]
         [HttpGet]
         public ActionResult Search(string search)
@@ -119,7 +151,7 @@ namespace DatingApp.Controllers
 
             foreach (var profile in profiles)
             {
-                if (profile.Id != profileId)
+                if (profile.Id != profileId && profile.Active == true)
                 {
                     bool isContact = false;
 
@@ -134,6 +166,19 @@ namespace DatingApp.Controllers
             }
 
             return View(profilesViewModel);
+        }
+
+        public ActionResult Download()
+        {
+            var profile = UnitOfWork.ProfileRepository.GetProfile(User.Identity.GetUserId());
+
+            string path = Server.MapPath("~/ExportedUserData/" + profile.Id + ".xml");
+
+            var downloadViewModel = new ProfileDownloadViewModel(profile);
+
+            XMLSerializer.Serialize<ProfileDownloadViewModel>(downloadViewModel, path);
+
+            return RedirectToAction("IndexMe");
         }
 
         protected override void Dispose(bool disposing)

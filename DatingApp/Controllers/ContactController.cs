@@ -31,14 +31,20 @@ namespace DatingApp.Controllers
 
             foreach (var model in profilesContactsAccepted)
             {
-                var profileIndexViewModelAccepted = new ProfileIndexViewModel(model);
-                profilesIndexViewModelContactsAccepted.Profiles.Add(profileIndexViewModelAccepted);
+                if (model.Active == true)
+                {
+                    var profileIndexViewModelAccepted = new ProfileIndexViewModel(model);
+                    profilesIndexViewModelContactsAccepted.Profiles.Add(profileIndexViewModelAccepted);
+                }
             }
 
             foreach (var model in profilesContactsPending)
             {
-                var profileIndexViewModelPending = new ProfileIndexViewModel(model);
-                profilesIndexViewModelContactsPending.Profiles.Add(profileIndexViewModelPending);
+                if (model.Active == true)
+                {
+                    var profileIndexViewModelPending = new ProfileIndexViewModel(model);
+                    profilesIndexViewModelContactsPending.Profiles.Add(profileIndexViewModelPending);
+                }
             }
 
             var allContacts = new ContactsViewModel(profilesIndexViewModelContactsAccepted, profilesIndexViewModelContactsPending);

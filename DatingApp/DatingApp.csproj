@@ -264,6 +264,7 @@
     <Compile Include="Repositories\PostRepository.cs" />
     <Compile Include="Repositories\ProfileRepository.cs" />
     <Compile Include="Repositories\UnitOfWork.cs" />
+    <Compile Include="Services\XMLSerializer.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
