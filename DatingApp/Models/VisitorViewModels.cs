@@ -12,11 +12,14 @@ namespace DatingApp.Models
         {
             Id = model.Id;
             VisitorName = model.Visitor.Name;
+            VisitorProfileId = model.Visitor.Id;
         }
 
         public int Id { get; set; }
 
         public string VisitorName { get; set; }
+
+        public int VisitorProfileId { get; set; }
 
     }
 }

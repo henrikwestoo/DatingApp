@@ -60,7 +60,7 @@ function updateWall() {
 
                 if (getCurrentProfileId() == +$('#user-id').val()) {
 
-                    //vi använder post.id för att hålla koll på vilken post elementen tillhör
+                    //Vi använder post.id för att hålla koll på vilken post elementen tillhör
                     $('#posts-div').append(
                         '<div class="panel panel-default" id="post-div-' + post.Id + '"><div class="panel-heading panel-header-wide"><div class="col-md-8">' + post.CreatorName + '</div><div class="col-md-4">' + formattedDate + '</div></div><div class="panel-body text-left" style="word-wrap: break-word !important;">' + post.Content + '</div><div class="panel-footer"><div class="row"><div class="col-md-4" id="remove-post-' + post.Id + '"><input type="button" onclick="displayRemovePostButtons(' + post.Id + ')" value = "Remove post"class= "btn btn-danger"/></div><div class="col-md-2" style="display: none;" id="confirm-remove-' + post.Id + '"><input type="button" onclick="removePost(' + post.Id + ')" value = "Confirm"class= "btn btn-success"/></div><div class="col-md-2" style="display: none;" id="cancel-remove-' + post.Id + '"><input type="button" onclick="cancelRemovePost(' + post.Id + ')" value = "Cancel"class= "btn btn-danger"/></div></div></div>'
                     );
@@ -99,7 +99,7 @@ function getCurrentProfileId() {
 //När man bekräftat att man vill ta bort posten
 function removePost(postId) {
 
-    $("#post-div-" + postId + "").hide();
+    $("#post-div-" + postId + "").fadeOut();
 
     $.ajax({
         type: "POST",
