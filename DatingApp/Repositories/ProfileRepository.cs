@@ -57,6 +57,12 @@ namespace DatingApp.Repositories
             return profiles;
         }
 
+        public List<ProfileModel> GetThreeNewestUsers() {
+
+            return Ctx.Profiles.OrderByDescending((x) => x.Id).Take(3).ToList();
+        
+        }
+
         public int CountProfiles()
         {
             return Ctx.Profiles.Count();
