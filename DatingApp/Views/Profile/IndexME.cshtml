@@ -11,7 +11,8 @@
             <div class="panel-heading text-center">
                 <img src="@Url.Content(Model.Image)" alt="Image" class="img-thumbnail profile-image" />
                 <h1 class="panel-title" id="profile-name-space">@Html.DisplayFor((m) => m.Name)</h1>
-                @if (!Model.Active) {<h6>(Deactivated)</h6> }
+                @if (!Model.Active)
+                {<h6>(Deactivated)</h6>}
             </div>
             <div class="panel-body text-center">
                 <table class="table table-responsive">
@@ -46,6 +47,20 @@
                        value="De-activate my account"
                        class="btn btn-danger"
                        onclick="location.href='@Url.Action("DisableAccount", "Profile")'" />
+            </div>
+        </div>
+
+        <div class="panel panel-default">
+            <div class="panel-heading text-center">
+                <h1 class="panel-title">Latest visitors</h1>
+            </div>
+            <div class="panel-body">
+                <ul>
+                    @foreach (var visitor in Model.Visitors)
+                    {
+                        <li><a href="@Url.Action("Index", "Profile", new { userId = visitor.Id })"><span>@visitor.Name</span></a></li>
+                    }
+                </ul>
             </div>
         </div>
     </div>

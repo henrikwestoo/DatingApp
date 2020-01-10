@@ -48,8 +48,9 @@ namespace DatingApp.Controllers
         {           
             string userId = User.Identity.GetUserId();
             var model = UnitOfWork.ProfileRepository.GetProfile(userId);
+            var visitors = UnitOfWork.VisitorRepository.GetVisitorProfiles(model.Id);
 
-            var viewModel = new ProfileIndexViewModel(model);
+            var viewModel = new ProfileIndexViewModel(model, visitors);
 
             return View(viewModel);
         }
@@ -60,7 +61,29 @@ namespace DatingApp.Controllers
         {
             var model = UnitOfWork.ProfileRepository.GetProfile(userId);
 
+            var visitorModel = new VisitorModel()
+            {
+                ProfileId = model.Id,
+                VisitorId = UnitOfWork.ProfileRepository.GetProfileId(User.Identity.GetUserId())
+            };
+
+            // om besökaren inte redan finns i besökarlistan och listan är mindre än 5
+            if ((UnitOfWork.VisitorRepository.GetVisitorProfiles(model.Id).Count < 5) && 
+                (!UnitOfWork.VisitorRepository.GetVisitorProfiles(model.Id).Contains(UnitOfWork.ProfileRepository.GetProfile(User.Identity.GetUserId()))))
+            {
+                UnitOfWork.VisitorRepository.AddVisitor(visitorModel);
+            
+            // om besökaren inte redan finns i besökarlistan, men listan är full
+            } else if(!UnitOfWork.VisitorRepository.GetVisitorProfiles(model.Id).Contains(UnitOfWork.ProfileRepository.GetProfile(User.Identity.GetUserId())))
+            {
+                // den äldsta besökaren tas bort och den nya läggs till
+                UnitOfWork.VisitorRepository.RemoveOldestVisitor();
+                UnitOfWork.VisitorRepository.AddVisitor(visitorModel);
+            }
+
             var viewModel = new ProfileIndexViewModel(model);
+
+            UnitOfWork.Save();
 
             return View(viewModel);
         }

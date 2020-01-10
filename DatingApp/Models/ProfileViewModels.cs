@@ -28,6 +28,18 @@ namespace DatingApp.Models
                 Active = model.Active;
             }
 
+            public ProfileIndexViewModel(ProfileModel model, List<ProfileModel> visitors)
+            {
+                Id = model.Id;
+                Name = model.Name;
+                Age = model.Age;
+                Gender = model.Gender;
+                Biography = model.Biography;
+                Image = model.Image;
+                Active = model.Active;
+                Visitors = visitors;
+            }
+
 
             public int Id { get; set; }
 
@@ -53,6 +65,8 @@ namespace DatingApp.Models
             public bool Active { get; set; }
 
             public string Image { get; set; }
+
+            public List<ProfileModel> Visitors { get; set; }
         }
 
 

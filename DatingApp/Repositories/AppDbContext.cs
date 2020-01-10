@@ -17,6 +17,8 @@ namespace DatingApp.Repositories
         public DbSet<ContactModel> Contacts { get; set; }
         
         public DbSet<PostModel> Posts { get; set; }
+
+        public DbSet<VisitorModel> Visitors { get; set; }
         
         public AppDbContext() : base("DefaultConnection")
         {
@@ -24,6 +26,7 @@ namespace DatingApp.Repositories
         }
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
+
             modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>(); // Enable cascade delete when you remove something that requires it.
             base.OnModelCreating(modelBuilder);
         }

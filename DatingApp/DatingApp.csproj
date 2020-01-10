@@ -200,6 +200,16 @@
     <Compile Include="Migrations\202001091011018_profile_active.Designer.cs">
       <DependentUpon>202001091011018_profile_active.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202001101015041_1_N_Visitors_SR.cs" />
+    <Compile Include="Migrations\202001101015041_1_N_Visitors_SR.Designer.cs">
+      <DependentUpon>202001101015041_1_N_Visitors_SR.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202001101144403_visitors_fixed.cs" />
+    <Compile Include="Migrations\202001101144403_visitors_fixed.Designer.cs">
+      <DependentUpon>202001101144403_visitors_fixed.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\VisitorModel.cs" />
+    <Compile Include="Models\VisitorViewModels.cs" />
     <Compile Include="Repositories\AppDbContext.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -264,6 +274,7 @@
     <Compile Include="Repositories\PostRepository.cs" />
     <Compile Include="Repositories\ProfileRepository.cs" />
     <Compile Include="Repositories\UnitOfWork.cs" />
+    <Compile Include="Repositories\VisitorRepository.cs" />
     <Compile Include="Services\XMLSerializer.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -394,6 +405,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202001091011018_profile_active.resx">
       <DependentUpon>202001091011018_profile_active.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202001101015041_1_N_Visitors_SR.resx">
+      <DependentUpon>202001101015041_1_N_Visitors_SR.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202001101144403_visitors_fixed.resx">
+      <DependentUpon>202001101144403_visitors_fixed.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

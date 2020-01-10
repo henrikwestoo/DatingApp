@@ -107,10 +107,11 @@ namespace DatingApp.Controllers
 
                 AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
                 HttpContext.User = new GenericPrincipal(new GenericIdentity(string.Empty), null);
-
+                unitOfWork.Dispose();
                 return View();
             } else
             {
+                unitOfWork.Dispose();
                 return RedirectToAction("Index", "Home");
             }
         }

@@ -11,6 +11,7 @@ namespace DatingApp.Repositories
         private ProfileRepository profileRepository;
         private PostRepository postRepository;
         private ContactRepository contactRepository;
+        private VisitorRepository visitorRepository;
 
         public UnitOfWork()
         {
@@ -41,6 +42,15 @@ namespace DatingApp.Repositories
             {
                 contactRepository = new ContactRepository(Ctx);
                 return contactRepository;
+            }
+        }
+
+        public VisitorRepository VisitorRepository
+        {
+            get
+            {
+                visitorRepository = new VisitorRepository(Ctx);
+                return visitorRepository;
             }
         }
 
