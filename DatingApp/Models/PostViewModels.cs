@@ -10,7 +10,8 @@ namespace DatingApp.Models
 
         public class PostIndexViewModel 
         {
-           
+            public int Id { get; set; }
+
             public virtual int CreatorId { get; set; }
 
             public virtual int ReceiverId { get; set; }
@@ -27,6 +28,7 @@ namespace DatingApp.Models
                 ReceiverId = postModel.ReceiverId;
                 Content = postModel.Content;
                 DateTime = postModel.DateTime;
+                Id = postModel.Id;
             }
 
             public PostIndexViewModel(PostModel postModel, string creatorName)
@@ -36,6 +38,7 @@ namespace DatingApp.Models
                 Content = postModel.Content;
                 DateTime = postModel.DateTime;
                 CreatorName = creatorName;
+                Id = postModel.Id;
             }
 
 

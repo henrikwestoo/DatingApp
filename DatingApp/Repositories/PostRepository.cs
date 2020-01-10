@@ -22,5 +22,12 @@ namespace DatingApp.Repositories
         {
             return Ctx.Posts.Where((u) => (u.ReceiverId == userId)).OrderByDescending(u => u.DateTime).ToList();
         }
+
+        public void DeletePost(int postId)
+        {
+            var post = Ctx.Posts.Where((p) => (p.Id == postId)).First();
+            Ctx.Set<PostModel>().Remove(post);
+
+        }
     }
 }

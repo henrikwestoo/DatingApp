@@ -193,6 +193,14 @@ namespace DatingApp.Controllers
             return View(profilesViewModel);
         }
 
+        [HttpGet]
+        public int GetCurrentProfileId()
+        {
+
+            return UnitOfWork.ProfileRepository.GetProfileId(User.Identity.GetUserId());
+
+        }
+
         public ActionResult Download()
         {
             var profile = UnitOfWork.ProfileRepository.GetProfile(User.Identity.GetUserId());

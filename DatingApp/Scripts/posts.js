@@ -1,4 +1,5 @@
 ﻿window.addEventListener('load', () => {
+
     updateWall();
 
     $("#post-wall-button").click(function () {
@@ -43,6 +44,7 @@ function updateWall() {
 
     var receiverId = $('#user-id').val();
 
+
     $.ajax({
         type: "POST",
         url: "/api/postapi/display",
@@ -55,9 +57,20 @@ function updateWall() {
                 var dateArray = post.DateTime.split("T");
                 var clock = dateArray[1].substring(0, 8);
                 var formattedDate = dateArray[0] + " " + clock;
-               $('#posts-div').append(
-                   '<div class="panel panel-default"><div class="panel-heading panel-header-wide"><div class="col-md-8">' + post.CreatorName + '</div><div class="col-md-4">' + formattedDate + '</div></div><div class="panel-body text-left" style="word-wrap: break-word !important;">' + post.Content + '</div></div>'
-                );
+
+                if (getCurrentProfileId() == +$('#user-id').val()) {
+
+                    //vi använder post.id för att hålla koll på vilken post elementen tillhör
+                    $('#posts-div').append(
+                        '<div class="panel panel-default" id="post-div-' + post.Id + '"><div class="panel-heading panel-header-wide"><div class="col-md-8">' + post.CreatorName + '</div><div class="col-md-4">' + formattedDate + '</div></div><div class="panel-body text-left" style="word-wrap: break-word !important;">' + post.Content + '</div><hr /><input type="button" id="remove-post-button-' + post.Id + '" onclick="displayRemovePostButtons(' + post.Id + ')" value = "Remove post"class= "btn btn-danger"/><input type="button" id="confirm-remove-button-' + post.Id + '" onclick="removePost(' + post.Id + ')" value = "Confirm"class= "btn btn-success" style ="display: none;"/><input type="button" id="cancel-remove-button-' + post.Id + '" onclick="cancelRemovePost(' + post.Id + ')" value = "Cancel"class= "btn btn-danger" style ="display: none;"/></div>'
+                    );
+                }
+
+                else {
+                    $('#posts-div').append(
+                        '<div class="panel panel-default"><div class="panel-heading panel-header-wide"><div class="col-md-8">' + post.CreatorName + '</div><div class="col-md-4">' + formattedDate + '</div></div><div class="panel-body text-left" style="word-wrap: break-word !important;">' + post.Content + '</div></div>'
+                    );
+                }
             });
         },
         error: function () {
@@ -66,3 +79,48 @@ function updateWall() {
     });
 }
 
+function getCurrentProfileId() {
+
+    var number = 0;
+
+    $.ajax({
+        type: "GET",
+        async: false,
+        url: "/profile/getcurrentprofileid",
+        success: function (id) {
+            number = id;
+        }
+    });
+
+    return number;
+
+}
+
+//När man bekräftat att man vill ta bort posten
+function removePost(postId) {
+
+    $("#post-div-" + postId + "").hide();
+
+    $.ajax({
+        type: "POST",
+        url: "/post/delete",
+        data: { postId: postId },
+    });
+
+}
+//När man inte bekräftar borttagningen
+function cancelRemovePost(postId) {
+
+    $("#remove-post-button-" + postId + "").show();
+    document.getElementById("confirm-remove-button-" + postId + "").style.display = "none";
+    document.getElementById("cancel-remove-button-" + postId + "").style.display = "none";
+
+}
+//När man klickat på remove
+function displayRemovePostButtons(postId) {
+
+    $("#remove-post-button-" + postId + "").hide();
+    document.getElementById("confirm-remove-button-" + postId + "").style.display = "block";
+    document.getElementById("cancel-remove-button-" + postId + "").style.display = "block";
+
+}
