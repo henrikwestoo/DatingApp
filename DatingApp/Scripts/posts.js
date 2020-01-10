@@ -62,7 +62,7 @@ function updateWall() {
 
                     //vi använder post.id för att hålla koll på vilken post elementen tillhör
                     $('#posts-div').append(
-                        '<div class="panel panel-default" id="post-div-' + post.Id + '"><div class="panel-heading panel-header-wide"><div class="col-md-8">' + post.CreatorName + '</div><div class="col-md-4">' + formattedDate + '</div></div><div class="panel-body text-left" style="word-wrap: break-word !important;">' + post.Content + '</div><hr /><input type="button" id="remove-post-button-' + post.Id + '" onclick="displayRemovePostButtons(' + post.Id + ')" value = "Remove post"class= "btn btn-danger"/><input type="button" id="confirm-remove-button-' + post.Id + '" onclick="removePost(' + post.Id + ')" value = "Confirm"class= "btn btn-success" style ="display: none;"/><input type="button" id="cancel-remove-button-' + post.Id + '" onclick="cancelRemovePost(' + post.Id + ')" value = "Cancel"class= "btn btn-danger" style ="display: none;"/></div>'
+                        '<div class="panel panel-default" id="post-div-' + post.Id + '"><div class="panel-heading panel-header-wide"><div class="col-md-8">' + post.CreatorName + '</div><div class="col-md-4">' + formattedDate + '</div></div><div class="panel-body text-left" style="word-wrap: break-word !important;">' + post.Content + '</div><div class="panel-footer"><div class="row"><div class="col-md-4" id="remove-post-' + post.Id + '"><input type="button" onclick="displayRemovePostButtons(' + post.Id + ')" value = "Remove post"class= "btn btn-danger"/></div><div class="col-md-2" style="display: none;" id="confirm-remove-' + post.Id + '"><input type="button" onclick="removePost(' + post.Id + ')" value = "Confirm"class= "btn btn-success"/></div><div class="col-md-2" style="display: none;" id="cancel-remove-' + post.Id + '"><input type="button" onclick="cancelRemovePost(' + post.Id + ')" value = "Cancel"class= "btn btn-danger"/></div></div></div>'
                     );
                 }
 
@@ -111,16 +111,16 @@ function removePost(postId) {
 //När man inte bekräftar borttagningen
 function cancelRemovePost(postId) {
 
-    $("#remove-post-button-" + postId + "").show();
-    document.getElementById("confirm-remove-button-" + postId + "").style.display = "none";
-    document.getElementById("cancel-remove-button-" + postId + "").style.display = "none";
+    document.getElementById("remove-post-" + postId + "").style.display = "block";
+    document.getElementById("confirm-remove-" + postId + "").style.display = "none";
+    document.getElementById("cancel-remove-" + postId + "").style.display = "none";
 
 }
 //När man klickat på remove
 function displayRemovePostButtons(postId) {
 
-    $("#remove-post-button-" + postId + "").hide();
-    document.getElementById("confirm-remove-button-" + postId + "").style.display = "block";
-    document.getElementById("cancel-remove-button-" + postId + "").style.display = "block";
+    document.getElementById("remove-post-" + postId + "").style.display = "none";
+    document.getElementById("confirm-remove-" + postId + "").style.display = "block";
+    document.getElementById("cancel-remove-" + postId + "").style.display = "block";
 
 }
