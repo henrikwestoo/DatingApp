@@ -18,9 +18,9 @@ namespace DatingApp.Repositories
             Ctx.Visitors.Add(model);
         }
 
-        public List<ProfileModel> GetVisitorProfiles(int id)
+        public List<VisitorModel> GetVisitorProfiles(int id)
         {
-            return Ctx.Visitors.Where((p) => p.ProfileId == id).Select((v) => v.Visitor).ToList();
+            return Ctx.Visitors.Where((p) => p.ProfileId == id).ToList();
         }
 
         public void RemoveOldestVisitor()

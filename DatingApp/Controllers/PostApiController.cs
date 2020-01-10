@@ -64,5 +64,11 @@ namespace DatingApp.Controllers
         
         }
 
+        protected override void Dispose(bool disposing)
+        {
+            UnitOfWork.Dispose();
+            base.Dispose(disposing);
+        }
+
     }
 }

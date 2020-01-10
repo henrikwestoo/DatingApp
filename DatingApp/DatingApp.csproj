@@ -187,6 +187,7 @@
     <Compile Include="Controllers\PostApiController.cs" />
     <Compile Include="Controllers\PostController.cs" />
     <Compile Include="Controllers\ProfileController.cs" />
+    <Compile Include="Controllers\VisitorApiController.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Migrations\202001062022484_Added_Repositories.cs" />
     <Compile Include="Migrations\202001062022484_Added_Repositories.Designer.cs">
@@ -303,6 +304,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Scripts\posts.js" />
+    <Content Include="Scripts\visitors.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

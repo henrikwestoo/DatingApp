@@ -10,8 +10,11 @@ namespace DatingApp.Models
 
         public VisitorViewModel(VisitorModel model)
         {
+            Id = model.Id;
             VisitorName = model.Visitor.Name;
         }
+
+        public int Id { get; set; }
 
         public string VisitorName { get; set; }
 

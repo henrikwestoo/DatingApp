@@ -55,11 +55,10 @@
                 <h1 class="panel-title">Latest visitors</h1>
             </div>
             <div class="panel-body">
-                <ul>
-                    @foreach (var visitor in Model.Visitors)
-                    {
-                        <li><a href="@Url.Action("Index", "Profile", new { userId = visitor.Id })"><span>@visitor.Name</span></a></li>
-                    }
+                <ul id="visitor-list">
+
+                    @*<li><a href="@Url.Action("Index", "Profile", new { userId = visitor.Id })"><span>@visitor.Name</span></a></li>*@
+
                 </ul>
             </div>
         </div>
@@ -71,3 +70,5 @@
         @Html.Partial("~/Views/Post/Index.cshtml")
     </div>
 </div>
+
+@Scripts.Render("~/bundles/visitors")
