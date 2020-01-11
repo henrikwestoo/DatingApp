@@ -46,6 +46,7 @@ namespace DatingApp.Controllers
         [Authorize]
         public ActionResult IndexMe()
         {           
+            //Visar den nuvarande användarens profilsida
             string userId = User.Identity.GetUserId();
             var model = UnitOfWork.ProfileRepository.GetProfile(userId);
 
@@ -58,6 +59,7 @@ namespace DatingApp.Controllers
         [HttpGet]
         public ActionResult Index(int userId)
         {
+            //visar profilsidan på användaren med id:t som skickas in
             var model = UnitOfWork.ProfileRepository.GetProfile(userId);
 
             var visitorModel = new VisitorModel()
@@ -98,6 +100,7 @@ namespace DatingApp.Controllers
         }
 
         [Authorize]
+        //returnerar edit-viewn
         public ActionResult Edit()
         {
             string userId = User.Identity.GetUserId();

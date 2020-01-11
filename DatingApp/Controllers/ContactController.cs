@@ -17,6 +17,8 @@ namespace DatingApp.Controllers
         // GET: Contact
         [Authorize]
         public ActionResult Index()
+
+            //skickar en model med den nuvarande användarens pending och accepted contacts
         {
             var currentProfileId = UnitOfWork.ProfileRepository.GetProfileId(User.Identity.GetUserId());
 
