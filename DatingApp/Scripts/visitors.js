@@ -12,7 +12,7 @@ function getVisitors() {
         success: function(result) {
             result.forEach((visitor) => {
 
-                if (visitor.VisitorActive) {
+                if (visitor.VisitorActive == true) {
 
                     $('#visitor-list').append(
                         '<li><a href=".?userId=' + visitor.VisitorProfileId + '">' + visitor.VisitorName + '</a></li>'
