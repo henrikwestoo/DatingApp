@@ -14,19 +14,18 @@ namespace DatingApp.Controllers
     public class ContactController : Controller
     {
         private UnitOfWork UnitOfWork = new UnitOfWork();
+
         // GET: Contact
         [Authorize]
         public ActionResult Index()
-
-            //skickar en model med den nuvarande användarens pending och accepted contacts
-
         {
             var currentProfileId = UnitOfWork.ProfileRepository.GetProfileId(User.Identity.GetUserId());
 
+            // Hämtar en dictionary med alla användarens kontakter och kategorier
             var acceptedContactsAndCategories = UnitOfWork.ContactRepository.FindContactsAndCategories(currentProfileId);
+
             var pendingContactIds = UnitOfWork.ContactRepository.FindContactIds(currentProfileId, false);
 
-            //var profilesContactsAccepted = UnitOfWork.ProfileRepository.FindProfiles(acceptedContactIdsAndCategories.Keys.ToList());
             var profilesContactsPending = UnitOfWork.ProfileRepository.FindProfiles(pendingContactIds);
 
             var listOfProfileContactViewModel = new List<ContactProfileViewModel>();

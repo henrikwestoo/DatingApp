@@ -1,4 +1,5 @@
 ﻿@model DatingApp.Models.ContactsViewModel
+@using DatingApp.Models
 
 @Html.Partial("ContactRequestsPartial")
 
@@ -7,6 +8,7 @@
 }
 
 <h2>Contacts</h2>
+
 
 <table class="table table-bordered">
     <tr>
@@ -20,6 +22,8 @@
 
     @foreach (var item in Model.Accepted)
     {
+        int count = 0;
+
         <tr>
             <td>@item.Name </td>
             <td>@item.Age</td>
@@ -48,12 +52,16 @@
 
                 <input type="submit"
                        value="Change category to Friend"
-                       onclick ="removePost(@item.Id, 'Friend')"
+                       onclick="removePost(@item.Id, 'Friend')"
                        class="btn btn-info" />
 
             </td>
-            <td> @item.Category</td>
+
+            <td>
+                @Html.DropDownListFor(m => m.Accepted[count].Category, new SelectList(Enum.GetValues(typeof(Category)), item.Category))
+            </td>
         </tr>
+        count++;
     }
 </table>
 
