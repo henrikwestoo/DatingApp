@@ -11,10 +11,17 @@ function getVisitors() {
         url: "/api/visitorapi/getvisitors",
         success: function(result) {
             result.forEach((visitor) => {
-                $('#visitor-list').append(
-                    '<li><a href=".?userId=' + visitor.VisitorProfileId + '">' + visitor.VisitorName + '</a></li>'
-                );
 
+                if (visitor.VisitorActive) {
+
+                    $('#visitor-list').append(
+                        '<li><a href=".?userId=' + visitor.VisitorProfileId + '">' + visitor.VisitorName + '</a></li>'
+                    );
+                } else {
+                    $('#visitor-list').append(
+                        '<li>' + visitor.VisitorName + ' (inactive) </li>'
+                    );
+                }
             })
         }
     })

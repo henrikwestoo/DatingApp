@@ -13,6 +13,7 @@ namespace DatingApp.Models
             Id = model.Id;
             VisitorName = model.Visitor.Name;
             VisitorProfileId = model.Visitor.Id;
+            VisitorActive = model.Visitor.Active;
         }
 
         public int Id { get; set; }
@@ -20,6 +21,8 @@ namespace DatingApp.Models
         public string VisitorName { get; set; }
 
         public int VisitorProfileId { get; set; }
+
+        public bool VisitorActive { get; set; }
 
     }
 }
