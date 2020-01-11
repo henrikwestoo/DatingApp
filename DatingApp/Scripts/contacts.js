@@ -3,7 +3,10 @@
 });
 
 
-function removePost(contactId, category) {
+function changeCategory(contactId, category) {
+
+
+    var category = $("#" + contactId + "-dropdown option:selected").val();
 
     $.ajax({
         type: "POST",

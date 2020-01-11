@@ -49,16 +49,7 @@
                 }
             </td>
             <td>
-
-                <input type="submit"
-                       value="Change category to Friend"
-                       onclick="removePost(@item.Id, 'Friend')"
-                       class="btn btn-info" />
-
-            </td>
-
-            <td>
-                @Html.DropDownListFor(m => m.Accepted[count].Category, new SelectList(Enum.GetValues(typeof(Category)), item.Category))
+                @Html.DropDownListFor(m => m.Accepted[count].Category, new SelectList(Enum.GetValues(typeof(Category)), item.Category), new { @onchange="changeCategory(" + item.Id + ")", @id = item.Id + "-dropdown" })
             </td>
         </tr>
         count++;
@@ -66,5 +57,3 @@
 </table>
 
 @Scripts.Render("~/bundles/contacts")
-
-@*@Html.DropDownListFor(item => item.Accepted, new SelectList(Enum.GetValues(typeof(Category))), item.Category)*@
