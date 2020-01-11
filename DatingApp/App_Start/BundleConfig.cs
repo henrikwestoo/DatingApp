@@ -32,6 +32,8 @@ namespace DatingApp
                         "~/Scripts/posts.js"));
             bundles.Add(new StyleBundle("~/bundles/visitors").Include(
                         "~/Scripts/visitors.js"));
+            bundles.Add(new StyleBundle("~/bundles/contacts").Include(
+                      "~/Scripts/contacts.js"));
         }
     }
 }

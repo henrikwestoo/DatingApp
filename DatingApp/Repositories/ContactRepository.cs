@@ -19,6 +19,29 @@ namespace DatingApp.Repositories
             Ctx.Contacts.Add(model);
         }
 
+        //används för att byta kategori på en kontakt
+        public void EditCategory(int currentUserId, int contactId, Category newCategory) 
+        {
+            //eftersom man klickade på kontakten finns den i sambandstabellen, frågan är vilket id som står i vilken kolumn
+            //därför har vi två linq frågor, skillnaderna ligger i where-satserna
+            var contact = Ctx.Contacts.Where((c) => (c.ContactId == contactId) && (c.ProfileId == currentUserId)).FirstOrDefault();
+
+            if (contact == null) {
+
+                contact = Ctx.Contacts.Where((c) => (c.ContactId == currentUserId) && (c.ProfileId == contactId)).First();
+                contact.ProfileCategory = newCategory;
+                Ctx.Set<ContactModel>().AddOrUpdate(contact);
+
+            } else
+            {
+                contact.ContactCategory = newCategory;
+                Ctx.Set<ContactModel>().AddOrUpdate(contact);
+            }
+            
+        
+
+        }
+
         public List<int> FindContactIds(int profileId, bool accepted)
         {
             List<int> contacts = new List<int>();

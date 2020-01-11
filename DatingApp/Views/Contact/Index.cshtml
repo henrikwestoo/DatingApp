@@ -44,7 +44,19 @@
 
                 }
             </td>
-            <td>@item.Category</td>
+            <td>
+
+                <input type="submit"
+                       value="Change category to Friend"
+                       onclick ="removePost(@item.Id, 'Friend')"
+                       class="btn btn-info" />
+
+            </td>
+            <td> @item.Category</td>
         </tr>
     }
 </table>
+
+@Scripts.Render("~/bundles/contacts")
+
+@*@Html.DropDownListFor(item => item.Accepted, new SelectList(Enum.GetValues(typeof(Category))), item.Category)*@

@@ -20,7 +20,6 @@ namespace DatingApp.Controllers
 
             //skickar en model med den nuvarande användarens pending och accepted contacts
 
-        //
         {
             var currentProfileId = UnitOfWork.ProfileRepository.GetProfileId(User.Identity.GetUserId());
 
@@ -99,6 +98,17 @@ namespace DatingApp.Controllers
             UnitOfWork.Save();
 
             return RedirectToAction("Index", "Contact");
+
+        }
+
+        [HttpPost]
+        public void EditCategory(int contactId, Category category)
+        {
+            var currentProfileId = UnitOfWork.ProfileRepository.GetProfileId(User.Identity.GetUserId());
+            UnitOfWork.ContactRepository.EditCategory(currentProfileId, contactId, category);
+
+            UnitOfWork.Save();
+
 
         }
 
