@@ -20,7 +20,18 @@ namespace DatingApp.Models
         public virtual int ContactId { get; set; }
         public virtual ProfileModel Contact { get; set; }
 
+        public Category ProfileCategory { get; set; }
+
+        public Category ContactCategory { get; set; }
+
         public bool Accepted { get; set; }
 
+    }
+
+    public enum Category
+    {
+        Lover,
+        Friend
+      
     }
 }

@@ -19,24 +19,26 @@ namespace DatingApp.Controllers
         public ActionResult Index()
 
             //skickar en model med den nuvarande användarens pending och accepted contacts
+
+        //
         {
             var currentProfileId = UnitOfWork.ProfileRepository.GetProfileId(User.Identity.GetUserId());
 
-            var acceptedContacts = UnitOfWork.ContactRepository.FindContacts(currentProfileId, true);
-            var pendingContacts = UnitOfWork.ContactRepository.FindContacts(currentProfileId, false);
+            var acceptedContactsAndCategories = UnitOfWork.ContactRepository.FindContactsAndCategories(currentProfileId);
+            var pendingContactIds = UnitOfWork.ContactRepository.FindContactIds(currentProfileId, false);
 
-            var profilesContactsAccepted = UnitOfWork.ProfileRepository.FindProfiles(acceptedContacts);
-            var profilesContactsPending = UnitOfWork.ProfileRepository.FindProfiles(pendingContacts);
+            //var profilesContactsAccepted = UnitOfWork.ProfileRepository.FindProfiles(acceptedContactIdsAndCategories.Keys.ToList());
+            var profilesContactsPending = UnitOfWork.ProfileRepository.FindProfiles(pendingContactIds);
 
-            var profilesIndexViewModelContactsAccepted = new ProfilesIndexViewModel();
+            var listOfProfileContactViewModel = new List<ContactProfileViewModel>();
             var profilesIndexViewModelContactsPending = new ProfilesIndexViewModel();
 
-            foreach (var model in profilesContactsAccepted)
+            foreach (var item in acceptedContactsAndCategories)
             {
-                if (model.Active == true)
+                if (item.Key.Active == true)
                 {
-                    var profileIndexViewModelAccepted = new ProfileIndexViewModel(model);
-                    profilesIndexViewModelContactsAccepted.Profiles.Add(profileIndexViewModelAccepted);
+                    var profileContactViewModel = new ContactProfileViewModel(item.Key, item.Value);
+                    listOfProfileContactViewModel.Add(profileContactViewModel);
                 }
             }
 
@@ -49,11 +51,10 @@ namespace DatingApp.Controllers
                 }
             }
 
-            var allContacts = new ContactsViewModel(profilesIndexViewModelContactsAccepted, profilesIndexViewModelContactsPending);
+            var allContacts = new ContactsViewModel(listOfProfileContactViewModel, profilesIndexViewModelContactsPending);
 
 
             return View(allContacts);
-
         }
 
         [HttpPost]
@@ -80,7 +81,7 @@ namespace DatingApp.Controllers
 
             var currentProfileId = UnitOfWork.ProfileRepository.GetProfileId(User.Identity.GetUserId());
 
-            UnitOfWork.ContactRepository.EditContact(currentProfileId, contactUserId);
+            UnitOfWork.ContactRepository.AcceptContact(currentProfileId, contactUserId);
 
             UnitOfWork.Save();
 
@@ -108,7 +109,7 @@ namespace DatingApp.Controllers
             try
             {
                 var currentProfileId = UnitOfWork.ProfileRepository.GetProfileId(User.Identity.GetUserId());
-                pendingContacts = UnitOfWork.ContactRepository.FindContacts(currentProfileId, false).Count;
+                pendingContacts = UnitOfWork.ContactRepository.FindContactIds(currentProfileId, false).Count;
             }
 
             catch (InvalidOperationException)

@@ -15,9 +15,10 @@
         <th>Gender</th>
         <th>View</th>
         <th>Manage</th>
+        <th>Category</th>
     </tr>
 
-    @foreach (var item in Model.Accepted.Profiles)
+    @foreach (var item in Model.Accepted)
     {
         <tr>
             <td>@item.Name </td>
@@ -43,6 +44,7 @@
 
                 }
             </td>
+            <td>@item.Category</td>
         </tr>
     }
 </table>

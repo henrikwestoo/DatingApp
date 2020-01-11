@@ -19,7 +19,7 @@ namespace DatingApp.Repositories
             Ctx.Contacts.Add(model);
         }
 
-        public List<int> FindContacts(int profileId, bool accepted)
+        public List<int> FindContactIds(int profileId, bool accepted)
         {
             List<int> contacts = new List<int>();
 
@@ -43,7 +43,20 @@ namespace DatingApp.Repositories
             return contacts;
         }
 
-        public void EditContact(int userProfileId, int contactId)
+        public Dictionary<ProfileModel, Category> FindContactsAndCategories(int profileId)
+        {
+            Dictionary<ProfileModel, Category> dictionary1 = Ctx.Contacts.Where(p => (p.ContactId == profileId)).
+                    Select((x) => new { x.Profile, x.ProfileCategory }).ToDictionary(t => t.Profile, t => t.ProfileCategory);
+
+            Dictionary<ProfileModel, Category> dictionary2 = Ctx.Contacts.Where(p => (p.ProfileId == profileId)).
+                    Select((x) => new { x.Contact, x.ContactCategory }).ToDictionary(t => t.Contact, t => t.ContactCategory);
+
+            var merged = dictionary1.Concat(dictionary2).ToLookup(x => x.Key, x => x.Value).ToDictionary(x => x.Key, g => g.First());
+
+            return merged;
+        }
+
+        public void AcceptContact(int userProfileId, int contactId)
         {
             var contact = Ctx.Contacts.Where((c) => (c.ContactId == userProfileId) && (c.ProfileId == contactId)).First();
             contact.Accepted = true;
