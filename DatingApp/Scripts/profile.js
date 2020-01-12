@@ -13,11 +13,12 @@ function displayMatchPercentage(targetId) {
         data: { targetId: targetId },
         success: function (matchPercentage) {
 
-            document.getElementById("percentage-label").innerHTML = matchPercentage + "%";
+            document.getElementById("percentage-label").innerHTML ="Ni har en matchings-procent på " + matchPercentage + "%";
 
         }
     });
 
+    document.getElementById("match-button").style.display = "none";
     document.getElementById("percentage-label").style.display = "block";
 
 }
