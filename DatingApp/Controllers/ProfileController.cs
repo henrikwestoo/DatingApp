@@ -131,6 +131,9 @@ namespace DatingApp.Controllers
             model.Age = viewModel.Age;
             model.Gender = viewModel.Gender;
             model.Biography = viewModel.Biography;
+            model.CSharp = viewModel.CSharp;
+            model.JavaScript = viewModel.JavaScript;
+            model.StackOverflow = viewModel.StackOverflow;
 
             if (!String.IsNullOrEmpty(fileName))
             {

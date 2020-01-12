@@ -8,66 +8,82 @@
 
 @using (Html.BeginForm("Edit", "Profile", FormMethod.Post, new { @class = "form-horizontal", role = "form", enctype = "multipart/form-data" }))
 {
-    <img src="@Url.Content(Model.Image)" alt="Image" class="profile-image" />
-    <br />
-    @Html.LabelFor(m => m.Image, new { @class = "col-md-2 control-label" })
-    <br />
-    <div class="col-md-10">
-        <input type="file" name="file" />
-    </div>
-    <br />
-    <br />
-    @Html.LabelFor(m => m.Name, new { @class = "col-md-2 control-label" })
-    <br />
-    <div class="col-md-10">
-        @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
-    </div>
-    <br />
-    <br />
-    @Html.LabelFor(m => m.Age, new { @class = "col-md-2 control-label" })
-    <br />
-    <div class="col-md-10">
-        @Html.TextBoxFor(m => m.Age, new { @class = "form-control" })
-    </div>
-    <br />
-    <br />
-    @Html.LabelFor(m => m.Gender, new { @class = "col-md-2 control-label" })
-    <br />
-    <div class="col-md-10">
-        @Html.TextBoxFor(m => m.Gender, new { @class = "form-control" })
-    </div>
-    <br />
-    <br />
-    @Html.LabelFor(m => m.Biography, new { @class = "col-md-2 control-label" })
-    <br />
-    <div class="col-md-10">
-        @Html.TextBoxFor(m => m.Biography, new { @class = "form-control" })
-    </div>
-    <br />
-    <br />
-    @Html.LabelFor(m => m.CSharp, new { @class = "col-md-2 control-label" })
-    <br />
-    <div class="col-md-10">
-        @Html.EditorFor(m => m.CSharp, new { htmlAttributes = new { @class = "custom-range", @type = "range", @min = "0", @max = "10", @id = "desp" } })
-    </div>
-    <br />
-    <br />
-    @Html.LabelFor(m => m.JavaScript, new { @class = "col-md-2 control-label" })
-    <br />
-    <div class="col-md-10">
-        @Html.EditorFor(m => m.JavaScript, new { htmlAttributes = new { @class = "custom-range", @type = "range", @min = "0", @max = "10", @id = "desp" } })
-    </div>
-    <br />
-    <br />
-    @Html.LabelFor(m => m.StackOverflow, new { @class = "col-md-2 control-label" })
-    <br />
-    <div class="col-md-10">
-        @Html.EditorFor(m => m.StackOverflow, new { htmlAttributes = new { @class = "custom-range", @type = "range", @min = "0", @max = "10", @id = "desp" } })
-    </div>
-    <br />
-    <br />
+    @Html.AntiForgeryToken()
+
     <div class="form-group">
-        <div class="col-md-offset-1 col-md-10">
+        <label class="col-md-2 control-label">Current image</label>
+
+        <div class="col-md-10">
+            <img src="@Url.Content(Model.Image)" alt="Image" class="profile-image" />
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Image, new { @class = "col-md-2 control-label" })
+
+        <div class="col-md-10">
+            <input type="file" name="file" />
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Name, new { @class = "col-md-2 control-label" })
+
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Age, new { @class = "col-md-2 control-label" })
+
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.Age, new { @class = "form-control" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Gender, new { @class = "col-md-2 control-label" })
+
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.Gender, new { @class = "form-control" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Biography, new { @class = "col-md-2 control-label" })
+
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.Biography, new { @class = "form-control" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.CSharp, new { @class = "col-md-2 control-label" })
+
+        <div class="col-md-10">
+            @Html.EditorFor(m => m.CSharp, new { htmlAttributes = new { @class = "custom-range", @type = "range", @min = "0", @max = "10", @id = "desp" } })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.JavaScript, new { @class = "col-md-2 control-label" })
+
+        <div class="col-md-10">
+            @Html.EditorFor(m => m.JavaScript, new { htmlAttributes = new { @class = "custom-range", @type = "range", @min = "0", @max = "10", @id = "desp" } })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.StackOverflow, new { @class = "col-md-2 control-label" })
+
+        <div class="col-md-10">
+            @Html.EditorFor(m => m.StackOverflow, new { htmlAttributes = new { @class = "custom-range", @type = "range", @min = "0", @max = "10", @id = "desp" } })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
             <input type="submit" class="btn btn-default" value="Save changes" />
         </div>
     </div>
