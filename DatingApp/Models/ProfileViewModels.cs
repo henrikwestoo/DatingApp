@@ -71,8 +71,11 @@ namespace DatingApp.Models
             public bool Active { get; set; }
 
             public string Image { get; set; }
+            [Display(Name = "C#")]
             public int CSharp { get; set; }
+            [Display(Name = "JavaScript")]
             public int JavaScript { get; set; }
+            [Display(Name = "Stack Overflow-ability")]
             public int StackOverflow { get; set; }
 
             public List<ProfileModel> Visitors { get; set; }
