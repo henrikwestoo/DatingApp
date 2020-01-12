@@ -30,7 +30,7 @@
                         <td class="col-md-2">@Html.LabelFor(m => m.CSharp, htmlAttributes: new { @class = "control-label col-md-2" })</td>
                         <td class="col-md-10">
                             <div class="progress" id="csharp-progress">
-                                <div class="progress-bar" id="progress-bar-csharp" data-value="@Model.CSharp"></div>
+                                <div class="progress-bar" id="progress-bar-csharp" aria-valuemin="0" aria-valuemax="100" data-value="@Model.CSharp"></div>
                             </div>
                         </td>
                     </tr>
@@ -38,7 +38,7 @@
                         <td class="col-md-2">@Html.LabelFor(m => m.JavaScript, htmlAttributes: new { @class = "control-label col-md-2" })</td>
                         <td class="col-md-10">
                             <div class="progress" id="javascript-progress">
-                                <div class="progress-bar" id="progress-bar-javascript" data-value="@Model.JavaScript"></div>
+                                <div class="progress-bar" id="progress-bar-javascript" aria-valuemin="0" aria-valuemax="100" data-value="@Model.JavaScript"></div>
                             </div>
                         </td>
                     </tr>
@@ -46,7 +46,7 @@
                         <td class="col-md-2">@Html.LabelFor(m => m.StackOverflow, htmlAttributes: new { @class = "control-label col-md-2" })</td>
                         <td class="col-md-10">
                             <div class="progress" id="stackoverflow-progress">
-                                <div class="progress-bar" id="progress-bar-stackoverflow" data-value="@Model.StackOverflow"></div>
+                                <div class="progress-bar" id="progress-bar-stackoverflow" aria-valuemin="0" aria-valuemax="100" data-value="@Model.StackOverflow"></div>
                             </div>
                         </td>
                     </tr>
