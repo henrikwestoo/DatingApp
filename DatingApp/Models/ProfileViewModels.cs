@@ -85,7 +85,7 @@ namespace DatingApp.Models
 
         public class ProfileSearchViewModel
         {
-            public ProfileSearchViewModel(ProfileModel model, bool isContact)
+            public ProfileSearchViewModel(ProfileModel model, bool isContact, int matchPercentage)
             {
                 Id = model.Id;
                 Name = model.Name;
@@ -94,6 +94,7 @@ namespace DatingApp.Models
                 Biography = model.Biography;
                 Image = model.Image;
                 IsContact = isContact;
+                MatchPercentage = matchPercentage;
             }
 
 
@@ -114,6 +115,7 @@ namespace DatingApp.Models
             public string Image { get; set; }
 
             public bool IsContact { get; set; }
+            public int MatchPercentage { get; set; }
         }
 
         public class ProfilesSearchViewModel

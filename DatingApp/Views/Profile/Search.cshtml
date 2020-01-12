@@ -18,6 +18,7 @@
             <th>Gender</th>
             <th>View</th>
             <th>Add</th>
+            <th>Match</th>
         </tr>
 
         @foreach (var item in Model.Profiles)
@@ -48,6 +49,7 @@
                         }
                     }
                 </td>
+                <td>@item.MatchPercentage%</td>
             </tr>
         }
 

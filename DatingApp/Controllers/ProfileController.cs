@@ -182,7 +182,7 @@ namespace DatingApp.Controllers
             var currentId = User.Identity.GetUserId();
             int profileId = UnitOfWork.ProfileRepository.GetProfileId(currentId);
 
-            var profilesViewModel = new ProfilesSearchViewModel();
+            var profilesSearchViewModel = new ProfilesSearchViewModel();
 
             var contacts = UnitOfWork.ContactRepository.FindAllContacts(profileId);
 
@@ -197,12 +197,14 @@ namespace DatingApp.Controllers
                         isContact = true;
                     }
 
-                    var profileViewModel = new ProfileSearchViewModel(profile, isContact);
-                    profilesViewModel.Profiles.Add(profileViewModel);
+                    var profileSearchViewModel = new ProfileSearchViewModel(profile, isContact, GetMatchPercentage(profile.Id));
+                    profilesSearchViewModel.Profiles.Add(profileSearchViewModel);
                 }
             }
 
-            return View(profilesViewModel);
+            profilesSearchViewModel.Profiles = profilesSearchViewModel.Profiles.OrderByDescending(x => x.MatchPercentage).ToList();
+
+            return View(profilesSearchViewModel);
         }
 
         [HttpGet]
