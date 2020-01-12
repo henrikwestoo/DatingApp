@@ -213,6 +213,17 @@ namespace DatingApp.Controllers
 
         }
 
+        [HttpGet]
+        public int GetMatchPercentage(int targetId) {
+
+            int currentProfileId = UnitOfWork.ProfileRepository.GetProfileId(User.Identity.GetUserId());
+
+            int matchPercentage = UnitOfWork.ProfileRepository.GetProfile(currentProfileId).Age+UnitOfWork.ProfileRepository.GetProfile(targetId).Age;
+
+            return matchPercentage;
+        
+        }
+
         public ActionResult Download()
         {
             var profile = UnitOfWork.ProfileRepository.GetProfile(User.Identity.GetUserId());

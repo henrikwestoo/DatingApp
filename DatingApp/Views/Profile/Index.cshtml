@@ -26,7 +26,15 @@
                         <td>@Html.LabelFor(m => m.Biography, htmlAttributes: new { @class = "control-label col-md-2" })</td>
                         <td><em>@Html.DisplayFor((m) => m.Biography, new { @class = "control-label col-md-8" })</em></td>
                     </tr>
+
                 </table>
+                <hr />
+                <h2 id="percentage-label">100%</h2>
+                <input type="button"
+                       value="Get match %"
+                       class="btn btn-success"
+                       onclick="displayMatchPercentage(@Model.Id)" />
+
             </div>
         </div>
     </div>
@@ -37,3 +45,5 @@
         @Html.Partial("~/Views/Post/Index.cshtml")
     </div>
 </div>
+
+@Scripts.Render("~/bundles/profile")
