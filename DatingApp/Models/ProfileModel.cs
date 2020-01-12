@@ -24,6 +24,10 @@ namespace DatingApp.Models
 
         public bool Active { get; set; }
 
+        public int CSharp { get; set; }
+        public int JavaScript { get; set; }
+        public int StackOverflow { get; set; }
+
         [ForeignKey("User")]
         public string UserId { get; set; }
         public ApplicationUser User { get; set; }

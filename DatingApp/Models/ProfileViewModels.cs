@@ -26,6 +26,9 @@ namespace DatingApp.Models
                 Biography = model.Biography;
                 Image = model.Image;
                 Active = model.Active;
+                CSharp = model.CSharp;
+                JavaScript = model.JavaScript;
+                StackOverflow = model.StackOverflow;
             }
 
             public ProfileIndexViewModel(ProfileModel model, List<ProfileModel> visitors)
@@ -37,6 +40,9 @@ namespace DatingApp.Models
                 Biography = model.Biography;
                 Image = model.Image;
                 Active = model.Active;
+                CSharp = model.CSharp;
+                JavaScript = model.JavaScript;
+                StackOverflow = model.StackOverflow;
                 Visitors = visitors;
             }
 
@@ -49,22 +55,25 @@ namespace DatingApp.Models
             public string Name { get; set; }
 
             [Display(Name = "Age")]
-            [Required(ErrorMessage = "Field required")]
+            [Required(ErrorMessage = "Field required1")]
 
             public int Age { get; set; }
 
             [Display(Name = "Gender")]
-            [Required(ErrorMessage = "Field required")]
+            [Required(ErrorMessage = "Field required2")]
             public Gender Gender { get; set; }
 
             [Display(Name = "Bio")]
-            [Required(ErrorMessage = "Field required")]
+            [Required(ErrorMessage = "Field required3")]
             [StringLength(150, MinimumLength = 1, ErrorMessage = "Character limit is 150")]
             public string Biography { get; set; }
 
             public bool Active { get; set; }
 
             public string Image { get; set; }
+            public int CSharp { get; set; }
+            public int JavaScript { get; set; }
+            public int StackOverflow { get; set; }
 
             public List<ProfileModel> Visitors { get; set; }
         }

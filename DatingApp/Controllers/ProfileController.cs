@@ -33,7 +33,10 @@ namespace DatingApp.Controllers
                 Biography = profileModel.Biography,
                 Image = profileModel.Image,
                 UserId = User.Identity.GetUserId(),
-                Active = true
+                Active = true,
+                CSharp = profileModel.CSharp,
+                JavaScript = profileModel.JavaScript,
+                StackOverflow = profileModel.StackOverflow
             };
 
             UnitOfWork.ProfileRepository.AddProfile(profile);
@@ -220,9 +223,19 @@ namespace DatingApp.Controllers
 
             int currentProfileId = UnitOfWork.ProfileRepository.GetProfileId(User.Identity.GetUserId());
 
-            int matchPercentage = UnitOfWork.ProfileRepository.GetProfile(currentProfileId).Age+UnitOfWork.ProfileRepository.GetProfile(targetId).Age;
+            var user1 = UnitOfWork.ProfileRepository.GetProfile(currentProfileId);
+            var user2 = UnitOfWork.ProfileRepository.GetProfile(targetId);
 
-            return matchPercentage;
+            int csharpMatch, javaScriptMatch, stackOverflowMatch;
+
+            if (user1.CSharp > user2.CSharp) { csharpMatch = user1.CSharp - user2.CSharp; }
+            else {csharpMatch = user2.CSharp - user1.CSharp;}
+            if (user1.JavaScript > user2.JavaScript) { javaScriptMatch = user1.JavaScript - user2.JavaScript; }
+            else { javaScriptMatch = user2.JavaScript - user1.JavaScript; }
+            if (user1.StackOverflow > user2.StackOverflow) { stackOverflowMatch = user1.StackOverflow - user2.StackOverflow; }
+            else { stackOverflowMatch = user2.StackOverflow - user1.StackOverflow; }
+
+            return 100 - ((int)((csharpMatch + javaScriptMatch + stackOverflowMatch) * 3.3));
         
         }
 

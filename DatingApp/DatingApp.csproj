@@ -213,6 +213,10 @@
     <Compile Include="Migrations\202001111150455_added_categories_contacts.Designer.cs">
       <DependentUpon>202001111150455_added_categories_contacts.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202001121137429_added_programming_skills.cs" />
+    <Compile Include="Migrations\202001121137429_added_programming_skills.Designer.cs">
+      <DependentUpon>202001121137429_added_programming_skills.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\VisitorModel.cs" />
     <Compile Include="Models\VisitorViewModels.cs" />
     <Compile Include="Repositories\AppDbContext.cs" />
@@ -422,6 +426,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202001111150455_added_categories_contacts.resx">
       <DependentUpon>202001111150455_added_categories_contacts.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202001121137429_added_programming_skills.resx">
+      <DependentUpon>202001121137429_added_programming_skills.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

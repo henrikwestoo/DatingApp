@@ -1,5 +1,5 @@
 ﻿@using DatingApp.Models
-@model ProfileModel
+@model DatingApp.Models.ProfileViewModels.ProfileIndexViewModel
 
 <hr />
 <h4>Create your profile</h4>
@@ -32,5 +32,23 @@
     @Html.LabelFor(m => m.Biography, new { @class = "col-md-2 control-label" })
     <div class="col-md-10">
         @Html.TextAreaFor(m => m.Biography, new { @class = "form-control" })
+    </div>
+</div>
+<div class="form-group">
+    @Html.LabelFor(m => m.CSharp, new { @class = "col-md-2 control-label" })
+    <div class="col-md-10">
+        @Html.TextBoxFor(m => m.CSharp, new { @class = "form-control" })
+    </div>
+</div>
+<div class="form-group">
+    @Html.LabelFor(m => m.JavaScript, new { @class = "col-md-2 control-label" })
+    <div class="col-md-10">
+        @Html.TextBoxFor(m => m.JavaScript, new { @class = "form-control" })
+    </div>
+</div>
+<div class="form-group">
+    @Html.LabelFor(m => m.StackOverflow, new { @class = "col-md-2 control-label" })
+    <div class="col-md-10">
+        @Html.TextBoxFor(m => m.StackOverflow, new { @class = "form-control" })
     </div>
 </div>
