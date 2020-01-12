@@ -28,6 +28,12 @@ function displayMatchPercentage(targetId) {
 
                 if (increaser == matchPercentage) {
                     clearInterval(timer);
+
+                    if (increaser < 50) {
+                        document.getElementById("percentage-label").style.color = "red";
+                    } else {
+                        document.getElementById("percentage-label").style.color = "green";
+                    }
                 }
 
                 increaser++;
