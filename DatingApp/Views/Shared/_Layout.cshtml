@@ -38,10 +38,14 @@
     </div>
     <div class="container body-content">
         @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - CODR</p>
-        </footer>
+
+        @if (!(HttpContext.Current.Request.Url.AbsolutePath == "/Profile/IndexMe" || HttpContext.Current.Request.Url.AbsolutePath == "/Profile/"))
+        {
+            <hr />
+            <footer>
+                <p>&copy; @DateTime.Now.Year - CODR</p>
+            </footer>
+        }
     </div>
 
     @Scripts.Render("~/bundles/jquery")
