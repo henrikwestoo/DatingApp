@@ -28,6 +28,30 @@
                         <td>@Html.LabelFor(m => m.Biography, htmlAttributes: new { @class = "control-label col-md-2" })</td>
                         <td><em>@Html.DisplayFor((m) => m.Biography, new { @class = "control-label col-md-6" })</em></td>
                     </tr>
+                    <tr>
+                        <td class="col-md-2">@Html.LabelFor(m => m.CSharp, htmlAttributes: new { @class = "control-label col-md-2" })</td>
+                        <td class="col-md-10">
+                            <div class="progress" id="csharp-progress">
+                                <div class="progress-bar" id="progress-bar-csharp" data-value="@Model.CSharp"></div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-2">@Html.LabelFor(m => m.JavaScript, htmlAttributes: new { @class = "control-label col-md-2" })</td>
+                        <td class="col-md-10">
+                            <div class="progress" id="javascript-progress">
+                                <div class="progress-bar" id="progress-bar-javascript" data-value="@Model.JavaScript"></div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-2">@Html.LabelFor(m => m.StackOverflow, htmlAttributes: new { @class = "control-label col-md-2" })</td>
+                        <td class="col-md-10">
+                            <div class="progress" id="stackoverflow-progress">
+                                <div class="progress-bar" id="progress-bar-stackoverflow" data-value="@Model.StackOverflow"></div>
+                            </div>
+                        </td>
+                    </tr>
                 </table>
                 <input type="button"
                        value="Edit"
@@ -72,3 +96,4 @@
 </div>
 
 @Scripts.Render("~/bundles/visitors")
+@Scripts.Render("~/bundles/profiles")

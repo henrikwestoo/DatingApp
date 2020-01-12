@@ -28,16 +28,18 @@ namespace DatingApp
                       "~/Content/bootstrap.css",
                       "~/Content/Custom.css",
                       "~/Content/site.css"));
-            bundles.Add(new StyleBundle("~/bundles/custom").Include(
+            bundles.Add(new ScriptBundle("~/bundles/custom").Include(
                        "~/Scripts/custom.js"));
-            bundles.Add(new StyleBundle("~/bundles/posts").Include(
+            bundles.Add(new ScriptBundle("~/bundles/posts").Include(
                         "~/Scripts/posts.js"));
-            bundles.Add(new StyleBundle("~/bundles/visitors").Include(
+            bundles.Add(new ScriptBundle("~/bundles/visitors").Include(
                         "~/Scripts/visitors.js"));
-            bundles.Add(new StyleBundle("~/bundles/contacts").Include(
+            bundles.Add(new ScriptBundle("~/bundles/contacts").Include(
                       "~/Scripts/contacts.js"));
-            bundles.Add(new StyleBundle("~/bundles/profile").Include(
+            bundles.Add(new ScriptBundle("~/bundles/profile").Include(
                       "~/Scripts/profile.js"));
+            bundles.Add(new ScriptBundle("~/bundles/profiles").Include(
+                      "~/Scripts/profiles.js"));
         }
     }
 }
