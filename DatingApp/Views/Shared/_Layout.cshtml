@@ -39,7 +39,7 @@
     <div class="container body-content">
         @RenderBody()
 
-        @if (!(HttpContext.Current.Request.Url.AbsolutePath == "/Profile/IndexMe" || HttpContext.Current.Request.Url.AbsolutePath == "/Profile/"))
+        @if (!(HttpContext.Current.Request.Url.AbsolutePath == "/Profile/IndexMe" || HttpContext.Current.Request.Url.AbsolutePath == "/Profile/" || HttpContext.Current.Request.Url.AbsolutePath == "/Profile"))
         {
             <hr />
             <footer>

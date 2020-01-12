@@ -43,9 +43,13 @@
                         if (!item.IsContact)
                         {
                             @Html.Hidden("contactProfileId", item.Id)
+                            @Html.Hidden("currentUrl", Request.QueryString["search"])
                             <input type="submit"
                                    value="Add contact"
                                    class="btn btn-success" />
+                        } else
+                        {
+                            <em>Request pending</em>
                         }
                     }
                 </td>

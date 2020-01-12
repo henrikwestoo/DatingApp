@@ -56,7 +56,7 @@ namespace DatingApp.Controllers
         }
 
         [HttpPost]
-        public ActionResult AddContact(int contactProfileId)
+        public ActionResult AddContact(int contactProfileId, string currentUrl)
         {
             var currentProfileId = UnitOfWork.ProfileRepository.GetProfileId(User.Identity.GetUserId());
 
@@ -69,7 +69,7 @@ namespace DatingApp.Controllers
             UnitOfWork.ContactRepository.AddContact(contactModel);
             UnitOfWork.Save();
 
-            return RedirectToAction("Search", "Profile");
+            return RedirectToAction("Search", "Profile", new { search = currentUrl});
         }
 
         [HttpPost]

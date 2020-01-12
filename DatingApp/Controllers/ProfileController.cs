@@ -179,6 +179,11 @@ namespace DatingApp.Controllers
         [HttpGet]
         public ActionResult Search(string search)
         {
+            if(search == null)
+            {
+                search = "";
+            }
+
             var profiles = UnitOfWork.ProfileRepository.SearchProfiles(search);
 
 
