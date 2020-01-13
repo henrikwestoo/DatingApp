@@ -137,7 +137,7 @@ namespace DatingApp.Controllers
 
                     bool validExtension = false;
 
-                    if (extension.Equals(".png") || extension.Equals(".jpg") || extension.Equals(".jpeg"))
+                    if (extension.Equals("png") || extension.Equals("jpg") || extension.Equals("jpeg"))
                     {
                         validExtension = true;
                     }

@@ -1,7 +1,0 @@
-<?xml version="1.0"?>
-<ProfileDownloadViewModel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <Name>Henrik Westöö</Name>
-  <Age>21</Age>
-  <Gender>Male</Gender>
-  <Biography>AI är bara en massa if-satser</Biography>
-</ProfileDownloadViewModel>

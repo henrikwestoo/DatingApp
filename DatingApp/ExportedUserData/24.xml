@@ -1,7 +1,0 @@
-<?xml version="1.0"?>
-<ProfileDownloadViewModel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <Name>Tomasz Baslyk</Name>
-  <Age>20</Age>
-  <Gender>Male</Gender>
-  <Biography>Don't ever make me write JavaScript again</Biography>
-</ProfileDownloadViewModel>

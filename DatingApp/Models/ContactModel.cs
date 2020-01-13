@@ -30,8 +30,9 @@ namespace DatingApp.Models
 
     public enum Category
     {
-        Lover,
-        Friend
+        Smart,
+        Funny,
+        Pretty
       
     }
 }
