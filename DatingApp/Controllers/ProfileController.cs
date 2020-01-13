@@ -267,6 +267,7 @@ namespace DatingApp.Controllers
             var user2 = UnitOfWork.ProfileRepository.GetProfile(targetId);
 
             int csharpMatch, javaScriptMatch, stackOverflowMatch;
+            int ageMatch = 0;
 
             if (user1.CSharp > user2.CSharp) { csharpMatch = user1.CSharp - user2.CSharp; }
             else { csharpMatch = user2.CSharp - user1.CSharp; }
@@ -275,7 +276,14 @@ namespace DatingApp.Controllers
             if (user1.StackOverflow > user2.StackOverflow) { stackOverflowMatch = user1.StackOverflow - user2.StackOverflow; }
             else { stackOverflowMatch = user2.StackOverflow - user1.StackOverflow; }
 
-            return 100 - ((int)((csharpMatch + javaScriptMatch + stackOverflowMatch) * 3.3));
+            if (user1.Age > user2.Age) { 
+                if (user1.Age - user2.Age < 10) { 
+                    ageMatch = 10 - (user1.Age - user2.Age); } }
+            else { 
+                if (user2.Age - user1.Age < 10) { 
+                    ageMatch = 10 - (user2.Age - user1.Age); } }
+
+            return 100 - ((int)((csharpMatch + javaScriptMatch + stackOverflowMatch) * 3) + ageMatch);
 
         }
 
