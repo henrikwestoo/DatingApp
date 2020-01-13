@@ -176,6 +176,36 @@ namespace DatingApp.Controllers
         {
             if (ModelState.IsValid)
             {
+                if (file != null)
+                {
+                    var splitFile = file.FileName.Split('.');
+                    var extension = splitFile[splitFile.Length - 1];
+
+                    bool validExtension = false;
+
+                    if (extension.Equals(".png") || extension.Equals(".jpg") || extension.Equals(".jpeg"))
+                    {
+                        validExtension = true;
+                    }
+
+                    if (validExtension)
+                    {
+                        string path = Path.Combine(Server.MapPath("~/Images"), Path.GetFileName(file.FileName));
+                        file.SaveAs(path);
+                        pModel.Image = "~/Images/" + file.FileName;
+                    }
+                    else
+                    {
+                        ViewBag.ErrorMessage = "Image must be a .png, .jpg or .jpeg";
+                        return View();
+                    }
+
+                }
+                else
+                {
+                    pModel.Image = "~/Images/default-profile-picture.jpg";
+                }
+
                 var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
@@ -187,16 +217,6 @@ namespace DatingApp.Controllers
                     // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
                     // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                     // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
-
-                    if (file != null)
-                    {
-                        string path = Path.Combine(Server.MapPath("~/Images"), Path.GetFileName(file.FileName));
-                        file.SaveAs(path);
-                        pModel.Image = "~/Images/" + file.FileName;
-                    } else
-                    {
-                        pModel.Image = "~/Images/default-profile-picture.jpg";
-                    }
 
                     return RedirectToAction("Create", "Profile", pModel);
                 }

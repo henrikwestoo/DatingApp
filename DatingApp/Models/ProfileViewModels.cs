@@ -50,22 +50,22 @@ namespace DatingApp.Models
             public int Id { get; set; }
 
             [Display(Name = "Name")]
-            [Required(ErrorMessage = "Field required")]
+            [Required(ErrorMessage = "Name is required")]
             [StringLength(50, MinimumLength = 1, ErrorMessage = "Your name can not be this long")]
             public string Name { get; set; }
 
             [Display(Name = "Age")]
-            [Required(ErrorMessage = "Field required1")]
+            [Required(ErrorMessage = "Age is required")]
 
             public int Age { get; set; }
 
             [Display(Name = "Gender")]
-            [Required(ErrorMessage = "Field required2")]
+            [Required(ErrorMessage = "Gender is required")]
             public Gender Gender { get; set; }
 
-            [Display(Name = "Bio")]
-            [Required(ErrorMessage = "Field required3")]
-            [StringLength(150, MinimumLength = 1, ErrorMessage = "Character limit is 150")]
+            [Display(Name = "Motto")]
+            [Required(ErrorMessage = "Motto is required")]
+            [StringLength(50, MinimumLength = 1, ErrorMessage = "Character limit is 30")]
             public string Biography { get; set; }
 
             public bool Active { get; set; }

@@ -12,6 +12,7 @@ function postToWall() {
     const newPost = $('#new-post').val();
     const dateTime = new Date().toISOString();
     const recieverId = $('#user-id').val();
+    //var validCharacters = new RegExp('^ [\w][^\W_][\w]$');
 
     if (newPost !== '') {
 

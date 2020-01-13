@@ -17,7 +17,7 @@ namespace DatingApp.Controllers
         private UnitOfWork UnitOfWork = new UnitOfWork();
 
         // GET: Profile
-        public ActionResult Create()    
+        public ActionResult Create()
         {
             return View();
         }
@@ -48,7 +48,7 @@ namespace DatingApp.Controllers
 
         [Authorize]
         public ActionResult IndexMe()
-        {           
+        {
             //Visar den nuvarande användarens profilsida
             string userId = User.Identity.GetUserId();
             var model = UnitOfWork.ProfileRepository.GetProfile(userId);
@@ -75,9 +75,10 @@ namespace DatingApp.Controllers
 
             bool duplicate = false;
 
-            foreach(var visitor in visitorModels)
+            foreach (var visitor in visitorModels)
             {
-                if (visitor.VisitorId == UnitOfWork.ProfileRepository.GetProfileId(User.Identity.GetUserId())) {
+                if (visitor.VisitorId == UnitOfWork.ProfileRepository.GetProfileId(User.Identity.GetUserId()))
+                {
                     duplicate = true;
                 }
             }
@@ -86,9 +87,10 @@ namespace DatingApp.Controllers
             if ((visitorModels.Count < 5) && (!duplicate))
             {
                 UnitOfWork.VisitorRepository.AddVisitor(visitorModel);
-            
-            // om besökaren inte redan finns i besökarlistan, men listan är full
-            } else if(!duplicate)
+
+                // om besökaren inte redan finns i besökarlistan, men listan är full
+            }
+            else if (!duplicate)
             {
                 // den äldsta besökaren tas bort och den nya läggs till
                 UnitOfWork.VisitorRepository.RemoveOldestVisitor();
@@ -116,38 +118,62 @@ namespace DatingApp.Controllers
         [HttpPost]
         public ActionResult Edit(ProfileIndexViewModel viewModel, HttpPostedFileBase file)
         {
-            string fileName = "";
-
-            if (file != null)
+            if (ModelState.IsValid)
             {
-                string path = Path.Combine(Server.MapPath("~/Images"), Path.GetFileName(file.FileName));
-                file.SaveAs(path);
-                fileName = "~/Images/" + file.FileName;
+                string fileName = "";
+
+                if (file != null)
+                {
+                    var splitFile = file.FileName.Split('.');
+                    var extension = splitFile[splitFile.Length - 1];
+
+                    bool validExtension = false;
+
+                    if (extension.Equals(".png") || extension.Equals(".jpg") || extension.Equals(".jpeg"))
+                    {
+                        validExtension = true;
+                    }
+
+                    if (validExtension)
+                    {
+                        string path = Path.Combine(Server.MapPath("~/Images"), Path.GetFileName(file.FileName));
+                        file.SaveAs(path);
+                        fileName = "~/Images/" + file.FileName;
+                    } else
+                    {
+                        ViewBag.ErrorMessage = "Image must be a .png, .jpg or .jpeg";
+                        return View(viewModel);
+                    }
+                }
+
+                string foreignKey = User.Identity.GetUserId();
+
+                var model = UnitOfWork.ProfileRepository.GetProfile(UnitOfWork.ProfileRepository.GetProfileId(foreignKey));
+                model.Name = viewModel.Name;
+                model.Age = viewModel.Age;
+                model.Gender = viewModel.Gender;
+                model.Biography = viewModel.Biography;
+                model.CSharp = viewModel.CSharp;
+                model.JavaScript = viewModel.JavaScript;
+                model.StackOverflow = viewModel.StackOverflow;
+
+                if (!String.IsNullOrEmpty(fileName))
+                {
+                    model.Image = fileName;
+                }
+
+                UnitOfWork.ProfileRepository.EditProfile(model);
+
+                UnitOfWork.Save();
+                return RedirectToAction("IndexMe", "Profile");
             }
-            string foreignKey = User.Identity.GetUserId();           
 
-            var model = UnitOfWork.ProfileRepository.GetProfile(UnitOfWork.ProfileRepository.GetProfileId(foreignKey));
-            model.Name = viewModel.Name;
-            model.Age = viewModel.Age;
-            model.Gender = viewModel.Gender;
-            model.Biography = viewModel.Biography;
-            model.CSharp = viewModel.CSharp;
-            model.JavaScript = viewModel.JavaScript;
-            model.StackOverflow = viewModel.StackOverflow;
-
-            if (!String.IsNullOrEmpty(fileName))
-            {
-                model.Image = fileName;
-            }
-
-            UnitOfWork.ProfileRepository.EditProfile(model);
-
-            UnitOfWork.Save();
-            return RedirectToAction("IndexMe", "Profile");
+            return View(viewModel);
         }
 
-        
-        public ActionResult DisableAccount() {
+
+        public ActionResult DisableAccount()
+        {
 
             string foreignKey = User.Identity.GetUserId();
 
@@ -182,7 +208,7 @@ namespace DatingApp.Controllers
         [HttpGet]
         public ActionResult Search(string search)
         {
-            if(search == null)
+            if (search == null)
             {
                 search = "";
             }
@@ -227,7 +253,8 @@ namespace DatingApp.Controllers
         }
 
         [HttpGet]
-        public int GetMatchPercentage(int targetId) {
+        public int GetMatchPercentage(int targetId)
+        {
 
             int currentProfileId = UnitOfWork.ProfileRepository.GetProfileId(User.Identity.GetUserId());
 
@@ -237,14 +264,14 @@ namespace DatingApp.Controllers
             int csharpMatch, javaScriptMatch, stackOverflowMatch;
 
             if (user1.CSharp > user2.CSharp) { csharpMatch = user1.CSharp - user2.CSharp; }
-            else {csharpMatch = user2.CSharp - user1.CSharp;}
+            else { csharpMatch = user2.CSharp - user1.CSharp; }
             if (user1.JavaScript > user2.JavaScript) { javaScriptMatch = user1.JavaScript - user2.JavaScript; }
             else { javaScriptMatch = user2.JavaScript - user1.JavaScript; }
             if (user1.StackOverflow > user2.StackOverflow) { stackOverflowMatch = user1.StackOverflow - user2.StackOverflow; }
             else { stackOverflowMatch = user2.StackOverflow - user1.StackOverflow; }
 
             return 100 - ((int)((csharpMatch + javaScriptMatch + stackOverflowMatch) * 3.3));
-        
+
         }
 
         public ActionResult Download()
