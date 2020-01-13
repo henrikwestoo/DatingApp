@@ -3,9 +3,18 @@
     ViewBag.Title = "Manage";
 }
 
+@if (TempData["Success"] != null)
+{
+    <div class="alert alert-success">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        @TempData["Success"].ToString()
+    </div>
+}
+
 <h2>@ViewBag.Title.</h2>
 
 <p class="text-success">@ViewBag.StatusMessage</p>
+
 <div>
     <h4>Change your account settings</h4>
     <hr />
@@ -56,6 +65,8 @@
                 }
             </dd>
         *@
+        <dt>E-mail:</dt>
+        <dd>@Html.ActionLink("Change e-mail", "ChangeEmail")</dd>
         <dt>Two-Factor Authentication:</dt>
         <dd>
             <p>

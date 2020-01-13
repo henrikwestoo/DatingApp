@@ -322,6 +322,30 @@ namespace DatingApp.Controllers
             return result.Succeeded ? RedirectToAction("ManageLogins") : RedirectToAction("ManageLogins", new { Message = ManageMessageId.Error });
         }
 
+        public ActionResult ChangeEmail()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> ChangeEmail(ChangeEmailViewModel viewModel)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
+                user.Email = viewModel.Email;
+                user.UserName = viewModel.Email;
+
+                await UserManager.UpdateAsync(user);
+
+                TempData["Success"] = "Successfully changed e-mail. Some changes will remain invisible until you re-log.";
+
+                return RedirectToAction("Index");
+            }
+
+            return View();
+        }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing && _userManager != null)
