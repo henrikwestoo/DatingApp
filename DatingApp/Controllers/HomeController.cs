@@ -39,6 +39,7 @@ namespace DatingApp.Controllers
                 }
                 else
                 {
+                    UnitOfWork.Dispose();
                     return View(viewModels);
                 }
             }

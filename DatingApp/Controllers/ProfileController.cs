@@ -96,12 +96,6 @@ namespace DatingApp.Controllers
             if ((visitorModels.Count < 5) && (!duplicate))
             {
                 UnitOfWork.VisitorRepository.AddVisitor(visitorModel);
-
-            // om besökaren redan finns i besökarlistan, men listan är full
-            } else if (duplicate) 
-            {
-                UnitOfWork.VisitorRepository.RemoveVisitor(visitorModel.VisitorId);
-                UnitOfWork.VisitorRepository.AddVisitor(visitorModel);
             }
             // om besökaren inte redan finns i besökarlistan, men listan är full
             else if (!duplicate)
