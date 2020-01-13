@@ -36,8 +36,8 @@
     margin-bottom: 0.5em;
 }
 
-textarea {
-    max-width: 100% !important;
+.bio-text-area {
+    max-width: 280px;
 }
 
 .col-md-8 {
