@@ -62,8 +62,15 @@ namespace DatingApp.Controllers
         [HttpGet]
         public ActionResult Index(int userId)
         {
+
             //visar profilsidan på användaren med id:t som skickas in
             var model = UnitOfWork.ProfileRepository.GetProfile(userId);
+
+            //Kollar om profilen tillhör den nuvarande användaren
+            if (UnitOfWork.ProfileRepository.GetProfileId(User.Identity.GetUserId()) == model.Id)
+            {
+                return RedirectToAction("IndexMe");
+            }
 
             var visitorModel = new VisitorModel()
             {
