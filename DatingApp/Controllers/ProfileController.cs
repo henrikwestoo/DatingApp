@@ -88,8 +88,13 @@ namespace DatingApp.Controllers
             {
                 UnitOfWork.VisitorRepository.AddVisitor(visitorModel);
 
-                // om besökaren inte redan finns i besökarlistan, men listan är full
+            // om besökaren redan finns i besökarlistan, men listan är full
+            } else if (duplicate) 
+            {
+                UnitOfWork.VisitorRepository.RemoveVisitor(visitorModel.VisitorId);
+                UnitOfWork.VisitorRepository.AddVisitor(visitorModel);
             }
+            // om besökaren inte redan finns i besökarlistan, men listan är full
             else if (!duplicate)
             {
                 // den äldsta besökaren tas bort och den nya läggs till

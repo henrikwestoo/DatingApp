@@ -20,7 +20,13 @@ namespace DatingApp.Repositories
 
         public List<VisitorModel> GetVisitorProfiles(int id)
         {
-            return Ctx.Visitors.Where((p) => p.ProfileId == id).ToList();
+            return Ctx.Visitors.Where((p) => p.ProfileId == id).OrderByDescending((p) => p.Id).ToList();
+        }
+
+        public void RemoveVisitor(int visitorId)
+        {
+            var visitor = Ctx.Visitors.Where((p) => p.VisitorId == visitorId).First();
+            Ctx.Set<VisitorModel>().Remove(visitor);
         }
 
         public void RemoveOldestVisitor()
