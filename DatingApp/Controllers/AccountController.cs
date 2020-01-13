@@ -105,8 +105,10 @@ namespace DatingApp.Controllers
             {
                 ViewBag.Identity = User.Identity.GetUserId();
 
+                // Om användaren är avaktiverad loggas man ut
                 AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
                 HttpContext.User = new GenericPrincipal(new GenericIdentity(string.Empty), null);
+
                 unitOfWork.Dispose();
                 return View();
             } else
@@ -178,6 +180,7 @@ namespace DatingApp.Controllers
             {
                 if (file != null)
                 {
+                    // Filändelsen kontrolleras
                     var splitFile = file.FileName.Split('.');
                     var extension = splitFile[splitFile.Length - 1];
 
@@ -196,6 +199,7 @@ namespace DatingApp.Controllers
                     }
                     else
                     {
+                        // Ändelsen är inte tillåten
                         ViewBag.ErrorMessage = "Image must be a .png, .jpg or .jpeg";
                         return View();
                     }
@@ -203,6 +207,7 @@ namespace DatingApp.Controllers
                 }
                 else
                 {
+                    // Om användare inte har valt en bild, sätts default-bilden
                     pModel.Image = "~/Images/default-profile-picture.jpg";
                 }
 

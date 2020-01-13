@@ -22,6 +22,7 @@ function displayMatchPercentage(targetId) {
 
             document.getElementById("percentage-label").innerHTML = increaser + "%";
 
+            // "Animerar" matchingsnumret tills den träffar ett tag
             var timer = setInterval(function () {
 
                 document.getElementById("percentage-label").innerHTML = increaser + "%";
@@ -38,7 +39,7 @@ function displayMatchPercentage(targetId) {
 
                 increaser++;
 
-            }, 2);
+            }, 2); // Varannan millisekund
         }
     });
 }

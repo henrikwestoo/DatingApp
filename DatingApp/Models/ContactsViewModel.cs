@@ -6,6 +6,7 @@ using static DatingApp.Models.ProfileViewModels;
 
 namespace DatingApp.Models
 {
+    // Viewmodel med två listor, en som innehåller kontakter och en som innehåller kontaktförfrågningar
     public class ContactsViewModel
     {
       

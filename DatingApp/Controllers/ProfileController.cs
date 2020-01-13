@@ -71,10 +71,12 @@ namespace DatingApp.Controllers
                 VisitorId = UnitOfWork.ProfileRepository.GetProfileId(User.Identity.GetUserId())
             };
 
+            // Hämtar alla besökare
             var visitorModels = UnitOfWork.VisitorRepository.GetVisitorProfiles(model.Id);
 
             bool duplicate = false;
 
+            // Kollar om den inloggade användaren finns på besökarlistan
             foreach (var visitor in visitorModels)
             {
                 if (visitor.VisitorId == UnitOfWork.ProfileRepository.GetProfileId(User.Identity.GetUserId()))
@@ -129,6 +131,7 @@ namespace DatingApp.Controllers
 
                 if (file != null)
                 {
+                    // Kontrollerar filändelsen på bilden
                     var splitFile = file.FileName.Split('.');
                     var extension = splitFile[splitFile.Length - 1];
 
@@ -146,6 +149,7 @@ namespace DatingApp.Controllers
                         fileName = "~/Images/" + file.FileName;
                     } else
                     {
+                        // Om filändelsen inte är tillåten
                         ViewBag.ErrorMessage = "Image must be a .png, .jpg or .jpeg";
                         return View(viewModel);
                     }
@@ -188,6 +192,7 @@ namespace DatingApp.Controllers
             UnitOfWork.ProfileRepository.EditProfile(model);
             UnitOfWork.Save();
 
+            // Loggar ut användaren och skickar med tempdata om det
             HttpContext.GetOwinContext().Authentication.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
             TempData["Deactivated"] = true;
 
@@ -234,6 +239,7 @@ namespace DatingApp.Controllers
                 {
                     bool isContact = false;
 
+                    // Kontrollerar om användaren i resultatet redan är kontakt med den inloggade användaren
                     if (contacts.Contains(profile.Id))
                     {
                         isContact = true;
@@ -258,6 +264,8 @@ namespace DatingApp.Controllers
         }
 
         [HttpGet]
+        /* Logiken för matchingen
+           Generar en siffra mellan 0-100 (%) genom att jämföra ens olika utvecklarkunskpar samt ålder */
         public int GetMatchPercentage(int targetId)
         {
 
@@ -295,6 +303,7 @@ namespace DatingApp.Controllers
 
             var downloadViewModel = new ProfileDownloadViewModel(profile);
 
+            // Serialiserar profilen
             XMLSerializer.Serialize<ProfileDownloadViewModel>(downloadViewModel, path);
 
             return RedirectToAction("IndexMe");

@@ -1,9 +1,4 @@
-﻿window.addEventListener('load', () => {
-
-});
-
-
-function changeCategory(contactId, category) {
+﻿function changeCategory(contactId, category) {
 
 
     var category = $("#" + contactId + "-dropdown option:selected").val();

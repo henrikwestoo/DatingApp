@@ -12,7 +12,6 @@ function postToWall() {
     const newPost = $('#new-post').val();
     const dateTime = new Date().toISOString();
     const recieverId = $('#user-id').val();
-    //var validCharacters = new RegExp('^ [\w][^\W_][\w]$');
 
     if (newPost !== '') {
 
@@ -23,6 +22,7 @@ function postToWall() {
             Content: newPost
         };
 
+        // Postar inlägg på väggen
         $.post('/api/postapi/send', post)
             .then((answer) => {
                 if (answer === "Ok") {
@@ -41,6 +41,7 @@ function postToWall() {
     }
 }
 
+// Uppdaterar de synliga inläggen. Körs i början och efter varje postToWall()
 function updateWall() {
 
     var receiverId = $('#user-id').val();

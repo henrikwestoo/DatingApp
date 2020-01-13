@@ -3,7 +3,7 @@
     setInterval(updateRequests, 10000);
 });
 
-
+// Lyssnar efter nya kontaktförfrågningar, uppdaterar siffran bredvid "View contacts"
 function updateRequests() {
     $.ajax({
         type: "GET",

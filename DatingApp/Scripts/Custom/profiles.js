@@ -3,6 +3,7 @@
     loadProgressBars();
 });
 
+// Animerar kunskapsbars:en
 function loadProgressBars() {
 
     var cSharpValue = $('#progress-bar-csharp').data('value') * 10;

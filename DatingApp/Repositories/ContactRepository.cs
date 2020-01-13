@@ -68,12 +68,14 @@ namespace DatingApp.Repositories
 
         public Dictionary<ProfileModel, Category> FindContactsAndCategories(int profileId)
         {
+            // Två dictionaries som tar fram alla kontakter för användaren, oavsett om den är i Contact-kolumen eller Profile-kolumen
             Dictionary<ProfileModel, Category> dictionary1 = Ctx.Contacts.Where(p => (p.ContactId == profileId) && (p.Accepted == true)).
                     Select((x) => new { x.Profile, x.ProfileCategory }).ToDictionary(t => t.Profile, t => t.ProfileCategory);
 
             Dictionary<ProfileModel, Category> dictionary2 = Ctx.Contacts.Where(p => (p.ProfileId == profileId) && (p.Accepted == true)).
                     Select((x) => new { x.Contact, x.ContactCategory }).ToDictionary(t => t.Contact, t => t.ContactCategory);
 
+            // Lägger ihop båda dictionaries till en
             var merged = dictionary1.Concat(dictionary2).ToLookup(x => x.Key, x => x.Value).ToDictionary(x => x.Key, g => g.First());
 
             return merged;

@@ -51,7 +51,7 @@ namespace DatingApp.Models
 
             [Display(Name = "Name")]
             [Required(ErrorMessage = "Name is required")]
-            [StringLength(50, MinimumLength = 1, ErrorMessage = "Your name can not be this long")]
+            [StringLength(50, MinimumLength = 1, ErrorMessage = "Your name is too long")]
             public string Name { get; set; }
 
             [Display(Name = "Age")]
@@ -65,7 +65,7 @@ namespace DatingApp.Models
 
             [Display(Name = "Motto")]
             [Required(ErrorMessage = "Motto is required")]
-            [StringLength(50, MinimumLength = 1, ErrorMessage = "Character limit is 30")]
+            [StringLength(50, MinimumLength = 1, ErrorMessage = "Character limit for the motto is 50")]
             public string Biography { get; set; }
 
             public bool Active { get; set; }

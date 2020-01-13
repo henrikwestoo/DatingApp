@@ -4,6 +4,7 @@
 
 });
 
+// Listar de fem senaste besökarna på en profil
 function getVisitors() {
 
     $.ajax({

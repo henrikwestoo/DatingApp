@@ -24,15 +24,17 @@ namespace DatingApp.Controllers
             // Hämtar en dictionary med alla användarens kontakter och kategorier
             var acceptedContactsAndCategories = UnitOfWork.ContactRepository.FindContactsAndCategories(currentProfileId);
 
+            // Hämtar obesvarade kontaktförfrågningar
             var pendingContactIds = UnitOfWork.ContactRepository.FindContactIds(currentProfileId, false);
-
             var profilesContactsPending = UnitOfWork.ProfileRepository.FindProfiles(pendingContactIds);
 
             var listOfProfileContactViewModel = new List<ContactProfileViewModel>();
             var profilesIndexViewModelContactsPending = new ProfilesIndexViewModel();
 
+            // Itererar igenom kontakter
             foreach (var item in acceptedContactsAndCategories)
             {
+                // Om kontakten är aktiv, läggs den till en lista
                 if (item.Key.Active == true)
                 {
                     var profileContactViewModel = new ContactProfileViewModel(item.Key, item.Value);
@@ -40,6 +42,7 @@ namespace DatingApp.Controllers
                 }
             }
 
+            // Itererar igenom förfrågningar
             foreach (var model in profilesContactsPending)
             {
                 if (model.Active == true)
@@ -49,6 +52,7 @@ namespace DatingApp.Controllers
                 }
             }
 
+            // Skapar en viewmodel med både kontaktförfrågningar och kontakter
             var allContacts = new ContactsViewModel(listOfProfileContactViewModel, profilesIndexViewModelContactsPending);
 
 

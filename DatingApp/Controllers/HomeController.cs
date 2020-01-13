@@ -16,6 +16,8 @@ namespace DatingApp.Controllers
         public ActionResult Index()
         {
             var viewModels = new ProfilesIndexViewModel();
+
+            // Om ett konto precis inaktiverats, får viewbag:en en bekräftelse som skickas vidare till view
             ViewBag.Deactivated = TempData["Deactivated"];
 
             try

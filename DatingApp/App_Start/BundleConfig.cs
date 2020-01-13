@@ -29,17 +29,17 @@ namespace DatingApp
                       "~/Content/Custom.css",
                       "~/Content/site.css"));
             bundles.Add(new ScriptBundle("~/bundles/custom").Include(
-                       "~/Scripts/custom.js"));
+                       "~/Scripts/Custom/updateRequests.js"));
             bundles.Add(new ScriptBundle("~/bundles/posts").Include(
-                        "~/Scripts/posts.js"));
+                        "~/Scripts/Custom/posts.js"));
             bundles.Add(new ScriptBundle("~/bundles/visitors").Include(
-                        "~/Scripts/visitors.js"));
+                        "~/Scripts/Custom/visitors.js"));
             bundles.Add(new ScriptBundle("~/bundles/contacts").Include(
-                      "~/Scripts/contacts.js"));
+                      "~/Scripts/Custom/contacts.js"));
             bundles.Add(new ScriptBundle("~/bundles/profile").Include(
-                      "~/Scripts/profile.js"));
+                      "~/Scripts/Custom/profile.js"));
             bundles.Add(new ScriptBundle("~/bundles/profiles").Include(
-                      "~/Scripts/profiles.js"));
+                      "~/Scripts/Custom/profiles.js"));
         }
     }
 }

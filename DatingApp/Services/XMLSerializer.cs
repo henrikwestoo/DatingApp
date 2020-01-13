@@ -24,10 +24,9 @@ namespace DatingApp.Services
                     xs.Serialize(fs, data);
                 }
 
-            // todo
             } catch(IOException e)
             {
-
+                Console.WriteLine("Failed to serialize: " + e.Message);
             }
         }
     }

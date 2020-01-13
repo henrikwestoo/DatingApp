@@ -5,6 +5,9 @@ using System.Web;
 
 namespace DatingApp.Repositories
 {
+    /* En klass som länkar samman alla repositories och vår AppDbContext
+     * 
+     */
     public class UnitOfWork : IDisposable
     {
         private AppDbContext Ctx;

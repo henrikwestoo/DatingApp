@@ -44,6 +44,7 @@ namespace DatingApp.Controllers
 
         [Route("api/postapi/display")]
         [HttpPost]
+        // Hämtar inlägg på användarens vägg och lägger in dem i en viewmodel
         public List<PostIndexViewModel> Display([FromBody] string receiverId) {
 
             int id = Int32.Parse(receiverId);
